@@ -10,7 +10,7 @@ Live: _(link added after the first Netlify deploy)_
 - **Rotating headline word**, **shimmer** order buttons, **number-ticker** kit prices, and a **shine border** on the middle kit.
 - **Marquees:** top ticker, brands, phone models and "ask us" chat bubbles.
 - **Magic Cards** with a light that follows the cursor.
-- **Sliding category tabs.**
+- **Swipe carousels** per shop category (drag, swipe or arrows) and a **live kit builder** with a 15% deal and a WhatsApp order message.
 - **Scroll effects:** a progress line in "Order in 3 steps" and huge footer text that speeds up with scroll.
 
 Review notes and fixes (mobile, tablet, desktop): [REVIEW-LOG.md](REVIEW-LOG.md).

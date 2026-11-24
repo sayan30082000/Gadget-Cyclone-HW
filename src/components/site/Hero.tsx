@@ -27,7 +27,7 @@ export function Hero() {
   const gy = useMotionValue(-600)
   const sx = useSpring(gx, { stiffness: 120, damping: 20, mass: 0.6 })
   const sy = useSpring(gy, { stiffness: 120, damping: 20, mass: 0.6 })
-  const glow = useMotionTemplate`radial-gradient(520px circle at ${sx}px ${sy}px, rgba(234,74,26,0.22), transparent 65%)`
+  const glow = useMotionTemplate`radial-gradient(520px circle at ${sx}px ${sy}px, rgba(0,122,82,0.16), transparent 65%)`
 
   // start the glow behind the photo, so touch screens see it before anyone taps
   useEffect(() => {
@@ -58,7 +58,7 @@ export function Hero() {
         height={44}
         squares={[40, 22]}
         className="border-none [mask-image:radial-gradient(ellipse_at_center,white_35%,transparent_85%)]"
-        squaresClassName="stroke-gc-line/70 hover:fill-gc-orange/45 data-[on]:fill-gc-orange/35"
+        squaresClassName="stroke-gc-line hover:fill-gc-green/25 data-[on]:fill-gc-green/20"
         trackRef={sectionRef}
         autoGlow
       />
@@ -67,25 +67,25 @@ export function Hero() {
       <div className="pointer-events-none relative z-10 mx-auto grid max-w-[1400px] gap-10 px-5 pt-14 pb-16 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12 lg:px-12 lg:pt-20 lg:pb-24">
         <div>
           <BlurFade delay={0.05}>
-            <p className="inline-flex items-center gap-2 border border-gc-line bg-gc-black/70 px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] text-gc-grey uppercase">
-              <MapPin className="size-3.5 text-gc-orange" /> Finlay Square · 4th floor · Chattogram
+            <p className="inline-flex items-center gap-2 border border-gc-line bg-gc-paper/70 px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] text-gc-muted uppercase">
+              <MapPin className="size-3.5 text-gc-green" /> Finlay Square · 4th floor · Chattogram
             </p>
           </BlurFade>
 
           <BlurFade delay={0.15}>
-            <h1 className="mt-6 font-serif text-[44px] leading-[1.02] text-gc-light sm:text-[60px] lg:text-[62px] xl:text-[74px]">
+            <h1 className="mt-6 font-serif text-[44px] leading-[1.02] text-gc-ink sm:text-[60px] lg:text-[62px] xl:text-[74px]">
               <WordRotate
                 words={ROTATING_WORDS}
                 duration={2200}
-                className="text-gc-orange italic"
+                className="text-gc-green italic"
               />
               for the phone you{" "}
-              <strong className="font-mono font-bold tracking-tight text-white">ALREADY</strong> own.
+              <strong className="font-mono font-bold tracking-tight text-gc-ink">ALREADY</strong> own.
             </h1>
           </BlurFade>
 
           <BlurFade delay={0.25}>
-            <p className="mt-6 max-w-xl font-mono text-[14px] leading-7 text-gc-grey sm:text-[15px]">
+            <p className="mt-6 max-w-xl font-mono text-[14px] leading-7 text-gc-muted sm:text-[15px]">
               Earbuds, chargers, power banks and covers, picked for your exact phone model.
               Delivered across Chattogram, and you pay the rider when it arrives.
             </p>
@@ -95,17 +95,17 @@ export function Hero() {
             <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-3">
               <a href={whatsappLink("Hi Gadget Cyclone! My phone is: ")} target="_blank" rel="noreferrer">
                 <ShimmerButton
-                  background="#ea4a1a"
+                  background="#007a52"
                   shimmerColor="#ffffff"
                   borderRadius="0px"
-                  className="h-12 px-6 font-mono text-[13px] font-bold tracking-wider text-gc-black uppercase"
+                  className="h-12 px-6 font-mono text-[13px] font-bold tracking-wider text-gc-paper uppercase"
                 >
                   ■ Order on WhatsApp
                 </ShimmerButton>
               </a>
               <a
                 href="#kits"
-                className="inline-flex h-12 items-center gap-2 border border-gc-line bg-gc-black/70 px-5 font-mono text-[13px] tracking-wider text-gc-light uppercase transition-colors hover:border-gc-orange hover:text-white"
+                className="inline-flex h-12 items-center gap-2 border border-gc-line bg-gc-paper/70 px-5 font-mono text-[13px] tracking-wider text-gc-ink uppercase transition-colors hover:border-gc-green hover:text-gc-ink"
               >
                 See the kits <ArrowDown className="size-4" />
               </a>
@@ -113,10 +113,10 @@ export function Hero() {
           </BlurFade>
 
           <BlurFade delay={0.45}>
-            <ul className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[12px] text-gc-grey">
+            <ul className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[12px] text-gc-muted">
               {["No advance", "Pay the rider", "7-day replacement"].map((t) => (
                 <li key={t} className="inline-flex items-center gap-1.5">
-                  <Check className="size-3.5 text-gc-orange" /> {t}
+                  <Check className="size-3.5 text-gc-green" /> {t}
                 </li>
               ))}
             </ul>
@@ -157,7 +157,7 @@ function TiltPhoto({ reduce }: { reduce: boolean }) {
         onPointerMove={onMove}
         onPointerLeave={onLeave}
         style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
-        className="relative aspect-[4/3] w-full border border-gc-line bg-gc-strip"
+        className="relative aspect-[4/3] w-full border border-gc-line bg-gc-card"
       >
         <img
           src={HERO_PHOTO}
@@ -165,19 +165,19 @@ function TiltPhoto({ reduce }: { reduce: boolean }) {
           className="absolute inset-0 size-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gc-black/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
 
         <FloatChip className="top-5 left-5" delay={0}>
-          <span className="text-gc-orange">■</span> COD · Chattogram
+          <span className="text-gc-green">■</span> COD · Chattogram
         </FloatChip>
         <FloatChip className="top-1/2 right-4" delay={0.8}>
           Tk 0 advance
         </FloatChip>
         <FloatChip className="bottom-5 left-5" delay={1.6}>
-          Fit-checked for <span className="text-white">your model</span>
+          Fit-checked for <span className="text-gc-ink">your model</span>
         </FloatChip>
       </motion.div>
-      <p className="mt-2 text-right font-mono text-[10px] text-gc-grey/80">
+      <p className="mt-2 text-right font-mono text-[10px] text-gc-muted/80">
         photo: Klim Musalimov / Unsplash
       </p>
     </div>
@@ -198,7 +198,7 @@ function FloatChip({
       animate={{ y: [0, -8, 0] }}
       transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay }}
       style={{ translateZ: 40 }}
-      className={`absolute border border-gc-line bg-gc-black/85 px-3 py-2 font-mono text-[11px] tracking-wide text-gc-light uppercase backdrop-blur ${className ?? ""}`}
+      className={`absolute border border-gc-line bg-gc-card/90 px-3 py-2 font-mono text-[11px] tracking-wide text-gc-ink uppercase backdrop-blur ${className ?? ""}`}
     >
       {children}
     </motion.div>

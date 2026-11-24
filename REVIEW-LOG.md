@@ -60,7 +60,64 @@ Extra motion written for this page:
 - **The kits stacked as 3 very wide cards with empty space.** Fix: 3 columns from tablet up, with a smaller price size there.
 - **Kit buttons wrapped and did not line up.** Fix: shorter label ("Order this kit"), and the buttons sit at the bottom of each card.
 
-## 4. Still to do (needs the shop owner)
+## 4. Round 2: my own feedback after seeing it
+I asked for three changes:
+1. A new color palette. I wanted to choose it, and to know how many colors a website needs.
+2. A new layout for the shop section.
+3. A new layout for the pricing section.
+
+**How many colors.** The answer I got: 6 to 8, in three jobs (the 60-30-10 idea).
+- About 60% base: background, cards, lines.
+- About 30% text: main and muted.
+- About 10% accent: one brand color, plus one support color.
+
+**The AI showed me:**
+- 6 palettes, each with a mini preview and a contrast check.
+- 3 shop layouts (product grid, swipe carousel, bento).
+- 3 pricing layouts (kit builder, comparison table, stacked rows).
+
+**I picked:**
+- **Palette: E Mint Market**, 7 colors:
+
+  | Color | Hex |
+  |---|---|
+  | Paper (background) | #F7F7F2 |
+  | Card | #FFFFFF |
+  | Line | #E2E2DA |
+  | Muted text | #5F6158 |
+  | Ink (main text) | #111111 |
+  | Green (accent) | #007A52 |
+  | Amber (support) | #FFB800 |
+
+  Contrast results:
+  - Ink on paper: 17.6
+  - Muted text on paper: 5.9
+  - Green on paper: 5.0
+  - White on green: 5.4
+  - Ink on amber: 10.9
+
+  Amber is never used as text on the light background (1.6), only behind dark text.
+- **Shop: a swipe carousel per category.**
+  - 5 rows (earbuds, chargers, power banks, covers, watches and speakers), 6 cards each.
+  - Swipe on phones, drag with the mouse, or use the arrow buttons.
+  - A progress bar under each row, and "swipe →" on phones.
+  - Every card opens WhatsApp asking for today's stock.
+- **Pricing: a live kit builder.**
+  - Start from the Starter, Power or Audio kit, or tick items one by one.
+  - The total updates live (Number Ticker). 3 or more items get 15% off, with a "you save" badge.
+  - An amber bar shows how many more items you need for the deal.
+  - A phone-model box, and an "Order this kit on WhatsApp" button that writes the whole kit into the message.
+  - On phones and tablets, a dark bar sticks to the bottom with the item count and total while you tick items.
+
+**What I checked:**
+- No sideways scroll on phones (page width 375).
+- The arrows move one card, and mouse drag scrolls the row.
+- Kit logic: Clear → "Pick 3 items for 15% off".
+- 1 item → "Add 2 more".
+- Earbuds + case cover + ear tips: Tk 1,850 → Tk 1,570 after 15% off. The WhatsApp message has all 3 items, the total and the phone model.
+- Layouts on phone, tablet and desktop.
+
+## 5. Still to do (needs the shop owner)
 - Add the real WhatsApp number and Facebook page link in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - Kit prices are samples.
 - The "Ask us" bubbles are example questions, not real reviews.

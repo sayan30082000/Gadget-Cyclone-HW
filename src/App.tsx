@@ -1,18 +1,19 @@
 import { Header } from "@/components/site/Header"
 import { Hero } from "@/components/site/Hero"
-import { AskUs, Brands, Categories, HowToOrder, Kits, Visit, WhyUs } from "@/components/site/Sections"
+import { AskUs, Brands, HowToOrder, Visit, WhyUs } from "@/components/site/Sections"
+import { KitBuilder, Shop } from "@/components/site/Shop"
 import { Footer } from "@/components/site/Footer"
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gc-black text-gc-light">
+    <div className="min-h-screen bg-gc-paper text-gc-ink">
       <Header />
       <main>
         <Hero />
         <Brands />
         <WhyUs />
-        <Categories />
-        <Kits />
+        <Shop />
+        <KitBuilder />
         <HowToOrder />
         <AskUs />
         <Visit />

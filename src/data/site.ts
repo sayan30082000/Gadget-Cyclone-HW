@@ -51,25 +51,32 @@ export type Category = {
   items: { name: string; note: string }[]
 }
 
+// Shop rows (round 2: one swipe carousel per category, 6 item types each)
 export const CATEGORIES: Category[] = [
   {
     id: "earbuds",
-    label: "Earbuds",
-    line: "Wireless earbuds, neckbands and over-ear headphones.",
+    label: "Earbuds & audio",
+    line: "Wireless earbuds, neckbands and headphones.",
     items: [
       { name: "TWS earbuds", note: "with charging case" },
+      { name: "ANC earbuds", note: "blocks outside noise" },
       { name: "Neckbands", note: "long battery, light" },
       { name: "Over-ear headphones", note: "for long listening" },
+      { name: "Gaming headsets", note: "mic on a boom" },
+      { name: "Wired earphones", note: "no charging needed" },
     ],
   },
   {
     id: "chargers",
-    label: "Chargers",
-    line: "Fast chargers and cables that match your phone's port.",
+    label: "Chargers & cables",
+    line: "Matched to your phone's port and fast-charge type.",
     items: [
-      { name: "Fast wall chargers", note: "USB-C PD" },
-      { name: "Cables", note: "USB-C, Lightning, micro-USB" },
+      { name: "20W fast chargers", note: "USB-C PD" },
+      { name: "33-65W chargers", note: "for phones that support it" },
+      { name: "USB-C cables", note: "1 m and 2 m" },
+      { name: "Lightning cables", note: "older iPhones" },
       { name: "Car chargers", note: "dual port" },
+      { name: "Wireless chargers", note: "pads and stands" },
     ],
   },
   {
@@ -80,58 +87,65 @@ export const CATEGORIES: Category[] = [
       { name: "10,000 mAh", note: "pocket size" },
       { name: "20,000 mAh", note: "two phones, one day" },
       { name: "Magnetic packs", note: "snap on the back" },
+      { name: "Fast-charge banks", note: "PD output" },
+      { name: "Mini banks", note: "lipstick size" },
+      { name: "Banks with cables", note: "cable built in" },
     ],
   },
   {
     id: "covers",
-    label: "Covers",
+    label: "Covers & protection",
     line: "Cases and screen protectors for your exact model.",
     items: [
       { name: "Clear cases", note: "show the phone" },
       { name: "Rugged cases", note: "for drops" },
-      { name: "Screen protectors", note: "cut for your model" },
+      { name: "Silicone cases", note: "soft grip" },
+      { name: "Wallet cases", note: "cards inside" },
+      { name: "Tempered glass", note: "cut for your model" },
+      { name: "Camera lens guards", note: "small, easy to miss" },
     ],
   },
   {
     id: "more",
     label: "Watches & speakers",
-    line: "Smart watches and small Bluetooth speakers.",
+    line: "Smart watches and Bluetooth speakers.",
     items: [
       { name: "Smart watches", note: "notifications + fitness" },
-      { name: "Bluetooth speakers", note: "pocket to party" },
-      { name: "Straps & docks", note: "extras" },
+      { name: "Fitness bands", note: "light, long battery" },
+      { name: "Watch straps", note: "swap the look" },
+      { name: "Mini speakers", note: "fits a pocket" },
+      { name: "Party speakers", note: "loud, with lights" },
+      { name: "Phone holders", note: "desk and bike" },
     ],
   },
 ]
 
-export type Kit = {
-  name: string
-  price: number
-  line: string
-  items: string[]
-  pick?: boolean
-}
+// Kit builder (round 2). Sample prices. 3 or more items = 15% off, rounded to the nearest Tk 10.
+export type KitItem = { id: string; name: string; price: number; group: string }
 
-export const KITS: Kit[] = [
-  {
-    name: "Starter kit",
-    price: 990,
-    line: "The basics for a new phone.",
-    items: ["Fast charger", "Matching cable", "Clear case", "Screen protector"],
-  },
-  {
-    name: "Power kit",
-    price: 3190,
-    line: "For long days away from a plug.",
-    items: ["20,000 mAh power bank", "Fast charger", "2 cables", "Rugged case"],
-    pick: true,
-  },
-  {
-    name: "Audio kit",
-    price: 1849,
-    line: "Music and calls, sorted.",
-    items: ["Wireless earbuds", "Earbud case cover", "Cable", "Ear tips"],
-  },
+export const KIT_ITEMS: KitItem[] = [
+  { id: "charger", name: "20W fast charger", price: 450, group: "Charging" },
+  { id: "cable", name: "USB-C cable", price: 250, group: "Charging" },
+  { id: "cable2", name: "Second cable", price: 250, group: "Charging" },
+  { id: "car", name: "Car charger", price: 550, group: "Charging" },
+  { id: "bank10", name: "10,000 mAh power bank", price: 1450, group: "Power" },
+  { id: "bank20", name: "20,000 mAh power bank", price: 2200, group: "Power" },
+  { id: "earbuds", name: "Wireless earbuds", price: 1500, group: "Audio" },
+  { id: "budcover", name: "Earbud case cover", price: 200, group: "Audio" },
+  { id: "tips", name: "Spare ear tips", price: 150, group: "Audio" },
+  { id: "clear", name: "Clear case", price: 250, group: "Protection" },
+  { id: "rugged", name: "Rugged case", price: 450, group: "Protection" },
+  { id: "glass", name: "Screen protector", price: 200, group: "Protection" },
+]
+
+export const KIT_DEAL = { minItems: 3, off: 0.15 }
+
+export type KitPreset = { id: string; name: string; line: string; items: string[] }
+
+export const KIT_PRESETS: KitPreset[] = [
+  { id: "starter", name: "Starter kit", line: "The basics for a new phone.", items: ["charger", "cable", "clear", "glass"] },
+  { id: "power", name: "Power kit", line: "For long days away from a plug.", items: ["bank20", "charger", "cable", "cable2", "rugged"] },
+  { id: "audio", name: "Audio kit", line: "Music and calls, sorted.", items: ["earbuds", "budcover", "cable", "tips"] },
 ]
 
 export const STEPS = [

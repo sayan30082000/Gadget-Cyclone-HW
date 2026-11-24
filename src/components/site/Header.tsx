@@ -30,16 +30,16 @@ export function Header() {
       {/* scroll progress */}
       <motion.div
         aria-hidden
-        className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gc-orange"
+        className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gc-green"
         style={{ scaleX: progress }}
       />
 
       {/* ticker: Magic UI Marquee */}
-      <div className="border-b border-gc-line bg-gc-strip">
+      <div className="bg-gc-green">
         <Marquee pauseOnHover className="py-2 [--duration:38s] [--gap:2.5rem]">
           {TICKER.map((t) => (
-            <span key={t} className="font-mono text-[11px] tracking-[0.12em] text-gc-light uppercase">
-              <span className="mr-2 text-gc-orange">■</span>
+            <span key={t} className="font-mono text-[11px] tracking-[0.12em] text-white uppercase">
+              <span className="mr-2 text-gc-amber">■</span>
               {t}
             </span>
           ))}
@@ -48,11 +48,11 @@ export function Header() {
 
       <header
         className={`sticky top-0 z-50 border-b border-gc-line transition-colors duration-300 ${
-          scrolled ? "bg-gc-black/85 backdrop-blur-md" : "bg-gc-black"
+          scrolled ? "bg-gc-paper/85 backdrop-blur-md" : "bg-gc-paper"
         }`}
       >
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 sm:px-8 lg:px-12">
-          <a href="#top" className="font-serif text-[26px] leading-none text-gc-orange">
+          <a href="#top" className="font-serif text-[26px] leading-none text-gc-green">
             Gadget Cyclone
           </a>
 
@@ -61,17 +61,17 @@ export function Header() {
               <a
                 key={n.href}
                 href={n.href}
-                className="group relative font-mono text-[12px] tracking-[0.14em] text-gc-grey uppercase transition-colors hover:text-white"
+                className="group relative font-mono text-[12px] tracking-[0.14em] text-gc-muted uppercase transition-colors hover:text-gc-ink"
               >
                 {n.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-gc-orange transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-gc-green transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             <a
               href={whatsappLink("Hi Gadget Cyclone! My phone is: ")}
               target="_blank"
               rel="noreferrer"
-              className="bg-gc-orange px-4 py-2 font-mono text-[12px] font-bold tracking-[0.12em] text-gc-black uppercase transition-transform hover:-translate-y-0.5"
+              className="bg-gc-green px-4 py-2 font-mono text-[12px] font-bold tracking-[0.12em] text-gc-paper uppercase transition-transform hover:-translate-y-0.5"
             >
               ■ Order now
             </a>
@@ -82,7 +82,7 @@ export function Header() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="grid size-10 place-items-center border border-gc-line text-gc-light md:hidden"
+            className="grid size-10 place-items-center border border-gc-line text-gc-ink md:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -103,7 +103,7 @@ export function Header() {
                     key={n.href}
                     href={n.href}
                     onClick={() => setOpen(false)}
-                    className="border-b border-gc-line py-3 font-mono text-[13px] tracking-[0.14em] text-gc-light uppercase last:border-none"
+                    className="border-b border-gc-line py-3 font-mono text-[13px] tracking-[0.14em] text-gc-ink uppercase last:border-none"
                   >
                     {n.label}
                   </a>
