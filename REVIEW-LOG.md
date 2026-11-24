@@ -117,7 +117,31 @@ I asked for three changes:
 - Earbuds + case cover + ear tips: Tk 1,850 → Tk 1,570 after 15% off. The WhatsApp message has all 3 items, the total and the phone model.
 - Layouts on phone, tablet and desktop.
 
-## 5. Still to do (needs the shop owner)
+## 5. Round 3: I didn't like the kits section
+I said the kits section didn't look good. The AI drew 3 new directions in the Mint Market colors:
+- A: bundle box
+- B: three kit cards
+- C: kit finder quiz
+
+**I picked A, the bundle box ("Pack your BOX"):**
+- **The shelf:** 12 item tiles, each with an icon, name and sample price. Tap one and its icon flies into the box (motion shared-layout animation). Tap it in the box to send it back.
+- **The box:** an open box drawing with flaps and tape, 8 slots, and "Gadget Cyclone · Power kit" printed on the front.
+- **Price sticker:** amber, on the corner of the box, showing the total, "15% off" and "save Tk …".
+- **Quick kits:** Starter, Power and Audio fill the box in one tap. "Empty the box" clears it.
+- **Ordering:** a phone-model box, and "Order this box on WhatsApp" with the full list and total.
+- **Phones:** box first, then the shelf in 3 columns, with a sticky bar ("5 in box · Tk 3,060 · See box ↑").
+
+**What I fixed while testing it:**
+- **The sticker price counted up from 0 every time I added an item,** because the sticker was rebuilt on each change. Fix: the number now rolls from the old total to the new one (Tk 3,060 → 4,340 → back), and the sticker only does a small pop.
+- **The empty slots were hard to see.** Fix: a darker dashed border.
+
+**Checked:**
+- Adding and removing items, by tapping the shelf and by tapping inside the box.
+- 15% off from 3 items.
+- No sideways scroll on the phone (375 px).
+- Desktop layout: shelf on the left, box and summary sticky on the right.
+
+## 6. Still to do (needs the shop owner)
 - Add the real WhatsApp number and Facebook page link in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - Kit prices are samples.
 - The "Ask us" bubbles are example questions, not real reviews.
