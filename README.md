@@ -5,9 +5,9 @@ UI/UX Class 03 assignment by Sayan Das. A one-page site for Gadget Cyclone, a ph
 Live: _(link added after the first Netlify deploy)_
 
 ## What's interactive
-- **Hero background:** Magic UI Interactive Grid. Squares light up orange under the mouse, a tap, or a finger drag, and a few glow on their own.
+- **Hero background:** Magic UI Interactive Grid. Squares light up green under the mouse, a tap, or a finger drag, and a few glow on their own.
 - **Cursor glow** over the hero, and a **3D tilt** on the hero photo.
-- **Rotating headline word**, **shimmer** order buttons, **number-ticker** kit prices, and a **shine border** on the middle kit.
+- **Rotating headline word**, **shimmer** order buttons, **number-ticker** totals in the kit builder.
 - **Marquees:** top ticker, brands, phone models and "ask us" chat bubbles.
 - **Magic Cards** with a light that follows the cursor.
 - **Swipe carousels** per shop category (drag, swipe or arrows) and a **live kit builder** with a 15% deal and a WhatsApp order message.

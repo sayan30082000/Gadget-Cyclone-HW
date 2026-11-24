@@ -37,7 +37,7 @@ export function Footer() {
         <div className="font-mono text-[11px] leading-6 text-gc-muted">
           <p>
             Built for UI/UX Class 03 by Sayan Das. Components: Magic UI (Interactive Grid, Marquee, Shimmer Button,
-            Shine Border, Magic Card, Number Ticker, Blur Fade, Word Rotate, Scroll Velocity). Ideas from Watermelon UI,
+            Magic Card, Number Ticker, Blur Fade, Word Rotate, Scroll Velocity). Ideas from Watermelon UI,
             Animate UI and Uiverse.
           </p>
           <p className="mt-2">Hero photo: Klim Musalimov on Unsplash. Kit prices are samples.</p>
