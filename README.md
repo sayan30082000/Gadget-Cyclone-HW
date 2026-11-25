@@ -1,8 +1,8 @@
 # Gadget Cyclone: interactive landing page
 
-UI/UX Class 03 assignment by Sayan Das. A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4th floor, 2 No. Gate), Chattogram.
+A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4th floor, 2 No. Gate), Chattogram. Cash on delivery, no advance. Built by Sayan Das.
 
-Live: _(link added after the first Netlify deploy)_
+**Live site: https://gagdet-cyclone.netlify.app**
 
 ## What's interactive
 - **Hero background:** Magic UI Interactive Grid. Squares light up green under the mouse, a tap, or a finger drag, and a few glow on their own.
@@ -13,7 +13,11 @@ Live: _(link added after the first Netlify deploy)_
 - On phones, a **floating WhatsApp button** appears after the hero and hides where the page already has order buttons.
 - **Marquees:** top ticker, brands, phone models and "ask us" chat bubbles.
 - **Magic Cards** with a light that follows the cursor.
-- **Swipe carousels** per shop category (drag, swipe or arrows) and a **"pack your box" kit section**: tap items on a shelf and they fly into a box with a live price sticker, 15% off for 3+ items, and a WhatsApp order message.
+- **Swipe carousels** per shop category (drag, swipe or arrows). Each of the 30 product cards has a real photo of that product.
+- **"Pack your box" kit section:**
+  - tap items on a shelf and they fly into a box
+  - a live price sticker, with 15% off for 3+ items
+  - a ready-made WhatsApp order message
 - **Scroll effects:** a progress line in "Order in 3 steps" and huge footer text that speeds up with scroll.
 
 Review notes and fixes (mobile, tablet, desktop): [REVIEW-LOG.md](REVIEW-LOG.md).
@@ -23,7 +27,8 @@ Lighthouse (phone test, production build): Performance 85-87, Accessibility 100,
 
 - **Pre-rendered:** `npm run build` also renders the page to HTML (`src/entry-server.tsx` + `scripts/prerender.mjs`), so text shows before the JavaScript loads.
 - **The grid background is one canvas**, and it only animates while something glows on screen.
-- **Hero photos** come in the right size for each screen. Fonts are self-hosted, only the Latin letters, and the first-screen ones are preloaded.
+- **Hero photos** come in the right size for each screen. Product photos are pre-cropped to 4:3 and load only when their row comes into view.
+- **Fonts** are self-hosted, only the Latin letters, and the first-screen ones are preloaded.
 - **For search and sharing:**
   - page title and description
   - share-preview image
@@ -51,7 +56,28 @@ Build: `npm run build` (output in `dist/`). Check the build locally with `npm ru
 Kit prices are examples until the shop adds real ones.
 
 ## Credits
-- **Components:** [Magic UI](https://magicui.design) (MIT), added with the shadcn CLI.
-- **Ideas:** [Watermelon UI](https://ui.watermelon.sh), [Animate UI](https://animate-ui.com) and [Uiverse](https://uiverse.io).
-- **Hero photos:** Klim Musalimov, Lasse Jensen, I'M ZION, michael evins, Barnaby Woodrow and Nejc Soklič on [Unsplash](https://unsplash.com) (Unsplash License).
+- **Components:** [Magic UI](https://magicui.design) (MIT), added with the shadcn CLI:
+  - Interactive Grid
+  - Marquee
+  - Shimmer Button
+  - Magic Card
+  - Number Ticker
+  - Blur Fade
+  - Word Rotate
+  - Scroll Velocity
+- **Ideas:**
+  - [Watermelon UI](https://ui.watermelon.sh), [Animate UI](https://animate-ui.com) and [Uiverse](https://uiverse.io)
+  - the light bulb's circle reveal comes from Magic UI's Animated Theme Toggler
+- **Photos:** all from [Unsplash](https://unsplash.com) (Unsplash License).
+
+  | Where | Photographers |
+  |---|---|
+  | Hero | Klim Musalimov, Lasse Jensen, I'M ZION, michael evins, Barnaby Woodrow, Nejc Soklič |
+  | Earbuds & audio | TheRegisti, Miguel Angel Avila, Habib Dadkhah, C D-X, Rebekah Yip, Arturo Añez |
+  | Chargers & cables | Homemade Media, Andrey Matveev, Lucian Alexe, James Lewis, Abhishek Tirkey, Matteo Grobberio |
+  | Power banks | gomi, I'M ZION, Kamil Switalski, Konstantinos Papadopoulos, Andrey Matveev |
+  | Covers & protection | Sophia Stark, Abhishek Yadav, Grysell Alvarez, Mason Supply, Alexandru Ant, Anuj Mhatre |
+  | Watches & speakers | Simon Daoudi, Nikita Kostrykin, Daniel Korpai, Nicolas J Leclercq, Habib Dadkhah, Viktor Khilchuk |
+
+
 - **Fonts:** Newsreader, JetBrains Mono and Inter (self-hosted with Fontsource).

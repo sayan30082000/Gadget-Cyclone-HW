@@ -1,12 +1,12 @@
-# Review log: Gadget Cyclone interactive landing page (UI/UX Class 03)
+# Review log: Gadget Cyclone interactive landing page
 
-How the page was built and fixed, for the class demo.
+How the page was built with AI, then reviewed and fixed on phone, tablet and desktop.
 
 ## 1. Brief given to the AI
-- **Task:** an interactive landing page for my practice business, Gadget Cyclone (phone accessories, Finlay Square 4th floor, 2 No. Gate, Chattogram; cash on delivery; orders on WhatsApp / Facebook).
-- **Required:** buttons, backgrounds and animations from the component galleries we saw in class, plus an interactive background. The page should feel alive, then be reviewed on mobile, tablet and desktop.
+- **Task:** an interactive landing page for Gadget Cyclone (phone accessories, Finlay Square 4th floor, 2 No. Gate, Chattogram; cash on delivery; orders on WhatsApp / Facebook).
+- **Required:** buttons, backgrounds and animations from free UI component galleries, plus an interactive background. The page should feel alive, then be reviewed on mobile, tablet and desktop.
 - **References:**
-  - my Class 02 page (black grid, Newsreader + JetBrains Mono, orange #EA4A1A)
+  - my earlier Gadget Cyclone page (black grid, Newsreader + JetBrains Mono, orange #EA4A1A)
   - the Dribbble ref "Tech Gadget E-commerce Website UI" (Design Monks)
   - the "UI ELEMENTS" band on my Figma moodboard (Watermelon UI, Magic UI, Uiverse, Animate UI, Layers)
 
@@ -275,7 +275,23 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 - The floating WhatsApp button shows over the shop and hides over Visit.
 - The "Call us" card and hours: tested with a placeholder number, then emptied again.
 
-## 9. Still to do (needs the shop owner)
+## 9. Round 7: real product photos, live link
+**Live:** https://gagdet-cyclone.netlify.app (Netlify, built from the GitHub repo).
+
+**Shop photos:**
+- All 30 shop cards now show a real photo of that product instead of an icon. Examples: a neckband for "Neckbands", a 67W charger for "33-65W chargers", a magnetic battery pack on the back of a phone for "Magnetic packs".
+- **Source:** every photo is from Unsplash (free license, no Unsplash+).
+- **Checked:** I picked each one by looking at the candidates side by side, not by the search text. Some searches were misleading: "car phone charger" mostly returned electric-car chargers.
+- **Fast:**
+  - each photo comes pre-cropped to the card's 4:3 shape, at 400 or 800 px wide
+  - photos load only when a row comes into view
+- **Look:** the card number and the COD tag sit on top of the photo, and the photo zooms in a little on hover.
+
+**Cleanup:**
+- The footer now has only shop information (example prices, photo source). The developer credits moved to the README.
+- The share previews, canonical link and sitemap now use the live address.
+
+## 10. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
 - **Prices:** kit prices are samples.
@@ -286,4 +302,4 @@ I asked the AI to act as a web developer and tell me what would make the site lo
   - a Bangla version (the wording needs checking by the owner)
   - a custom domain
   - a visitor analytics account
-- **If the Netlify name changes** from `gadget-cyclone-interactive`, change `url` in `src/data/site.ts` so share previews and the sitemap point to the right place.
+- **If the site address changes** (for example a custom domain, or renaming the Netlify site), change `url` in `src/data/site.ts` so share previews and the sitemap point to the right place.

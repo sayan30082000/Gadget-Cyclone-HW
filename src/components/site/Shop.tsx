@@ -1,50 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { motion } from "motion/react"
-import {
-  Activity,
-  Battery,
-  BatteryCharging,
-  BatteryFull,
-  BatteryLow,
-  Bike,
-  Bluetooth,
-  Cable,
-  Camera,
-  Car,
-  ChevronLeft,
-  ChevronRight,
-  Gamepad2,
-  Hand,
-  Headphones,
-  Layers,
-  Magnet,
-  Mic,
-  Music,
-  PartyPopper,
-  PlugZap,
-  Shield,
-  Smartphone,
-  Speaker,
-  VolumeX,
-  Wallet,
-  Watch,
-  Zap,
-  type LucideIcon,
-} from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { BlurFade } from "@/components/ui/blur-fade"
 import { SectionHead, wrap } from "@/components/site/Sections"
-import { CATEGORIES, whatsappLink, type Category } from "@/data/site"
+import { CATEGORIES, cardPhoto, whatsappLink, type Category } from "@/data/site"
 
 /* ================= Shop: one swipe carousel per category ================= */
 
-const ICONS: Record<string, LucideIcon[]> = {
-  earbuds: [Bluetooth, VolumeX, Music, Headphones, Gamepad2, Mic],
-  chargers: [PlugZap, Zap, Cable, Cable, Car, BatteryCharging],
-  power: [Battery, BatteryFull, Magnet, Zap, BatteryLow, Cable],
-  covers: [Smartphone, Shield, Hand, Wallet, Layers, Camera],
-  more: [Watch, Activity, Watch, Speaker, PartyPopper, Bike],
-}
+// card widths: 72% of the screen on phones, then 42%, 31%, and about 300 px on desktop
+const CARD_SIZES = "(min-width: 1024px) 300px, (min-width: 768px) 31vw, (min-width: 640px) 42vw, 72vw"
 
 export function Shop() {
   return (
@@ -74,7 +39,6 @@ function CategoryRow({ cat, index }: { cat: Category; index: number }) {
   const [thumb, setThumb] = useState({ size: 1, pos: 0 })
   const [edges, setEdges] = useState({ start: true, end: false })
   const [dragging, setDragging] = useState(false)
-  const icons = ICONS[cat.id] ?? []
 
   const measure = useCallback(() => {
     const el = track.current
@@ -150,7 +114,6 @@ function CategoryRow({ cat, index }: { cat: Category; index: number }) {
         }`}
       >
         {cat.items.map((it, i) => {
-          const Icon = icons[i] ?? Smartphone
           return (
             <motion.a
               key={it.name}
@@ -166,9 +129,20 @@ function CategoryRow({ cat, index }: { cat: Category; index: number }) {
               transition={{ type: "spring", stiffness: 300, damping: 22 }}
               className="group flex w-[72%] shrink-0 snap-start flex-col border border-gc-line bg-gc-paper p-4 transition-colors hover:border-gc-green sm:w-[42%] md:w-[31%] lg:w-[23.4%]"
             >
-              <div className="relative grid aspect-[4/3] place-items-center border border-gc-line bg-gc-card">
-                <Icon className="size-12 text-gc-green transition-transform duration-300 group-hover:scale-110" strokeWidth={1.4} />
-                <span className="absolute top-2 left-2 font-mono text-[12px] text-gc-muted">0{i + 1}</span>
+              <div className="relative aspect-[4/3] overflow-hidden border border-gc-line bg-gc-line">
+                <img
+                  src={cardPhoto(it.photo, 400)}
+                  srcSet={`${cardPhoto(it.photo, 400)} 400w, ${cardPhoto(it.photo, 800)} 800w`}
+                  sizes={CARD_SIZES}
+                  width={400}
+                  height={300}
+                  alt={it.alt}
+                  loading="lazy"
+                  decoding="async"
+                  draggable={false}
+                  className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute top-2 left-2 bg-gc-paper/90 px-1.5 py-0.5 font-mono text-[12px] text-gc-ink">0{i + 1}</span>
                 <span className="absolute top-2 right-2 bg-gc-amber px-1.5 py-0.5 font-mono text-[12px] font-bold tracking-wider text-gc-onamber uppercase">
                   COD
                 </span>

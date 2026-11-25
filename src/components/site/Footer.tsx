@@ -34,13 +34,9 @@ export function Footer() {
             WhatsApp →
           </a>
         </nav>
-        <div className="font-mono text-[12px] leading-6 text-gc-muted">
-          <p>
-            Built for UI/UX Class 03 by Sayan Das. Components: Magic UI (Interactive Grid, Marquee, Shimmer Button,
-            Magic Card, Number Ticker, Blur Fade, Word Rotate, Scroll Velocity). Ideas from Watermelon UI,
-            Animate UI and Uiverse.
-          </p>
-          <p className="mt-2">Hero photos on Unsplash by Klim Musalimov, Lasse Jensen, I&apos;M ZION, michael evins, Barnaby Woodrow and Nejc Soklič. Theme switch: our pull-cord light bulb (circle reveal idea from Magic UI Animated Theme Toggler). Prices shown are examples; we confirm today's price on WhatsApp.</p>
+        <div className="font-sans text-[14px] leading-6 text-gc-muted">
+          <p>Prices shown are examples. We confirm today&apos;s price and stock on WhatsApp before we pack your order.</p>
+          <p className="mt-2 text-[13px]">Photos: Unsplash.</p>
         </div>
       </div>
       <div className="border-t border-gc-line py-4 text-center font-mono text-[12px] text-gc-muted">
