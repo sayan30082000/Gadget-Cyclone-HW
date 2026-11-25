@@ -202,7 +202,88 @@ The round 4 sun/moon button looked like every other site. I asked for something 
 - Phone header (bulb next to the menu, no overlap, no sideways scroll).
 - Dark mode is remembered after a reload.
 
-## 8. Still to do (needs the shop owner)
-- Add the real WhatsApp number and Facebook page link in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
-- Kit prices are samples.
-- The "Ask us" bubbles are example questions, not real reviews.
+## 8. Round 6: professional pass
+I asked the AI to act as a web developer and tell me what would make the site look and work like a real shop's site. Then I asked it to make all those changes, but keep the parts people remember.
+
+**Kept as they were:**
+- the hero showcase (the word and the photo change together)
+- the green grid background
+- the pull-cord light bulb
+- the bundle box
+- the swipe carousels
+- the Mint Market colors in light and dark
+
+**Lighthouse, phone test, production build** (run on my computer; the live site will differ a little):
+
+| | Before | After |
+|---|---|---|
+| Performance | 58 | 85-87 |
+| Accessibility | 100 | 100 |
+| Best practices | 96 | 100 |
+| SEO | 92 | 100 |
+| First text on screen | 3.0 s | 2.2 s |
+| Biggest item on screen | 3.8 s | 3.4-3.5 s |
+| Time the page was frozen | 1,210 ms | about 200 ms |
+| Layout jumps | 0 | 0 |
+| Page weight | 942 KB | 516 KB |
+| Text big enough to read | 55% | 100% |
+
+**Faster:**
+- **Pre-rendered page:** the HTML now already contains the whole page, so text shows before the JavaScript loads, and React then takes it over.
+- **Grid background:** it was about 1,000 separate squares in the page. Now it is drawn lines plus one canvas that paints only the lit squares. It only runs while something glows and the hero is on screen. This roughly halved the page (2,185 → about 1,190 elements) and removed most of the freezing.
+- **Hero photos:** each screen gets the right size (480 to 1400 px wide). The first photo starts loading straight away, and only the next photo is loaded ahead.
+- **Fonts:** only the Latin letters are loaded, the first-screen fonts load early, and the text never jumps when a font arrives.
+- **Headline:** it shows immediately, with no fade-in delay.
+
+**Easier to read:**
+- Descriptions, FAQ answers, chat bubbles and card text moved from small code-style letters (10 to 14 px) to Inter at 15 to 16 px.
+- The code-style font stays for labels and buttons, so the "tech shop" feel is still there.
+- No text is smaller than 12 px.
+
+**Easier to order:**
+- **On phones** a WhatsApp button floats in the corner after the hero. It hides over the kit box and the Visit section, which have their own buttons.
+- **Every shop card** has an "Ask for today's stock →" link.
+- **The kit box order button** is now a plain green button. The shimmer version had white text on bright green in dark mode, which was hard to read.
+- **Optional details:** a "Call us" card and opening hours appear only when the owner fills them in `src/data/site.ts`. Nothing is guessed.
+
+**Honest:**
+- Prices are marked as examples in the kit box, the FAQ and the footer. We confirm today's price and stock on WhatsApp.
+
+**Share previews and Google:**
+- A clear page title and description.
+- A 1200×630 preview image for Facebook, WhatsApp and Messenger.
+- Business details for Google: address, area, cash payment. Phone and hours are added only when filled in.
+- `robots.txt` and `sitemap.xml`, written at build time.
+- Favicon, phone home-screen icons and a web manifest.
+- The phone's browser bar color follows the light bulb.
+
+**Hosting (Netlify):**
+- Files that never change are cached for a year.
+- Basic security headers.
+- A branded "This shelf is empty" 404 page.
+
+**Cleanup:** I removed two Magic UI components the page no longer used.
+
+**Fixed while testing:**
+- **Layout jump after pre-rendering:** the headline jumped (layout shift 0.18) when its font loaded late. The font now either arrives in time or the fallback stays, so the score is back to 0.
+- **"Call us" link:** it removed the letter "s" instead of spaces from the number. It now keeps only digits and +. The WhatsApp number also accepts spaces and a +.
+
+**Checked:**
+- Production build in light and dark on phone (375 px), tablet and desktop.
+- No console or hydration errors.
+- After the page loads, the grid, hero rotation, kit box, carousels and light bulb all still work.
+- The floating WhatsApp button shows over the shop and hides over Visit.
+- The "Call us" card and hours: tested with a placeholder number, then emptied again.
+
+## 9. Still to do (needs the shop owner)
+- **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
+- **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
+- **Prices:** kit prices are samples.
+- **Promises:** confirm the "7-day replacement" promise and the cash-on-delivery area before the site goes live.
+- **Logo:** the current one is a simple green "G" mark.
+- **"Ask us" bubbles** are example questions, not real reviews.
+- **Later:**
+  - a Bangla version (the wording needs checking by the owner)
+  - a custom domain
+  - a visitor analytics account
+- **If the Netlify name changes** from `gadget-cyclone-interactive`, change `url` in `src/data/site.ts` so share previews and the sitemap point to the right place.

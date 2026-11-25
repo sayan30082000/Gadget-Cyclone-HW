@@ -125,7 +125,7 @@ function CategoryRow({ cat, index }: { cat: Category; index: number }) {
           <span className="font-mono text-[12px] text-gc-green">0{index + 1}</span>
           <div>
             <h3 className="font-serif text-[28px] leading-tight text-gc-ink sm:text-[32px]">{cat.label}</h3>
-            <p className="mt-1 font-mono text-[12px] text-gc-muted">{cat.line}</p>
+            <p className="mt-1 font-sans text-[14px] text-gc-muted">{cat.line}</p>
           </div>
         </div>
         <div className="hidden shrink-0 gap-2 sm:flex">
@@ -168,14 +168,14 @@ function CategoryRow({ cat, index }: { cat: Category; index: number }) {
             >
               <div className="relative grid aspect-[4/3] place-items-center border border-gc-line bg-gc-card">
                 <Icon className="size-12 text-gc-green transition-transform duration-300 group-hover:scale-110" strokeWidth={1.4} />
-                <span className="absolute top-2 left-2 font-mono text-[10px] text-gc-muted">0{i + 1}</span>
-                <span className="absolute top-2 right-2 bg-gc-amber px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider text-gc-onamber uppercase">
+                <span className="absolute top-2 left-2 font-mono text-[12px] text-gc-muted">0{i + 1}</span>
+                <span className="absolute top-2 right-2 bg-gc-amber px-1.5 py-0.5 font-mono text-[12px] font-bold tracking-wider text-gc-onamber uppercase">
                   COD
                 </span>
               </div>
               <p className="mt-4 font-serif text-[21px] leading-tight text-gc-ink">{it.name}</p>
-              <p className="mt-1 font-mono text-[12px] text-gc-muted">{it.note}</p>
-              <p className="mt-4 font-mono text-[11px] tracking-wider text-gc-muted uppercase transition-colors group-hover:text-gc-green">
+              <p className="mt-1 font-sans text-[14px] text-gc-muted">{it.note}</p>
+              <p className="mt-4 font-sans text-[14px] font-medium text-gc-green">
                 Ask for today's stock →
               </p>
             </motion.a>
@@ -190,7 +190,7 @@ function CategoryRow({ cat, index }: { cat: Category; index: number }) {
           style={{ width: `${Math.max(thumb.size, 0.12) * 100}%`, marginLeft: `${thumb.pos * (1 - Math.max(thumb.size, 0.12)) * 100}%` }}
         />
       </div>
-      <p className="mt-2 font-mono text-[10px] tracking-wider text-gc-muted uppercase sm:hidden">swipe →</p>
+      <p className="mt-2 font-mono text-[12px] tracking-wider text-gc-muted uppercase sm:hidden">swipe →</p>
     </div>
   )
 }

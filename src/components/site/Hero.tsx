@@ -13,8 +13,7 @@ import { ArrowDown, Check, MapPin } from "lucide-react"
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern"
 import { ShimmerButton } from "@/components/ui/shimmer-button"
 import { WordRotate } from "@/components/ui/word-rotate"
-import { BlurFade } from "@/components/ui/blur-fade"
-import { HERO_PRODUCTS, whatsappLink } from "@/data/site"
+import { HERO_PRODUCTS, heroSrcSet, sized, whatsappLink } from "@/data/site"
 
 const STEP_MS = 2800
 const WORDS = HERO_PRODUCTS.map((p) => p.word)
@@ -35,13 +34,15 @@ export function Hero() {
     return () => window.clearTimeout(t)
   }, [active, paused, reduce])
 
-  // warm the cache so the crossfade never shows an empty frame
+  // warm only the next photo (the old version downloaded all six big photos at once)
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   useEffect(() => {
-    HERO_PRODUCTS.forEach((p) => {
-      const img = new Image()
-      img.src = p.photo
-    })
-  }, [])
+    const next = HERO_PRODUCTS[(active + 1) % HERO_PRODUCTS.length]
+    const img = new Image()
+    img.sizes = "(min-width: 1024px) 45vw, 100vw"
+    img.srcset = heroSrcSet(next.photo)
+  }, [active])
 
   const pick = (i: number) => {
     holdUntil.current = Date.now() + 8000 // a tapped product stays a bit longer
@@ -80,11 +81,8 @@ export function Hero() {
     >
       {/* Interactive background: Magic UI Interactive Grid Pattern */}
       <InteractiveGridPattern
-        width={44}
-        height={44}
-        squares={[40, 22]}
-        className="border-none [mask-image:radial-gradient(ellipse_at_center,white_35%,transparent_85%)]"
-        squaresClassName="stroke-gc-line hover:fill-gc-green/25 data-[on]:fill-gc-green/20"
+        cell={44}
+        className="[mask-image:radial-gradient(ellipse_at_center,white_35%,transparent_85%)]"
         trackRef={sectionRef}
         autoGlow
       />
@@ -92,28 +90,21 @@ export function Hero() {
 
       <div className="pointer-events-none relative z-10 mx-auto grid max-w-[1400px] gap-10 px-5 pt-14 pb-16 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12 lg:px-12 lg:pt-20 lg:pb-24">
         <div>
-          <BlurFade delay={0.05}>
-            <p className="inline-flex items-center gap-2 border border-gc-line bg-gc-paper/70 px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] text-gc-muted uppercase">
+            <p className="inline-flex items-center gap-2 border border-gc-line bg-gc-paper/70 px-3 py-1.5 font-mono text-[12px] tracking-[0.14em] text-gc-muted uppercase">
               <MapPin className="size-3.5 text-gc-green" /> Finlay Square · 4th floor · Chattogram
             </p>
-          </BlurFade>
 
-          <BlurFade delay={0.15}>
             <h1 className="mt-6 font-serif text-[44px] leading-[1.02] text-gc-ink sm:text-[60px] lg:text-[62px] xl:text-[74px]">
               <WordRotate words={WORDS} index={active} className="text-gc-green italic" />
               for the phone you{" "}
               <strong className="font-mono font-bold tracking-tight text-gc-ink">ALREADY</strong> own.
             </h1>
-          </BlurFade>
 
-          <BlurFade delay={0.25}>
-            <p className="mt-6 max-w-xl font-mono text-[14px] leading-7 text-gc-muted sm:text-[15px]">
+            <p className="mt-6 max-w-xl font-sans text-[16px] leading-7 text-gc-muted sm:text-[17px]">
               Earbuds, chargers, power banks, covers, watches and speakers, picked for your exact phone model.
               Delivered across Chattogram, and you pay the rider when it arrives.
             </p>
-          </BlurFade>
 
-          <BlurFade delay={0.35}>
             <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-3">
               <a
                 href={whatsappLink(`Hi Gadget Cyclone! I'm looking for ${WORDS[active].toLowerCase()}. My phone is: `)}
@@ -136,9 +127,7 @@ export function Hero() {
                 See the kits <ArrowDown className="size-4" />
               </a>
             </div>
-          </BlurFade>
 
-          <BlurFade delay={0.45}>
             <ul className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[12px] text-gc-muted">
               {["No advance", "Pay the rider", "7-day replacement"].map((t) => (
                 <li key={t} className="inline-flex items-center gap-1.5">
@@ -146,10 +135,9 @@ export function Hero() {
                 </li>
               ))}
             </ul>
-          </BlurFade>
         </div>
 
-        <BlurFade delay={0.3} className="pointer-events-auto">
+        <div className="pointer-events-auto">
           <div onPointerEnter={(e) => e.pointerType === "mouse" && setPaused(true)} onPointerLeave={() => setPaused(false)}>
             <TiltPhoto reduce={!!reduce} active={active} />
 
@@ -170,11 +158,14 @@ export function Hero() {
                     }`}
                   >
                     <img
-                      src={p.photo.replace("w=1400", "w=200")}
+                      src={sized(p.photo, 160)}
+                      loading="lazy"
+                      width={80}
+                      height={80}
                       alt=""
                       className={`size-full object-cover transition duration-300 ${on ? "" : "opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0"}`}
                     />
-                    {on && !paused && !reduce && (
+                    {mounted && on && !paused && !reduce && (
                       <motion.span
                         key={`bar-${active}`}
                         className="absolute bottom-0 left-0 h-1 bg-gc-green"
@@ -187,12 +178,12 @@ export function Hero() {
                 )
               })}
             </div>
-            <div className="mt-2 flex justify-between font-mono text-[10px] text-gc-muted">
+            <div className="mt-2 flex justify-between font-mono text-[12px] text-gc-muted">
               <span className="hidden sm:inline">{paused ? "paused" : "tap a product"}</span>
               <span>photo: {HERO_PRODUCTS[active].credit} / Unsplash</span>
             </div>
           </div>
-        </BlurFade>
+        </div>
       </div>
     </section>
   )
@@ -230,7 +221,10 @@ function TiltPhoto({ reduce, active }: { reduce: boolean; active: number }) {
         <AnimatePresence initial={false}>
           <motion.img
             key={p.photo}
-            src={p.photo}
+            src={sized(p.photo, 960)}
+            srcSet={heroSrcSet(p.photo)}
+            sizes="(min-width: 1024px) 45vw, 100vw"
+            fetchPriority={active === 0 ? "high" : "auto"}
             alt={p.alt}
             initial={{ opacity: 0, scale: 1.08 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -280,7 +274,7 @@ function FloatChip({
       animate={{ y: [0, -8, 0] }}
       transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay }}
       style={{ translateZ: 40 }}
-      className={`absolute border border-gc-line bg-gc-card/90 px-3 py-2 font-mono text-[11px] tracking-wide text-gc-ink uppercase backdrop-blur ${className ?? ""}`}
+      className={`absolute border border-gc-line bg-gc-card/90 px-3 py-2 font-mono text-[12px] tracking-wide text-gc-ink uppercase backdrop-blur ${className ?? ""}`}
     >
       {children}
     </motion.div>

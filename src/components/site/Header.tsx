@@ -37,9 +37,9 @@ export function Header() {
 
       {/* ticker: Magic UI Marquee */}
       <div className="bg-gc-green">
-        <Marquee pauseOnHover className="py-2 [--duration:38s] [--gap:2.5rem]">
+        <Marquee pauseOnHover repeat={2} className="py-2 [--duration:38s] [--gap:2.5rem]">
           {TICKER.map((t) => (
-            <span key={t} className="font-mono text-[11px] tracking-[0.12em] text-gc-ongreen uppercase">
+            <span key={t} className="font-mono text-[12px] tracking-[0.12em] text-gc-ongreen uppercase">
               <span className="mr-2 text-gc-amber">■</span>
               {t}
             </span>

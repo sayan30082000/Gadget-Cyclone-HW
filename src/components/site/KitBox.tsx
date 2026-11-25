@@ -16,7 +16,6 @@ import {
 } from "lucide-react"
 
 import { NumberTicker } from "@/components/ui/number-ticker"
-import { ShimmerButton } from "@/components/ui/shimmer-button"
 import { SectionHead, wrap } from "@/components/site/Sections"
 import { KIT_DEAL, KIT_ITEMS, KIT_PRESETS, whatsappLink } from "@/data/site"
 
@@ -97,7 +96,7 @@ export function KitBuilder() {
         )}
       </div>
 
-      <label className="mt-5 block font-mono text-[11px] tracking-[0.14em] text-gc-muted uppercase">
+      <label className="mt-5 block font-mono text-[12px] tracking-[0.14em] text-gc-muted uppercase">
         Your phone model
         <input
           value={model}
@@ -117,16 +116,16 @@ export function KitBuilder() {
         }}
         className="mt-4 block"
       >
-        <ShimmerButton
-          background={items.length ? "var(--gc-green)" : "var(--gc-muted)"}
-          borderRadius="0px"
-          className="h-12 w-full font-mono text-[13px] font-bold tracking-wider uppercase"
+        <span
+          className={`flex h-12 w-full items-center justify-center font-mono text-[13px] font-bold tracking-wider uppercase transition-transform ${
+            items.length ? "bg-gc-green text-gc-ongreen hover:-translate-y-0.5" : "bg-gc-line text-gc-muted"
+          }`}
         >
           {items.length ? "■ Order this box on WhatsApp" : "Box is empty"}
-        </ShimmerButton>
+        </span>
       </a>
-      <p className="mt-3 font-mono text-[11px] leading-5 text-gc-muted">
-        Pay the rider when it arrives. Sample prices, we confirm today's price before packing.
+      <p className="mt-3 font-mono text-[12px] leading-5 text-gc-muted">
+        Pay the rider when it arrives. Prices are examples: we confirm today's price and stock before packing.
       </p>
     </div>
   )
@@ -145,7 +144,7 @@ export function KitBuilder() {
           <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_1fr] lg:gap-10 [&>*]:min-w-0">
             {/* quick kits */}
             <div className="order-1 lg:col-start-1 lg:row-start-1">
-              <p className="font-mono text-[11px] tracking-[0.14em] text-gc-muted uppercase">Quick kits</p>
+              <p className="font-mono text-[12px] tracking-[0.14em] text-gc-muted uppercase">Quick kits</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {KIT_PRESETS.map((p) => {
                   const on = preset?.id === p.id
@@ -201,7 +200,7 @@ export function KitBuilder() {
                           className="group relative grid aspect-square place-items-center bg-gc-green text-gc-ongreen"
                         >
                           <Icon className="size-[42%]" strokeWidth={1.6} />
-                          <span className="absolute inset-0 grid place-items-center bg-gc-ink/85 text-gc-paper font-mono text-[10px] tracking-wider uppercase opacity-0 transition-opacity group-hover:opacity-100">
+                          <span className="absolute inset-0 grid place-items-center bg-gc-ink/85 text-gc-paper font-mono text-[12px] tracking-wider uppercase opacity-0 transition-opacity group-hover:opacity-100">
                             remove
                           </span>
                         </motion.button>
@@ -212,7 +211,7 @@ export function KitBuilder() {
                     ))}
                   </div>
 
-                  <p className="absolute right-4 bottom-4 left-4 flex items-center justify-between font-mono text-[10px] tracking-[0.18em] text-gc-muted uppercase">
+                  <p className="absolute right-4 bottom-4 left-4 flex items-center justify-between font-mono text-[12px] tracking-[0.18em] text-gc-muted uppercase">
                     <span>Gadget Cyclone · {preset ? preset.name : items.length ? "your kit" : "empty box"}</span>
                     <span className="hidden border border-gc-muted px-1.5 py-0.5 sm:inline">COD · CTG</span>
                   </p>
@@ -223,11 +222,11 @@ export function KitBuilder() {
                   ref={sticker}
                   className="absolute -top-1 -right-2 -rotate-6 bg-gc-amber px-3 py-2 text-gc-onamber shadow-[3px_3px_0_#111111] sm:-right-4"
                 >
-                  <p className="font-mono text-[10px] font-bold tracking-wider uppercase">{deal ? "15% off" : "box total"}</p>
+                  <p className="font-mono text-[12px] font-bold tracking-wider uppercase">{deal ? "15% off" : "box total"}</p>
                   <p className="font-mono text-[22px] leading-none font-bold">
                     Tk <NumberTicker value={total} className="!text-gc-onamber !tracking-tight" />
                   </p>
-                  {saved > 0 && <p className="mt-0.5 font-mono text-[10px]">save {tk(saved)}</p>}
+                  {saved > 0 && <p className="mt-0.5 font-mono text-[12px]">save {tk(saved)}</p>}
                 </div>
               </div>
 
@@ -236,7 +235,7 @@ export function KitBuilder() {
 
             {/* the shelf */}
             <div className="order-3 lg:col-start-1 lg:row-start-2">
-              <p className="font-mono text-[11px] tracking-[0.14em] text-gc-muted uppercase">The shelf</p>
+              <p className="font-mono text-[12px] tracking-[0.14em] text-gc-muted uppercase">The shelf</p>
               <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
                 {KIT_ITEMS.map((i) => {
                   const on = sel.includes(i.id)
@@ -264,15 +263,15 @@ export function KitBuilder() {
                           </motion.div>
                         )}
                       </div>
-                      <span className="mt-2 font-mono text-[11px] leading-tight text-gc-ink">{i.name}</span>
-                      <span className="mt-1 font-mono text-[11px] text-gc-muted">{tk(i.price)}</span>
+                      <span className="mt-2 font-mono text-[12px] leading-tight text-gc-ink">{i.name}</span>
+                      <span className="mt-1 font-sans text-[14px] text-gc-muted">{tk(i.price)}</span>
                       <AnimatePresence>
                         {on && (
                           <motion.span
                             initial={{ opacity: 0, y: -4 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0 }}
-                            className="absolute top-1.5 right-1.5 bg-gc-green px-1 font-mono text-[9px] tracking-wider text-gc-ongreen uppercase"
+                            className="absolute top-1.5 right-1.5 bg-gc-green px-1 font-mono text-[12px] tracking-wider text-gc-ongreen uppercase"
                           >
                             in box
                           </motion.span>
@@ -288,7 +287,7 @@ export function KitBuilder() {
                 <span className="font-mono text-[12px]">
                   {items.length} in box · <span className="font-bold">{tk(total)}</span>
                 </span>
-                <a href="#kit-box" className="bg-gc-green px-3 py-2 font-mono text-[11px] font-bold tracking-wider text-gc-ongreen uppercase">
+                <a href="#kit-box" className="bg-gc-green px-3 py-2 font-mono text-[12px] font-bold tracking-wider text-gc-ongreen uppercase">
                   See box ↑
                 </a>
               </div>

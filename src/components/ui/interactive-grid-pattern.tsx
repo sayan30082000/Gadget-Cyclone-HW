@@ -1,140 +1,167 @@
-import React, { useCallback, useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 
 import { cn } from "@/lib/utils"
 
 /**
- * InteractiveGridPattern (Magic UI), changed for Gadget Cyclone after the mobile review:
- * - hover is pure CSS now, so moving the mouse no longer re-renders ~900 squares
- * - squares also light up on tap / finger drag, because phones have no hover
- * - `autoGlow` lights a few random squares on its own, so the grid feels alive on touch screens too
+ * InteractiveGridPattern, based on Magic UI's component, rebuilt for Gadget Cyclone (round 6, performance):
+ * - the old version drew ~900 SVG squares (2,185 DOM elements on the page, 1.2 s blocked main thread on phones)
+ * - now the grid lines are one CSS background and the lit squares are painted on ONE canvas
+ * - squares light under the mouse, a tap or a finger drag; `autoGlow` lights a few on their own
+ * - the canvas only animates while something is fading, and stops when the hero is off screen
  */
-interface InteractiveGridPatternProps extends React.SVGProps<SVGSVGElement> {
-  width?: number
-  height?: number
-  squares?: [number, number] // [horizontal, vertical]
+interface InteractiveGridPatternProps {
+  /** size of one square in px */
+  cell?: number
   className?: string
-  squaresClassName?: string
-  /** element whose pointer events should light the squares (defaults to the svg) */
+  /** element whose pointer events light the squares */
   trackRef?: React.RefObject<HTMLElement | null>
   autoGlow?: boolean
 }
 
-export function InteractiveGridPattern({
-  width = 40,
-  height = 40,
-  squares = [24, 24],
-  className,
-  squaresClassName,
-  trackRef,
-  autoGlow = false,
-  ...props
-}: InteractiveGridPatternProps) {
-  const [horizontal, vertical] = squares
-  const svgRef = useRef<SVGSVGElement>(null)
-  const rects = useRef<(SVGRectElement | null)[]>([])
-  const timers = useRef(new Map<number, number>())
+type Lit = { start: number; dur: number; peak: number }
 
-  const light = useCallback((index: number, ms = 650) => {
-    const el = rects.current[index]
-    if (!el) return
-    el.dataset.on = "1"
-    const old = timers.current.get(index)
-    if (old) window.clearTimeout(old)
-    timers.current.set(
-      index,
-      window.setTimeout(() => {
-        delete el.dataset.on
-        timers.current.delete(index)
-      }, ms)
-    )
-  }, [])
+export function InteractiveGridPattern({ cell = 44, className, trackRef, autoGlow = false }: InteractiveGridPatternProps) {
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // tap / drag on touch screens (mouse uses CSS :hover)
   useEffect(() => {
-    const target = trackRef?.current ?? svgRef.current
-    const svg = svgRef.current
-    if (!target || !svg) return
+    const wrap = wrapRef.current
+    const canvas = canvasRef.current
+    const target = trackRef?.current ?? wrap
+    if (!wrap || !canvas || !target) return
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const lit = new Map<number, Lit>()
+    let cols = 1
+    let rows = 1
+    let raf = 0
+    let visible = true
+    let color = "0, 122, 82"
+    let hovered = -1
+
+    const readColor = () => {
+      const hex = getComputedStyle(document.documentElement).getPropertyValue("--gc-green").trim() || "#007a52"
+      const n = parseInt(hex.replace("#", ""), 16)
+      color = `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`
+    }
+
+    const resize = () => {
+      const { width, height } = wrap.getBoundingClientRect()
+      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      canvas.width = Math.round(width * dpr)
+      canvas.height = Math.round(height * dpr)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      cols = Math.ceil(width / cell)
+      rows = Math.ceil(height / cell)
+      kick()
+    }
+
+    const draw = (now: number) => {
+      raf = 0
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      for (const [i, l] of lit) {
+        const t = (now - l.start) / l.dur
+        if (t >= 1 && i !== hovered) {
+          lit.delete(i)
+          continue
+        }
+        // quick fade in, slow fade out (like the old CSS: 100 ms in, 1 s out)
+        const a = i === hovered ? l.peak : t < 0.1 ? (t / 0.1) * l.peak : l.peak * (1 - (t - 0.1) / 0.9)
+        ctx.fillStyle = `rgba(${color}, ${a.toFixed(3)})`
+        ctx.fillRect((i % cols) * cell + 1, Math.floor(i / cols) * cell + 1, cell - 1, cell - 1)
+      }
+      if (lit.size && visible) raf = requestAnimationFrame(draw)
+    }
+    const kick = () => {
+      if (!raf && visible) raf = requestAnimationFrame(draw)
+    }
+
+    const light = (i: number, dur: number, peak: number) => {
+      lit.set(i, { start: performance.now(), dur, peak })
+      kick()
+    }
+
     const onPointer = (ev: Event) => {
       const e = ev as PointerEvent
-      if (e.pointerType === "mouse") return
-      const r = svg.getBoundingClientRect()
-      const col = Math.floor((e.clientX - r.left) / width)
-      const row = Math.floor((e.clientY - r.top) / height)
-      for (let dx = -1; dx <= 1; dx++)
-        for (let dy = -1; dy <= 1; dy++) {
-          const c = col + dx
-          const rr = row + dy
-          if (c < 0 || rr < 0 || c >= horizontal || rr >= vertical) continue
-          light(rr * horizontal + c, dx === 0 && dy === 0 ? 900 : 500)
+      const r = wrap.getBoundingClientRect()
+      const c = Math.floor((e.clientX - r.left) / cell)
+      const rr = Math.floor((e.clientY - r.top) / cell)
+      if (c < 0 || rr < 0 || c >= cols || rr >= rows) return
+      const i = rr * cols + c
+      if (e.pointerType === "mouse") {
+        // mouse: the square under the cursor stays lit, the last one fades out
+        if (hovered !== i) {
+          if (hovered >= 0) light(hovered, 1000, 0.25)
+          hovered = i
+          light(i, 1000, 0.25)
         }
-    }
-    target.addEventListener("pointerdown", onPointer, { passive: true })
-    target.addEventListener("pointermove", onPointer, { passive: true })
-    return () => {
-      target.removeEventListener("pointerdown", onPointer)
-      target.removeEventListener("pointermove", onPointer)
-    }
-  }, [trackRef, width, height, horizontal, vertical, light])
-
-  // ambient glow: a few random squares, only while the grid is on screen
-  useEffect(() => {
-    if (!autoGlow) return
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const svg = svgRef.current
-    if (!svg) return
-    let visible = true
-    const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting))
-    io.observe(svg)
-    const id = window.setInterval(() => {
-      if (!visible || document.hidden) return
-      const r = svg.getBoundingClientRect()
-      const cols = Math.min(horizontal, Math.ceil(r.width / width))
-      const rows = Math.min(vertical, Math.ceil(r.height / height))
-      for (let k = 0; k < 2; k++) {
-        const c = Math.floor(Math.random() * cols)
-        const rr = Math.floor(Math.random() * rows)
-        light(rr * horizontal + c, 1100)
+        return
       }
-    }, 420)
-    return () => {
-      window.clearInterval(id)
-      io.disconnect()
+      // touch: light a small cross around the finger
+      for (const [dx, dy] of [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const cc = c + dx
+        const r2 = rr + dy
+        if (cc < 0 || r2 < 0 || cc >= cols || r2 >= rows) continue
+        light(r2 * cols + cc, dx === 0 && dy === 0 ? 900 : 600, 0.22)
+      }
     }
-  }, [autoGlow, horizontal, vertical, width, height, light])
+    const onLeave = () => {
+      if (hovered >= 0) light(hovered, 1000, 0.25)
+      hovered = -1
+    }
 
-  useEffect(() => {
-    const map = timers.current
-    return () => map.forEach((t) => window.clearTimeout(t))
-  }, [])
+    readColor()
+    resize()
+    const ro = new ResizeObserver(resize)
+    ro.observe(wrap)
+    const io = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting
+      if (visible) kick()
+    })
+    io.observe(wrap)
+    const mo = new MutationObserver(() => {
+      readColor()
+      kick()
+    })
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+    target.addEventListener("pointermove", onPointer, { passive: true })
+    target.addEventListener("pointerdown", onPointer, { passive: true })
+    target.addEventListener("pointerleave", onLeave, { passive: true })
+
+    let timer = 0
+    if (autoGlow && !reduce) {
+      timer = window.setInterval(() => {
+        if (!visible || document.hidden) return
+        for (let k = 0; k < 2; k++) light(Math.floor(Math.random() * cols * rows), 1100, 0.2)
+      }, 420)
+    }
+
+    return () => {
+      cancelAnimationFrame(raf)
+      window.clearInterval(timer)
+      ro.disconnect()
+      io.disconnect()
+      mo.disconnect()
+      target.removeEventListener("pointermove", onPointer)
+      target.removeEventListener("pointerdown", onPointer)
+      target.removeEventListener("pointerleave", onLeave)
+    }
+  }, [cell, trackRef, autoGlow])
 
   return (
-    <svg
-      ref={svgRef}
-      width={width * horizontal}
-      height={height * vertical}
-      className={cn("absolute inset-0 h-full w-full border border-gray-400/30", className)}
-      {...props}
+    <div
+      ref={wrapRef}
+      aria-hidden
+      className={cn("pointer-events-none absolute inset-0", className)}
+      style={{
+        backgroundImage:
+          "linear-gradient(to right, var(--gc-line) 1px, transparent 1px), linear-gradient(to bottom, var(--gc-line) 1px, transparent 1px)",
+        backgroundSize: `${cell}px ${cell}px`,
+      }}
     >
-      {Array.from({ length: horizontal * vertical }).map((_, index) => {
-        const x = (index % horizontal) * width
-        const y = Math.floor(index / horizontal) * height
-        return (
-          <rect
-            key={index}
-            ref={(el) => {
-              rects.current[index] = el
-            }}
-            x={x}
-            y={y}
-            width={width}
-            height={height}
-            className={cn(
-              "fill-transparent stroke-gray-400/30 transition-[fill] duration-1000 ease-out hover:duration-100 data-[on]:duration-150",
-              squaresClassName
-            )}
-          />
-        )
-      })}
-    </svg>
+      <canvas ref={canvasRef} className="absolute inset-0 size-full" />
+    </div>
   )
 }

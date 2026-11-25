@@ -7,14 +7,19 @@ export const SITE = {
     "https://www.google.com/maps/search/?api=1&query=Finlay+Square+2+No+Gate+Chattogram",
   // Fill these in to turn on direct WhatsApp / Facebook links.
   // Until then the buttons open WhatsApp with the message ready, and you pick the chat.
-  whatsappNumber: "", // e.g. "8801XXXXXXXXX" (country code, no +)
+  whatsappNumber: "", // e.g. "8801XXXXXXXXX" (country code first; spaces and + are fine)
   facebookUrl: "", // e.g. "https://www.facebook.com/your-page"
+  // Round 6: shown on the page only when filled in (never guessed)
+  phone: "", // e.g. "+8801XXXXXXXXX" -> adds a "Call us" button
+  hours: "", // e.g. "Sa-Th 11:00-21:00" (this format also works for Google) -> shown in the Visit section
+  // the live address of the site, used for share previews, canonical link and sitemap
+  url: "https://gadget-cyclone-interactive.netlify.app",
 }
 
 export function whatsappLink(message: string) {
   const text = encodeURIComponent(message)
   return SITE.whatsappNumber
-    ? `https://wa.me/${SITE.whatsappNumber}?text=${text}`
+    ? `https://wa.me/${SITE.whatsappNumber.replace(/[^0-9]/g, "")}?text=${text}`
     : `https://wa.me/?text=${text}`
 }
 
@@ -29,7 +34,11 @@ export const TICKER = [
 
 // Hero showcase: the headline word and the photo change together.
 // Photos: Unsplash (free Unsplash License), credited on the page.
-const u = (id: string) => `https://images.unsplash.com/${id}?w=1400&q=80&auto=format&fit=crop`
+const u = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&q=70`
+
+/** same photo at a given width (Unsplash resizes on the fly) */
+export const sized = (photo: string, w: number) => `${photo}&w=${w}`
+export const heroSrcSet = (photo: string) => [480, 720, 960, 1400].map((w) => `${sized(photo, w)} ${w}w`).join(", ")
 
 export type HeroProduct = { word: string; photo: string; alt: string; note: string; credit: string }
 
@@ -233,6 +242,6 @@ export const FAQS = [
   },
   {
     q: "Are the kit prices fixed?",
-    a: "The prices on this page are samples. Message us for today's price and stock.",
+    a: "The prices on this page are examples. Prices change with stock, so we confirm today's price on WhatsApp before we pack your order.",
   },
 ]

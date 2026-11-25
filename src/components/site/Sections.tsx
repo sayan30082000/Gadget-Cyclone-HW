@@ -13,6 +13,7 @@ import {
   ChevronDown,
   MapPin,
   MessageCircle,
+  Phone,
   RotateCcw,
   Smartphone,
   Store,
@@ -21,7 +22,6 @@ import {
 import { BlurFade } from "@/components/ui/blur-fade"
 import { MagicCard } from "@/components/ui/magic-card"
 import { Marquee } from "@/components/ui/marquee"
-import { ShimmerButton } from "@/components/ui/shimmer-button"
 import {
   ASKS,
   BRANDS,
@@ -44,7 +44,7 @@ function FacebookIcon({ className }: { className?: string }) {
 
 export function Label({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block bg-gc-line px-2.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.14em] text-gc-ink uppercase">
+    <span className="inline-block bg-gc-line px-2.5 py-1.5 font-mono text-[12px] font-bold tracking-[0.14em] text-gc-ink uppercase">
       ■ {children}
     </span>
   )
@@ -70,7 +70,7 @@ export function SectionHead({
         {title} <strong className="font-mono font-bold tracking-tight text-gc-ink">{bold}</strong>
         {after ? ` ${after}` : ""}
       </h2>
-      {sub && <p className="mt-4 max-w-2xl font-mono text-[14px] leading-7 text-gc-muted">{sub}</p>}
+      {sub && <p className="mt-4 max-w-2xl font-sans text-[16px] leading-7 text-gc-muted">{sub}</p>}
     </BlurFade>
   )
 }
@@ -84,7 +84,7 @@ export function Brands() {
     <section className="border-b border-gc-line bg-gc-card">
       <div className={`${wrap} flex flex-col gap-3 py-5 md:flex-row md:items-center md:gap-8`}>
         <Label>Brands we stock</Label>
-        <Marquee pauseOnHover className="flex-1 [--duration:28s] [--gap:3rem] [mask-image:linear-gradient(90deg,transparent,white_10%,white_90%,transparent)]">
+        <Marquee pauseOnHover repeat={2} className="flex-1 [--duration:28s] [--gap:3rem] [mask-image:linear-gradient(90deg,transparent,white_10%,white_90%,transparent)]">
           {BRANDS.map((b) => (
             <span key={b} className="font-mono text-[18px] tracking-wider text-gc-muted transition-colors hover:text-gc-ink">
               {b}
@@ -122,7 +122,7 @@ export function WhyUs() {
             <MagicCard {...cardProps} className="h-full">
               <div className="p-6 sm:p-8">
                 <CardTitle n="01" icon={<Bike className="size-5" />} title="Cash on delivery" />
-                <p className="mt-3 max-w-md font-mono text-[13px] leading-6 text-gc-muted">
+                <p className="mt-3 max-w-md font-sans text-[15px] leading-6 text-gc-muted">
                   Order now, pay the rider when it arrives. Anywhere inside Chattogram city. No advance.
                 </p>
                 <RiderTrack />
@@ -134,16 +134,16 @@ export function WhyUs() {
             <MagicCard {...cardProps} className="h-full">
               <div className="p-6 sm:p-8">
                 <CardTitle n="02" icon={<Smartphone className="size-5" />} title="Right fit, checked" />
-                <p className="mt-3 font-mono text-[13px] leading-6 text-gc-muted">
+                <p className="mt-3 font-sans text-[15px] leading-6 text-gc-muted">
                   Tell us your model. We match the case, cable or charger before we pack.
                 </p>
                 <div className="mt-6 -mx-2 space-y-2 [mask-image:linear-gradient(90deg,transparent,white_12%,white_88%,transparent)]">
-                  <Marquee className="[--duration:22s] [--gap:0.5rem]" repeat={3}>
+                  <Marquee className="[--duration:22s] [--gap:0.5rem]" repeat={2}>
                     {PHONE_MODELS.slice(0, 5).map((m) => (
                       <ModelChip key={m} m={m} />
                     ))}
                   </Marquee>
-                  <Marquee reverse className="[--duration:22s] [--gap:0.5rem]" repeat={3}>
+                  <Marquee reverse className="[--duration:22s] [--gap:0.5rem]" repeat={2}>
                     {PHONE_MODELS.slice(5).map((m) => (
                       <ModelChip key={m} m={m} />
                     ))}
@@ -157,7 +157,7 @@ export function WhyUs() {
             <MagicCard {...cardProps} className="h-full">
               <div className="p-6 sm:p-8">
                 <CardTitle n="03" icon={<RotateCcw className="size-5" />} title="7-day replacement" />
-                <p className="mt-3 font-mono text-[13px] leading-6 text-gc-muted">
+                <p className="mt-3 font-sans text-[15px] leading-6 text-gc-muted">
                   Something wrong with it? Bring it back within 7 days.
                 </p>
                 <SevenDays />
@@ -170,7 +170,7 @@ export function WhyUs() {
               <div className="flex h-full flex-col justify-between gap-6 p-6 sm:p-8 lg:flex-row lg:items-end">
                 <div>
                   <CardTitle n="04" icon={<Store className="size-5" />} title="Walk in or message" />
-                  <p className="mt-3 max-w-md font-mono text-[13px] leading-6 text-gc-muted">
+                  <p className="mt-3 max-w-md font-sans text-[15px] leading-6 text-gc-muted">
                     See it in your hand at {SITE.address}. Or order on WhatsApp or Facebook.
                   </p>
                 </div>
@@ -203,7 +203,7 @@ function CardTitle({ n, icon, title }: { n: string; icon: React.ReactNode; title
 
 function ModelChip({ m }: { m: string }) {
   return (
-    <span className="border border-gc-line bg-gc-paper px-3 py-1.5 font-mono text-[11px] whitespace-nowrap text-gc-ink">
+    <span className="border border-gc-line bg-gc-paper px-3 py-1.5 font-mono text-[12px] whitespace-nowrap text-gc-ink">
       <Check className="mr-1 inline size-3 text-gc-green" />
       {m}
     </span>
@@ -219,7 +219,7 @@ function RiderTrack() {
         <span className="absolute top-1/2 left-0 grid size-9 -translate-y-1/2 place-items-center border border-gc-line bg-gc-paper text-gc-green">
           <Store className="size-4" />
         </span>
-        <span className="absolute top-1/2 right-0 grid size-9 -translate-y-1/2 place-items-center border border-gc-green bg-gc-paper font-mono text-[10px] text-gc-green">
+        <span className="absolute top-1/2 right-0 grid size-9 -translate-y-1/2 place-items-center border border-gc-green bg-gc-paper font-mono text-[12px] text-gc-green">
           Tk
         </span>
         <motion.span
@@ -230,7 +230,7 @@ function RiderTrack() {
           <Bike className="size-6" />
         </motion.span>
       </div>
-      <div className="mt-2 flex justify-between font-mono text-[10px] tracking-wider text-gc-muted uppercase">
+      <div className="mt-2 flex justify-between font-mono text-[12px] tracking-wider text-gc-muted uppercase">
         <span>Finlay Square</span>
         <span>you pay here</span>
       </div>
@@ -247,7 +247,7 @@ function SevenDays() {
         <div
           key={i}
           style={{ transitionDelay: `${0.15 * i}s` }}
-          className={`grid aspect-square place-items-center font-mono text-[10px] transition-colors duration-300 ${
+          className={`grid aspect-square place-items-center font-mono text-[12px] transition-colors duration-300 ${
             inView ? "bg-gc-green text-gc-ongreen" : "bg-gc-line text-gc-muted"
           }`}
         >
@@ -284,7 +284,7 @@ export function HowToOrder() {
                   0{i + 1}
                 </span>
                 <h3 className="font-serif text-[28px] leading-10 text-gc-ink md:mt-5 md:leading-tight">{s.title}</h3>
-                <p className="mt-2 max-w-xs font-mono text-[13px] leading-6 text-gc-muted">{s.text}</p>
+                <p className="mt-2 max-w-xs font-sans text-[15px] leading-6 text-gc-muted">{s.text}</p>
               </BlurFade>
             ))}
           </div>
@@ -309,12 +309,12 @@ export function AskUs() {
         />
       </div>
       <div className="mt-10 space-y-3 [mask-image:linear-gradient(90deg,transparent,white_8%,white_92%,transparent)]">
-        <Marquee pauseOnHover className="[--duration:45s]">
+        <Marquee pauseOnHover repeat={3} className="[--duration:45s]">
           {ASKS.slice(0, half).map((q) => (
             <Bubble key={q} q={q} />
           ))}
         </Marquee>
-        <Marquee pauseOnHover reverse className="[--duration:45s]">
+        <Marquee pauseOnHover reverse repeat={3} className="[--duration:45s]">
           {ASKS.slice(half).map((q) => (
             <Bubble key={q} q={q} />
           ))}
@@ -322,13 +322,9 @@ export function AskUs() {
       </div>
       <div className={`${wrap} flex justify-center pt-8 pb-16 lg:pb-24`}>
         <a href={whatsappLink("Hi! I have a question: ")} target="_blank" rel="noreferrer">
-          <ShimmerButton
-            background="var(--gc-green)"
-            borderRadius="0px"
-            className="h-12 px-6 font-mono text-[13px] font-bold tracking-wider text-gc-ongreen uppercase"
-          >
+          <span className="inline-flex h-12 items-center bg-gc-green px-6 font-mono text-[13px] font-bold tracking-wider text-gc-ongreen uppercase transition-transform hover:-translate-y-0.5">
             <MessageCircle className="mr-2 size-4" /> Ask on WhatsApp
-          </ShimmerButton>
+          </span>
         </a>
       </div>
     </section>
@@ -337,9 +333,9 @@ export function AskUs() {
 
 function Bubble({ q }: { q: string }) {
   return (
-    <div className="relative max-w-[320px] rounded-2xl rounded-bl-sm border border-gc-line bg-gc-card px-4 py-3 font-mono text-[13px] text-gc-ink">
+    <div className="relative max-w-[320px] rounded-2xl rounded-bl-sm border border-gc-line bg-gc-card px-4 py-3 font-sans text-[15px] text-gc-ink">
       {q}
-      <span className="ml-2 align-bottom text-[10px] text-gc-green">✓✓</span>
+      <span className="ml-2 align-bottom text-[12px] text-gc-green">✓✓</span>
     </div>
   )
 }
@@ -371,21 +367,30 @@ export function Visit() {
       cta: "Get directions",
       href: SITE.mapsUrl,
     },
+    // shown only once the owner adds a phone number in src/data/site.ts
+    ...(SITE.phone
+      ? [{ icon: <Phone className="size-5" />, title: "Call us", text: SITE.phone, cta: "Call now", href: `tel:${SITE.phone.replace(/[^+0-9]/g, "")}` }]
+      : []),
   ]
 
   return (
     <section id="visit" className="scroll-mt-16 border-b border-gc-line">
       <div className={`${wrap} py-16 lg:py-24`}>
-        <SectionHead label="Visit" title="Come say" bold="HI" sub="4th floor of Finlay Square, near 2 No. Gate." />
+        <SectionHead
+          label="Visit"
+          title="Come say"
+          bold="HI"
+          sub={`4th floor of Finlay Square, near 2 No. Gate.${SITE.hours ? ` Open ${SITE.hours}.` : ""}`}
+        />
 
-        <div className="mt-10 grid grid-cols-1 gap-3 md:grid-cols-3 [&>*]:min-w-0">
+        <div className={`mt-10 grid grid-cols-1 gap-3 [&>*]:min-w-0 ${contact.length > 3 ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-3"}`}>
           {contact.map((c, i) => (
             <BlurFade key={c.title} inView delay={0.08 * i}>
               <MagicCard {...cardProps} className="h-full">
                 <div className="flex h-full flex-col p-6">
                   <span className="grid size-11 place-items-center border border-gc-line text-gc-green">{c.icon}</span>
                   <h3 className="mt-6 font-serif text-[26px] text-gc-ink">{c.title}</h3>
-                  <p className="mt-2 flex-1 font-mono text-[13px] leading-6 text-gc-muted">{c.text}</p>
+                  <p className="mt-2 flex-1 font-sans text-[15px] leading-6 text-gc-muted">{c.text}</p>
                   <a
                     href={c.href}
                     target="_blank"
@@ -412,7 +417,7 @@ export function Visit() {
                   type="button"
                   aria-expanded={open === i}
                   onClick={() => setOpen(open === i ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 py-5 text-left font-mono text-[14px] text-gc-ink transition-colors hover:text-gc-ink"
+                  className="flex w-full items-center justify-between gap-4 py-5 text-left font-sans text-[16px] font-medium text-gc-ink transition-colors hover:text-gc-green"
                 >
                   {f.q}
                   <motion.span animate={{ rotate: open === i ? 180 : 0 }} className="shrink-0 text-gc-green">
@@ -428,7 +433,7 @@ export function Visit() {
                       transition={{ duration: 0.25 }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-5 font-mono text-[13px] leading-6 text-gc-muted">{f.a}</p>
+                      <p className="pb-5 font-sans text-[15px] leading-7 text-gc-muted">{f.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

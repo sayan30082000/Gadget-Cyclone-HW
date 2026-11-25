@@ -23,7 +23,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1400px] gap-8 px-5 py-10 sm:px-8 md:grid-cols-3 lg:px-12">
         <div>
           <p className="font-serif text-[26px] text-gc-green">Gadget Cyclone</p>
-          <p className="mt-3 font-mono text-[12px] leading-6 text-gc-muted">{SITE.address}</p>
+          <p className="mt-3 font-sans text-[14px] leading-6 text-gc-muted">{SITE.address}</p>
         </div>
         <nav className="flex flex-col font-mono text-[12px] tracking-wider text-gc-muted uppercase [&>a]:py-2 md:[&>a]:py-1">
           <a href="#why" className="hover:text-gc-ink">Why us</a>
@@ -34,16 +34,16 @@ export function Footer() {
             WhatsApp →
           </a>
         </nav>
-        <div className="font-mono text-[11px] leading-6 text-gc-muted">
+        <div className="font-mono text-[12px] leading-6 text-gc-muted">
           <p>
             Built for UI/UX Class 03 by Sayan Das. Components: Magic UI (Interactive Grid, Marquee, Shimmer Button,
             Magic Card, Number Ticker, Blur Fade, Word Rotate, Scroll Velocity). Ideas from Watermelon UI,
             Animate UI and Uiverse.
           </p>
-          <p className="mt-2">Hero photos on Unsplash by Klim Musalimov, Lasse Jensen, I&apos;M ZION, michael evins, Barnaby Woodrow and Nejc Soklič. Theme switch: our pull-cord light bulb (circle reveal idea from Magic UI Animated Theme Toggler). Kit prices are samples.</p>
+          <p className="mt-2">Hero photos on Unsplash by Klim Musalimov, Lasse Jensen, I&apos;M ZION, michael evins, Barnaby Woodrow and Nejc Soklič. Theme switch: our pull-cord light bulb (circle reveal idea from Magic UI Animated Theme Toggler). Prices shown are examples; we confirm today's price on WhatsApp.</p>
         </div>
       </div>
-      <div className="border-t border-gc-line py-4 text-center font-mono text-[11px] text-gc-muted">
+      <div className="border-t border-gc-line py-4 text-center font-mono text-[12px] text-gc-muted">
         © {YEAR} Gadget Cyclone · Chattogram
       </div>
     </footer>

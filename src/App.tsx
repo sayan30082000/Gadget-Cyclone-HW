@@ -4,6 +4,7 @@ import { AskUs, Brands, HowToOrder, Visit, WhyUs } from "@/components/site/Secti
 import { Shop } from "@/components/site/Shop"
 import { KitBuilder } from "@/components/site/KitBox"
 import { Footer } from "@/components/site/Footer"
+import { FloatingOrder } from "@/components/site/FloatingOrder"
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Visit />
       </main>
       <Footer />
+      <FloatingOrder />
     </div>
   )
 }

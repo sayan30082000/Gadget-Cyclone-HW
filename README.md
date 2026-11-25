@@ -9,7 +9,8 @@ Live: _(link added after the first Netlify deploy)_
 - **Hero product showcase:** 6 products we sell (earbuds, chargers, power banks, covers, watches, speakers). The headline word and the photo change together. Tap a thumbnail to jump; hover to pause.
 - **Dark / light mode as a light bulb on a pull cord** in the header: light on = light mode, pull (drag the cord, click or Enter) = lights off. The bulb swings, and the new theme spreads from it in a circle (idea from Magic UI Animated Theme Toggler). The choice is remembered.
 - **Cursor glow** over the hero, and a **3D tilt** on the hero photo.
-- **Shimmer** order buttons and **number-ticker** totals in the kit box.
+- A **shimmer** order button in the hero and a **number-ticker** total on the kit box sticker.
+- On phones, a **floating WhatsApp button** appears after the hero and hides where the page already has order buttons.
 - **Marquees:** top ticker, brands, phone models and "ask us" chat bubbles.
 - **Magic Cards** with a light that follows the cursor.
 - **Swipe carousels** per shop category (drag, swipe or arrows) and a **"pack your box" kit section**: tap items on a shelf and they fly into a box with a live price sticker, 15% off for 3+ items, and a WhatsApp order message.
@@ -17,15 +18,37 @@ Live: _(link added after the first Netlify deploy)_
 
 Review notes and fixes (mobile, tablet, desktop): [REVIEW-LOG.md](REVIEW-LOG.md).
 
+## Fast and ready to share
+Lighthouse (phone test, production build): Performance 85-87, Accessibility 100, Best Practices 100, SEO 100. No layout jumps, and the page weighs 516 KB.
+
+- **Pre-rendered:** `npm run build` also renders the page to HTML (`src/entry-server.tsx` + `scripts/prerender.mjs`), so text shows before the JavaScript loads.
+- **The grid background is one canvas**, and it only animates while something glows on screen.
+- **Hero photos** come in the right size for each screen. Fonts are self-hosted, only the Latin letters, and the first-screen ones are preloaded.
+- **For search and sharing:**
+  - page title and description
+  - share-preview image
+  - canonical link
+  - business details for Google
+  - `robots.txt` and `sitemap.xml`
+  - icons and a web manifest
+- **Netlify:** `netlify.toml` sets caching and security headers. `public/404.html` is the not-found page.
+
 ## Run it
 ```
 npm install
 npm run dev
 ```
-Build: `npm run build` (output in `dist/`).
+Build: `npm run build` (output in `dist/`). Check the build locally with `npm run preview`.
 
 ## Edit the shop details
-`src/data/site.ts` holds the address, WhatsApp number, Facebook link, ticker lines, categories, kits, steps and FAQ.
+`src/data/site.ts` holds:
+
+- the address, WhatsApp number and Facebook link
+- the phone number and opening hours, which are optional and only shown when filled in
+- the live site address, used for share previews and the sitemap
+- the ticker lines, categories, kits, steps and FAQ
+
+Kit prices are examples until the shop adds real ones.
 
 ## Credits
 - **Components:** [Magic UI](https://magicui.design) (MIT), added with the shadcn CLI.

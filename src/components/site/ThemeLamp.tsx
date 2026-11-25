@@ -12,10 +12,12 @@ const CORD = 30 // px of cord before the bulb
 const PULL_TO_SWITCH = 16 // px of pull that counts as a pull
 
 function useIsDark() {
-  const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"))
+  // starts as light so the pre-rendered HTML matches; the effect reads the real theme right after
+  const [dark, setDark] = useState(false)
   useEffect(() => {
     const root = document.documentElement
     const sync = () => setDark(root.classList.contains("dark"))
+    sync()
     const mo = new MutationObserver(sync)
     mo.observe(root, { attributes: true, attributeFilter: ["class"] })
     return () => mo.disconnect()

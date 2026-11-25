@@ -2,13 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f7f7f2" />
-    <meta
-      name="description"
-      content="Gadget Cyclone: phone accessories at Finlay Square, Chattogram. Earbuds, chargers, power banks and covers. Cash on delivery, no advance."
-    />
     <script>
       // apply the saved theme before the first paint (light is the default)
       (function () {
@@ -17,7 +13,33 @@
         } catch (e) {}
       })()
     </script>
-    <title>Gadget Cyclone · Accessories for the phone you already own</title>
+    <title>Gadget Cyclone · Phone accessories in Chattogram, cash on delivery</title>
+    <meta
+      name="description"
+      content="Earbuds, chargers, power banks, covers, watches and speakers matched to your phone model. Finlay Square, 4th floor, Chattogram. Cash on delivery, no advance."
+    />
+
+    <!-- icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- share previews (Facebook, WhatsApp, Messenger, X); absolute URLs are added at build time -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gadget Cyclone" />
+    <meta property="og:title" content="Gadget Cyclone · Accessories for the phone you already own" />
+    <meta
+      property="og:description"
+      content="Earbuds, chargers, power banks and covers for your exact phone model. Cash on delivery across Chattogram, no advance."
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Gadget Cyclone: earbuds in a hand, cash on delivery, no advance" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- hero photos come from Unsplash: open the connection early -->
+    <link rel="preconnect" href="https://images.unsplash.com" />
   </head>
   <body>
     <div id="root"></div>
