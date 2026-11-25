@@ -35,7 +35,7 @@ const business = {
   description: "Phone accessories: earbuds, chargers, cables, power banks, covers, smart watches and speakers.",
   url,
   image: `${url}/og-image.png`,
-  logo: `${url}/icon-512.png`,
+  logo: `${url}/logo.png`,
   address: {
     "@type": "PostalAddress",
     streetAddress: "Finlay Square, 4th floor, 2 No. Gate",

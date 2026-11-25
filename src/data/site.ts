@@ -13,7 +13,7 @@ export const SITE = {
   phone: "", // e.g. "+8801XXXXXXXXX" -> adds a "Call us" button
   hours: "", // e.g. "Sa-Th 11:00-21:00" (this format also works for Google) -> shown in the Visit section
   // the live address of the site, used for share previews, canonical link and sitemap
-  url: "https://gadgetcyclone.netlify.app",
+  url: "https://gadget-cyclone-h.netlify.app",
 }
 
 export function whatsappLink(message: string) {

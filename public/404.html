@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Page not found · Gadget Cyclone</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <style>
       :root { color-scheme: light dark; --paper: #f7f7f2; --ink: #111111; --muted: #5f6158; --line: #e2e2da; --green: #007a52; --on: #ffffff; }
       @media (prefers-color-scheme: dark) { :root { --paper: #0c110f; --ink: #edf2ee; --muted: #9aa59f; --line: #27322d; --green: #34c38f; --on: #0c110f; } }
@@ -16,6 +16,7 @@
         background-image: linear-gradient(to right, var(--line) 1px, transparent 1px), linear-gradient(to bottom, var(--line) 1px, transparent 1px);
         background-size: 44px 44px; font-family: Georgia, "Times New Roman", serif;
       }
+      .logo { display: block; height: 44px; width: auto; margin: 0 0 22px; }
       main { max-width: 520px; background: var(--paper); border: 1px solid var(--line); padding: 32px; }
       .code { font: 700 14px ui-monospace, Consolas, monospace; letter-spacing: .14em; color: var(--green); }
       h1 { font-weight: 400; font-size: 44px; line-height: 1.05; margin: 14px 0 12px; }
@@ -25,6 +26,10 @@
   </head>
   <body>
     <main>
+      <picture>
+        <source srcset="/logo-dark.webp" media="(prefers-color-scheme: dark)" />
+        <img class="logo" src="/logo.webp" alt="Gadget Cyclone" width="134" height="44" />
+      </picture>
       <div class="code">■ 404</div>
       <h1>This shelf is empty.</h1>
       <p>The page you were looking for isn't here. Everything Gadget Cyclone sells is on the home page.</p>

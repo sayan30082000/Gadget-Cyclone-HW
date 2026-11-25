@@ -3,6 +3,7 @@ import { AnimatePresence, motion, useScroll, useSpring } from "motion/react"
 import { Menu, X } from "lucide-react"
 
 import { Marquee } from "@/components/ui/marquee"
+import { Logo } from "@/components/site/Logo"
 import { ThemeLamp } from "@/components/site/ThemeLamp"
 import { TICKER, whatsappLink } from "@/data/site"
 
@@ -53,8 +54,8 @@ export function Header() {
         }`}
       >
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 sm:px-8 lg:px-12">
-          <a href="#top" className="font-serif text-[26px] leading-none text-gc-green">
-            Gadget Cyclone
+          <a href="#top" className="shrink-0">
+            <Logo className="h-10 lg:h-12" />
           </a>
 
           <nav className="hidden items-center gap-8 md:flex">

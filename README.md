@@ -2,7 +2,7 @@
 
 A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4th floor, 2 No. Gate), Chattogram. Cash on delivery, no advance. Built by Sayan Das.
 
-**Live site: https://gadgetcyclone.netlify.app**
+**Live site: https://gadget-cyclone-h.netlify.app**
 
 **Moodboard (Figma): https://www.figma.com/design/2rI3oSh0jURncZABTfSMMz/Gadget-Cyclone-moodboard---Sayan**
 
@@ -54,6 +54,11 @@ Build: `npm run build` (output in `dist/`). Check the build locally with `npm ru
 - the phone number and opening hours, which are optional and only shown when filled in
 - the live site address, used for share previews and the sitemap
 - the ticker lines, categories, kits, steps and FAQ
+
+The logo lives in `public/`:
+- `logo.webp` for the light theme, `logo-dark.webp` for dark mode
+- `logo.png` for Google
+- `icon-*.png`, `apple-touch-icon.png` and `favicon-*.png` for the icons
 
 Kit prices are examples until the shop adds real ones.
 

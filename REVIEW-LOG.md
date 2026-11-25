@@ -276,7 +276,7 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 - The "Call us" card and hours: tested with a placeholder number, then emptied again.
 
 ## 9. Round 7: real product photos, live link
-**Live:** https://gadgetcyclone.netlify.app (Netlify, built from the GitHub repo). Moodboard: https://www.figma.com/design/2rI3oSh0jURncZABTfSMMz/Gadget-Cyclone-moodboard---Sayan (its Week 3 band shows screenshots of the live site).
+**Live:** https://gadget-cyclone-h.netlify.app (Netlify, built from the GitHub repo). Moodboard: https://www.figma.com/design/2rI3oSh0jURncZABTfSMMz/Gadget-Cyclone-moodboard---Sayan (its Week 3 band shows screenshots of the live site).
 
 **Shop photos:**
 - All 30 shop cards now show a real photo of that product instead of an icon. Examples: a neckband for "Neckbands", a 67W charger for "33-65W chargers", a magnetic battery pack on the back of a phone for "Magnetic packs".
@@ -291,12 +291,21 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 - The footer now has only shop information (example prices, photo source). The developer credits moved to the README.
 - The share previews, canonical link and sitemap now use the live address.
 
-## 10. Still to do (needs the shop owner)
+## 10. Round 8: the shop logo
+**Logo:** Sayan supplied the real Gadget Cyclone logo, and it replaces the plain text name.
+- **Cut-out:** the logo came on a light-green background. I removed the background, cleaned the edges so no light halo shows, and trimmed the empty space.
+- **Header (36-40 px tall) and footer:** in dark mode a lighter version is used, because the dark green "Gadget" would be hard to read on near-black. It loads as a CSS background, so each visitor downloads only one version (about 24 KB).
+- **Icons:** the "G" swirl on its own is now the browser tab icon, the phone home-screen icon and the app icons.
+- **Share preview:** the logo sits at the top left of the image shown on Facebook and WhatsApp.
+- **Other places:** it is also on the 404 page and in the business details for Google.
+
+**Live address:** the Netlify site is now https://gadget-cyclone-h.netlify.app. The code, README and moodboard use this address.
+
+## 11. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
 - **Prices:** kit prices are samples.
 - **Promises:** confirm the "7-day replacement" promise and the cash-on-delivery area before the site goes live.
-- **Logo:** the current one is a simple green "G" mark.
 - **"Ask us" bubbles** are example questions, not real reviews.
 - **Later:**
   - a Bangla version (the wording needs checking by the owner)

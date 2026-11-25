@@ -1,4 +1,5 @@
 import { ScrollVelocityContainer, ScrollVelocityRow } from "@/components/ui/scroll-based-velocity"
+import { Logo } from "@/components/site/Logo"
 import { SITE, whatsappLink } from "@/data/site"
 
 const YEAR = new Date().getFullYear()
@@ -22,7 +23,7 @@ export function Footer() {
 
       <div className="mx-auto grid max-w-[1400px] gap-8 px-5 py-10 sm:px-8 md:grid-cols-3 lg:px-12">
         <div>
-          <p className="font-serif text-[26px] text-gc-green">Gadget Cyclone</p>
+          <Logo className="h-14" />
           <p className="mt-3 font-sans text-[14px] leading-6 text-gc-muted">{SITE.address}</p>
         </div>
         <nav className="flex flex-col font-mono text-[12px] tracking-wider text-gc-muted uppercase [&>a]:py-2 md:[&>a]:py-1">
