@@ -50,7 +50,8 @@ export function FloatingOrder() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 24, scale: 0.9 }}
           transition={{ type: "spring", stiffness: 400, damping: 28 }}
-          className="fixed right-4 bottom-4 z-40 inline-flex h-12 items-center gap-2 bg-gc-green px-4 font-mono text-[12px] font-bold tracking-wider text-gc-ongreen uppercase shadow-[3px_3px_0_var(--gc-ink)] md:hidden"
+          // bottom-20: stays above the "Powered by Netlify" badge Netlify adds in the bottom-right corner
+          className="fixed right-4 bottom-20 z-40 inline-flex h-12 items-center gap-2 bg-gc-green px-4 font-mono text-[12px] font-bold tracking-wider text-gc-ongreen uppercase shadow-[3px_3px_0_var(--gc-ink)] md:hidden"
         >
           <MessageCircle className="size-5" /> WhatsApp
         </motion.a>
