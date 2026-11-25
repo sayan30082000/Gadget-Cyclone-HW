@@ -1,43 +1,15 @@
 import { useEffect, useMemo, useState } from "react"
 import { AnimatePresence, LayoutGroup, motion, useAnimate, useReducedMotion } from "motion/react"
-import {
-  Battery,
-  BatteryFull,
-  Bluetooth,
-  Cable,
-  Car,
-  Ear,
-  Layers,
-  Package,
-  PlugZap,
-  Shield,
-  Smartphone,
-  type LucideIcon,
-} from "lucide-react"
-
 import { NumberTicker } from "@/components/ui/number-ticker"
 import { SectionHead, wrap } from "@/components/site/Sections"
-import { KIT_DEAL, KIT_ITEMS, KIT_PRESETS, whatsappLink } from "@/data/site"
+import { KIT_DEAL, KIT_ITEMS, KIT_PRESETS, squarePhoto, whatsappLink } from "@/data/site"
 
 /*
- * Kits, round 3: "bundle box". Tap an item on the shelf and its icon flies into the box
+ * Kits: "bundle box". Tap an item on the shelf and its photo flies into the box
  * (shared layoutId), tap it in the box to send it back. Price sticker on the box.
+ * Shelf and box both use the same square photo, so the flight never stretches it.
  */
-
-const ICON: Record<string, LucideIcon> = {
-  charger: PlugZap,
-  cable: Cable,
-  cable2: Cable,
-  car: Car,
-  bank10: Battery,
-  bank20: BatteryFull,
-  earbuds: Bluetooth,
-  budcover: Package,
-  tips: Ear,
-  clear: Smartphone,
-  rugged: Shield,
-  glass: Layers,
-}
+const thumb = (photo: string) => squarePhoto(photo, 240)
 
 const tk = (n: number) => `Tk ${n.toLocaleString("en-US")}`
 const SLOTS = 8
@@ -186,26 +158,23 @@ export function KitBuilder() {
                   <div className="pointer-events-none absolute inset-y-0 left-1/2 w-14 -translate-x-1/2 bg-gc-green/[0.07]" />
 
                   <div className="relative grid grid-cols-4 gap-2">
-                    {items.map((i) => {
-                      const Icon = ICON[i.id] ?? Package
-                      return (
-                        <motion.button
-                          key={i.id}
-                          layoutId={`kit-${i.id}`}
-                          transition={fly}
-                          type="button"
-                          onClick={() => toggle(i.id)}
-                          aria-label={`Take ${i.name} out of the box`}
-                          title={`${i.name} · ${tk(i.price)} (tap to remove)`}
-                          className="group relative grid aspect-square place-items-center bg-gc-green text-gc-ongreen"
-                        >
-                          <Icon className="size-[42%]" strokeWidth={1.6} />
-                          <span className="absolute inset-0 grid place-items-center bg-gc-ink/85 text-gc-paper font-mono text-[12px] tracking-wider uppercase opacity-0 transition-opacity group-hover:opacity-100">
-                            remove
-                          </span>
-                        </motion.button>
-                      )
-                    })}
+                    {items.map((i) => (
+                      <motion.button
+                        key={i.id}
+                        layoutId={`kit-${i.id}`}
+                        transition={fly}
+                        type="button"
+                        onClick={() => toggle(i.id)}
+                        aria-label={`Take ${i.name} out of the box`}
+                        title={`${i.name} · ${tk(i.price)} (tap to remove)`}
+                        className="group relative aspect-square overflow-hidden border-2 border-gc-green bg-gc-paper"
+                      >
+                        <img src={thumb(i.photo)} alt="" draggable={false} decoding="async" className="size-full object-cover" />
+                        <span className="absolute inset-0 grid place-items-center bg-gc-ink/85 text-gc-paper font-mono text-[12px] tracking-wider uppercase opacity-0 transition-opacity group-hover:opacity-100">
+                          remove
+                        </span>
+                      </motion.button>
+                    ))}
                     {Array.from({ length: Math.max(0, SLOTS - items.length) }).map((_, k) => (
                       <div key={`slot-${k}`} className="aspect-square border border-dashed border-gc-muted/40" />
                     ))}
@@ -239,28 +208,30 @@ export function KitBuilder() {
               <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
                 {KIT_ITEMS.map((i) => {
                   const on = sel.includes(i.id)
-                  const Icon = ICON[i.id] ?? Package
                   return (
                     <button
                       key={i.id}
                       type="button"
                       aria-pressed={on}
                       onClick={() => toggle(i.id)}
-                      className={`relative flex flex-col items-center border p-3 text-center transition-colors ${
+                      className={`group relative flex flex-col items-center border p-2 text-center transition-colors sm:p-2.5 ${
                         on ? "border-gc-green bg-gc-green/[0.05]" : "border-gc-line bg-gc-card hover:border-gc-ink"
                       }`}
                     >
-                      <div className="grid size-12 place-items-center">
+                      <div className="aspect-square w-full overflow-hidden">
                         {on ? (
-                          <div className="size-12 border border-dashed border-gc-green/50" />
+                          <div className="size-full border border-dashed border-gc-green/50" />
                         ) : (
-                          <motion.div
+                          <motion.img
                             layoutId={`kit-${i.id}`}
                             transition={fly}
-                            className="grid size-12 place-items-center bg-gc-paper text-gc-green"
-                          >
-                            <Icon className="size-6" strokeWidth={1.6} />
-                          </motion.div>
+                            src={thumb(i.photo)}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            draggable={false}
+                            className="size-full bg-gc-paper object-cover"
+                          />
                         )}
                       </div>
                       <span className="mt-2 font-mono text-[12px] leading-tight text-gc-ink">{i.name}</span>

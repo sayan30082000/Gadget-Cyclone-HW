@@ -185,21 +185,26 @@ export const CATEGORIES: Category[] = [
 ]
 
 // Kit builder (round 2). Sample prices. 3 or more items = 15% off, rounded to the nearest Tk 10.
-export type KitItem = { id: string; name: string; price: number; group: string }
+// photo: real product photo (Unsplash), mostly the same photos as the shop cards
+export type KitItem = { id: string; name: string; price: number; group: string; photo: string }
+
+/** square crop of a product photo, used on the kit shelf and inside the box */
+export const squarePhoto = (photo: string, size: number) => `${photo}&w=${size}&h=${size}`
 
 export const KIT_ITEMS: KitItem[] = [
-  { id: "charger", name: "20W fast charger", price: 450, group: "Charging" },
-  { id: "cable", name: "USB-C cable", price: 250, group: "Charging" },
-  { id: "cable2", name: "Second cable", price: 250, group: "Charging" },
-  { id: "car", name: "Car charger", price: 550, group: "Charging" },
-  { id: "bank10", name: "10,000 mAh power bank", price: 1450, group: "Power" },
-  { id: "bank20", name: "20,000 mAh power bank", price: 2200, group: "Power" },
-  { id: "earbuds", name: "Wireless earbuds", price: 1500, group: "Audio" },
-  { id: "budcover", name: "Earbud case cover", price: 200, group: "Audio" },
-  { id: "tips", name: "Spare ear tips", price: 150, group: "Audio" },
-  { id: "clear", name: "Clear case", price: 250, group: "Protection" },
-  { id: "rugged", name: "Rugged case", price: 450, group: "Protection" },
-  { id: "glass", name: "Screen protector", price: 200, group: "Protection" },
+  { id: "charger", name: "20W fast charger", price: 450, group: "Charging", photo: u("photo-1583863788434-e58a36330cf0") },
+  { id: "cable", name: "USB-C cable", price: 250, group: "Charging", photo: u("photo-1572721546624-05bf65ad7679") },
+  { id: "cable2", name: "Second cable", price: 250, group: "Charging", photo: u("photo-1572721546624-05bf65ad7679") },
+  { id: "car", name: "Car charger", price: 550, group: "Charging", photo: u("photo-1746740403888-c16d387f65c6") },
+  { id: "bank10", name: "10,000 mAh power bank", price: 1450, group: "Power", photo: u("photo-1706275399494-fb26bbc5da63") },
+  { id: "bank20", name: "20,000 mAh power bank", price: 2200, group: "Power", photo: u("photo-1600577231598-31ea4cb50da3") },
+  { id: "earbuds", name: "Wireless earbuds", price: 1500, group: "Audio", photo: u("photo-1606220588913-b3aacb4d2f46") },
+  // earbuds in a black protective case, by Michael Marais
+  { id: "budcover", name: "Earbud case cover", price: 200, group: "Audio", photo: u("photo-1591053438797-c3f868541406") },
+  { id: "tips", name: "Spare ear tips", price: 150, group: "Audio", photo: u("photo-1611864583067-b002fdc4fa29") },
+  { id: "clear", name: "Clear case", price: 250, group: "Protection", photo: u("photo-1697008230027-5c6ebaf24801") },
+  { id: "rugged", name: "Rugged case", price: 450, group: "Protection", photo: u("photo-1552872417-d448e75ff94c") },
+  { id: "glass", name: "Screen protector", price: 200, group: "Protection", photo: u("photo-1772831902679-3f41c106d7a2") },
 ]
 
 export const KIT_DEAL = { minItems: 3, off: 0.15 }

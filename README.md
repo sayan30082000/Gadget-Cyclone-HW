@@ -16,7 +16,7 @@ A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4
 - **Marquees:** top ticker, brands, phone models and "ask us" chat bubbles.
 - **Magic Cards** with a light that follows the cursor.
 - **Swipe carousels** per shop category (drag, swipe or arrows). Each of the 30 product cards has a real photo of that product.
-- **"Pack your box" kit section:**
+- **"Pack your box" kit section** (every item has a real product photo):
   - tap items on a shelf and they fly into a box
   - a live price sticker, with 15% off for 3+ items
   - a ready-made WhatsApp order message
@@ -85,6 +85,7 @@ Kit prices are examples until the shop adds real ones.
   | Power banks | gomi, I'M ZION, Kamil Switalski, Konstantinos Papadopoulos, Andrey Matveev |
   | Covers & protection | Sophia Stark, Abhishek Yadav, Grysell Alvarez, Mason Supply, Alexandru Ant, Anuj Mhatre |
   | Watches & speakers | Simon Daoudi, Nikita Kostrykin, Daniel Korpai, Nicolas J Leclercq, Habib Dadkhah, Viktor Khilchuk |
+  | Kit box | the shop photos above, plus Michael Marais (earbud case cover) |
 
 
 - **Fonts:** Newsreader, JetBrains Mono and Inter (self-hosted with Fontsource).

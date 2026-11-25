@@ -60,8 +60,9 @@ export function Hero() {
   useEffect(() => {
     const r = sectionRef.current?.getBoundingClientRect()
     if (!r) return
+    // phones/tablets: the photo is at the top, desktop: on the right
     gx.set(r.width * (r.width < 1024 ? 0.5 : 0.72))
-    gy.set(r.height * (r.width < 1024 ? 0.75 : 0.45))
+    gy.set(r.height * (r.width < 1024 ? 0.22 : 0.45))
   }, [gx, gy])
 
   const onMove = (e: React.PointerEvent<HTMLElement>) => {
@@ -88,7 +89,7 @@ export function Hero() {
       />
       <motion.div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: glow }} />
 
-      <div className="pointer-events-none relative z-10 mx-auto grid max-w-[1400px] gap-10 px-5 pt-14 pb-16 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12 lg:px-12 lg:pt-20 lg:pb-24">
+      <div className="pointer-events-none relative z-10 mx-auto grid max-w-[1400px] gap-8 px-5 pt-6 pb-16 sm:px-8 sm:pt-10 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12 lg:px-12 lg:pt-20 lg:pb-24">
         <div>
             <p className="inline-flex items-center gap-2 border border-gc-line bg-gc-paper/70 px-3 py-1.5 font-mono text-[12px] tracking-[0.14em] text-gc-muted uppercase">
               <MapPin className="size-3.5 text-gc-green" /> Finlay Square · 4th floor · Chattogram
@@ -137,7 +138,8 @@ export function Hero() {
             </ul>
         </div>
 
-        <div className="pointer-events-auto">
+        {/* photo first on phones and tablets (the headline stays first in the page code for screen readers and Google) */}
+        <div className="pointer-events-auto order-first lg:order-none">
           <div onPointerEnter={(e) => e.pointerType === "mouse" && setPaused(true)} onPointerLeave={() => setPaused(false)}>
             <TiltPhoto reduce={!!reduce} active={active} />
 

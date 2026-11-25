@@ -301,7 +301,17 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 
 **Live address:** the Netlify site is now https://gadget-cyclone-h.netlify.app. The code, README and moodboard use this address.
 
-## 11. Still to do (needs the shop owner)
+## 11. Round 9: photo first on phones, real photos in the kit box
+- **Hero on phones and tablets:** the product photo (with its product strip) now comes first, right under the header, and the headline sits under it. On phones the first screen is now a big product photo instead of text. Desktop keeps text on the left and the photo on the right. The headline stays first in the page code, so screen readers and Google still read it first.
+- **Kit box:** the 12 shelf items and the items inside the box show real product photos instead of icons. They use the same Unsplash photos as the shop cards, plus one new one for the earbud case cover (Michael Marais).
+  - Shelf and box use the same square photo, so it doesn't stretch when it flies into the box.
+  - Photos load only when the section is close.
+- **Checked:**
+  - phone (375 px) and desktop, light and dark
+  - no sideways scroll
+  - adding and removing an item still flies between the shelf and the box, and the price updates
+
+## 12. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
 - **Prices:** kit prices are samples.
