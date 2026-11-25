@@ -8,6 +8,8 @@ interface WordRotateProps {
   duration?: number
   motionProps?: MotionProps
   className?: string
+  /** Controlled index (round 4): lets the hero photo and the word change together. */
+  index?: number
 }
 
 export function WordRotate({
@@ -21,17 +23,21 @@ export function WordRotate({
     transition: { duration: 0.3, ease: "easeOut" },
   },
   className,
+  index: controlledIndex,
 }: WordRotateProps) {
-  const [index, setIndex] = useState(0)
+  const [ownIndex, setOwnIndex] = useState(0)
+  const controlled = controlledIndex !== undefined
+  const index = controlled ? controlledIndex % words.length : ownIndex
 
   useEffect(() => {
+    if (controlled) return
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length)
+      setOwnIndex((prevIndex) => (prevIndex + 1) % words.length)
     }, duration)
 
     // Clean up interval on unmount
     return () => clearInterval(interval)
-  }, [words, duration])
+  }, [words, duration, controlled])
 
   return (
     <span className="block overflow-hidden pb-[0.08em]">

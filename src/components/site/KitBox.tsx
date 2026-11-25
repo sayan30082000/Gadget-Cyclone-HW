@@ -118,7 +118,7 @@ export function KitBuilder() {
         className="mt-4 block"
       >
         <ShimmerButton
-          background={items.length ? "#007a52" : "#5f6158"}
+          background={items.length ? "var(--gc-green)" : "var(--gc-muted)"}
           borderRadius="0px"
           className="h-12 w-full font-mono text-[13px] font-bold tracking-wider uppercase"
         >
@@ -156,7 +156,7 @@ export function KitBuilder() {
                       aria-pressed={on}
                       onClick={() => setSel(p.items)}
                       className={`border px-4 py-2 font-mono text-[12px] font-bold tracking-wider uppercase transition-colors ${
-                        on ? "border-gc-green bg-gc-green text-white" : "border-gc-line bg-gc-card text-gc-ink hover:border-gc-green"
+                        on ? "border-gc-green bg-gc-green text-gc-ongreen" : "border-gc-line bg-gc-card text-gc-ink hover:border-gc-green"
                       }`}
                     >
                       {p.name}
@@ -198,10 +198,10 @@ export function KitBuilder() {
                           onClick={() => toggle(i.id)}
                           aria-label={`Take ${i.name} out of the box`}
                           title={`${i.name} · ${tk(i.price)} (tap to remove)`}
-                          className="group relative grid aspect-square place-items-center bg-gc-green text-white"
+                          className="group relative grid aspect-square place-items-center bg-gc-green text-gc-ongreen"
                         >
                           <Icon className="size-[42%]" strokeWidth={1.6} />
-                          <span className="absolute inset-0 grid place-items-center bg-gc-ink/80 font-mono text-[10px] tracking-wider uppercase opacity-0 transition-opacity group-hover:opacity-100">
+                          <span className="absolute inset-0 grid place-items-center bg-gc-ink/85 text-gc-paper font-mono text-[10px] tracking-wider uppercase opacity-0 transition-opacity group-hover:opacity-100">
                             remove
                           </span>
                         </motion.button>
@@ -221,11 +221,11 @@ export function KitBuilder() {
                 {/* price sticker */}
                 <div
                   ref={sticker}
-                  className="absolute -top-1 -right-2 -rotate-6 bg-gc-amber px-3 py-2 text-gc-ink shadow-[3px_3px_0_#111111] sm:-right-4"
+                  className="absolute -top-1 -right-2 -rotate-6 bg-gc-amber px-3 py-2 text-gc-onamber shadow-[3px_3px_0_#111111] sm:-right-4"
                 >
                   <p className="font-mono text-[10px] font-bold tracking-wider uppercase">{deal ? "15% off" : "box total"}</p>
                   <p className="font-mono text-[22px] leading-none font-bold">
-                    Tk <NumberTicker value={total} className="!text-gc-ink !tracking-tight" />
+                    Tk <NumberTicker value={total} className="!text-gc-onamber !tracking-tight" />
                   </p>
                   {saved > 0 && <p className="mt-0.5 font-mono text-[10px]">save {tk(saved)}</p>}
                 </div>
@@ -272,7 +272,7 @@ export function KitBuilder() {
                             initial={{ opacity: 0, y: -4 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0 }}
-                            className="absolute top-1.5 right-1.5 bg-gc-green px-1 font-mono text-[9px] tracking-wider text-white uppercase"
+                            className="absolute top-1.5 right-1.5 bg-gc-green px-1 font-mono text-[9px] tracking-wider text-gc-ongreen uppercase"
                           >
                             in box
                           </motion.span>
@@ -284,11 +284,11 @@ export function KitBuilder() {
               </div>
 
               {/* phones/tablets: total follows you down the shelf */}
-              <div className="sticky bottom-3 z-20 mt-5 flex items-center justify-between gap-3 border border-gc-ink bg-gc-ink px-4 py-3 text-white lg:hidden">
+              <div className="sticky bottom-3 z-20 mt-5 flex items-center justify-between gap-3 border border-gc-ink bg-gc-ink px-4 py-3 text-gc-paper lg:hidden">
                 <span className="font-mono text-[12px]">
                   {items.length} in box · <span className="font-bold">{tk(total)}</span>
                 </span>
-                <a href="#kit-box" className="bg-gc-green px-3 py-2 font-mono text-[11px] font-bold tracking-wider uppercase">
+                <a href="#kit-box" className="bg-gc-green px-3 py-2 font-mono text-[11px] font-bold tracking-wider text-gc-ongreen uppercase">
                   See box ↑
                 </a>
               </div>

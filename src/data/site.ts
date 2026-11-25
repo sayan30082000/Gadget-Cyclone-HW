@@ -27,7 +27,56 @@ export const TICKER = [
   "7-day replacement",
 ]
 
-export const ROTATING_WORDS = ["Earbuds", "Chargers", "Power banks", "Covers", "Cables"]
+// Hero showcase: the headline word and the photo change together.
+// Photos: Unsplash (free Unsplash License), credited on the page.
+const u = (id: string) => `https://images.unsplash.com/${id}?w=1400&q=80&auto=format&fit=crop`
+
+export type HeroProduct = { word: string; photo: string; alt: string; note: string; credit: string }
+
+export const HERO_PRODUCTS: HeroProduct[] = [
+  {
+    word: "Earbuds",
+    photo: u("photo-1657532350710-d0becd0c680d"),
+    alt: "A hand holding white wireless earbuds in their case",
+    note: "TWS, ANC and neckbands",
+    credit: "Klim Musalimov",
+  },
+  {
+    word: "Chargers",
+    photo: u("photo-1631037561126-0782ab7e666e"),
+    alt: "A phone charging on a wireless charger with a green charging ring",
+    note: "20W to 65W, matched to your phone",
+    credit: "Lasse Jensen",
+  },
+  {
+    word: "Power banks",
+    photo: u("photo-1566554738544-d962991c3fee"),
+    alt: "Hands holding a teal power bank next to a phone",
+    note: "10,000 to 20,000 mAh",
+    credit: "I'M ZION",
+  },
+  {
+    word: "Covers",
+    photo: u("photo-1592320402243-605cc3e935f7"),
+    alt: "A hand holding a phone in a dark green case",
+    note: "cut for your exact model",
+    credit: "michael evins",
+  },
+  {
+    word: "Watches",
+    photo: u("photo-1764169604706-d19a7cfdf823"),
+    alt: "A smartwatch on a wrist",
+    note: "notifications + fitness",
+    credit: "Barnaby Woodrow",
+  },
+  {
+    word: "Speakers",
+    photo: u("photo-1608043152269-423dbba4e7e1"),
+    alt: "A black portable Bluetooth speaker on a wooden table",
+    note: "pocket to party size",
+    credit: "Nejc Soklič",
+  },
+]
 
 export const BRANDS = ["Anker", "Soundcore", "Baseus", "UGREEN", "QCY", "Xiaomi", "JBL", "Joyroom"]
 

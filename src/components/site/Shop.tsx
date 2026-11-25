@@ -169,7 +169,7 @@ function CategoryRow({ cat, index }: { cat: Category; index: number }) {
               <div className="relative grid aspect-[4/3] place-items-center border border-gc-line bg-gc-card">
                 <Icon className="size-12 text-gc-green transition-transform duration-300 group-hover:scale-110" strokeWidth={1.4} />
                 <span className="absolute top-2 left-2 font-mono text-[10px] text-gc-muted">0{i + 1}</span>
-                <span className="absolute top-2 right-2 bg-gc-amber px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider text-gc-ink uppercase">
+                <span className="absolute top-2 right-2 bg-gc-amber px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider text-gc-onamber uppercase">
                   COD
                 </span>
               </div>
@@ -214,7 +214,7 @@ function ArrowBtn({
       className={`grid size-11 place-items-center border transition-colors ${
         disabled
           ? "border-gc-line text-gc-line"
-          : "border-gc-ink text-gc-ink hover:border-gc-green hover:bg-gc-green hover:text-white"
+          : "border-gc-ink text-gc-ink hover:border-gc-green hover:bg-gc-green hover:text-gc-ongreen"
       }`}
     >
       {children}

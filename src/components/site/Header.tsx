@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react"
 import { Menu, X } from "lucide-react"
 
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { Marquee } from "@/components/ui/marquee"
 import { TICKER, whatsappLink } from "@/data/site"
 
@@ -38,7 +39,7 @@ export function Header() {
       <div className="bg-gc-green">
         <Marquee pauseOnHover className="py-2 [--duration:38s] [--gap:2.5rem]">
           {TICKER.map((t) => (
-            <span key={t} className="font-mono text-[11px] tracking-[0.12em] text-white uppercase">
+            <span key={t} className="font-mono text-[11px] tracking-[0.12em] text-gc-ongreen uppercase">
               <span className="mr-2 text-gc-amber">■</span>
               {t}
             </span>
@@ -71,21 +72,33 @@ export function Header() {
               href={whatsappLink("Hi Gadget Cyclone! My phone is: ")}
               target="_blank"
               rel="noreferrer"
-              className="bg-gc-green px-4 py-2 font-mono text-[12px] font-bold tracking-[0.12em] text-gc-paper uppercase transition-transform hover:-translate-y-0.5"
+              className="bg-gc-green px-4 py-2 font-mono text-[12px] font-bold tracking-[0.12em] text-gc-ongreen uppercase transition-transform hover:-translate-y-0.5"
             >
               ■ Order now
             </a>
+            <AnimatedThemeToggler
+              duration={500}
+              title="Dark / light mode"
+              className="grid size-10 place-items-center border border-gc-line text-gc-ink transition-colors hover:border-gc-green hover:text-gc-green [&_svg]:size-[18px]"
+            />
           </nav>
 
-          <button
-            type="button"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="grid size-10 place-items-center border border-gc-line text-gc-ink md:hidden"
-          >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <AnimatedThemeToggler
+              duration={500}
+              title="Dark / light mode"
+              className="grid size-10 place-items-center border border-gc-line text-gc-ink [&_svg]:size-[18px]"
+            />
+            <button
+              type="button"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+              className="grid size-10 place-items-center border border-gc-line text-gc-ink"
+            >
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
         </div>
 
         <AnimatePresence>

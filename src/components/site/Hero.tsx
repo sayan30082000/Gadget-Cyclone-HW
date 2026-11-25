@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
+  AnimatePresence,
   motion,
   useMotionTemplate,
   useMotionValue,
@@ -13,21 +14,46 @@ import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern
 import { ShimmerButton } from "@/components/ui/shimmer-button"
 import { WordRotate } from "@/components/ui/word-rotate"
 import { BlurFade } from "@/components/ui/blur-fade"
-import { ROTATING_WORDS, whatsappLink } from "@/data/site"
+import { HERO_PRODUCTS, whatsappLink } from "@/data/site"
 
-const HERO_PHOTO =
-  "https://images.unsplash.com/photo-1657532350710-d0becd0c680d?w=1400&q=80&auto=format&fit=crop"
+const STEP_MS = 2800
+const WORDS = HERO_PRODUCTS.map((p) => p.word)
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
+
+  // one counter drives both the headline word and the product photo
+  const [active, setActive] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const holdUntil = useRef(0)
+
+  useEffect(() => {
+    if (paused || reduce) return
+    const wait = Math.max(STEP_MS, holdUntil.current - Date.now())
+    const t = window.setTimeout(() => setActive((i) => (i + 1) % HERO_PRODUCTS.length), wait)
+    return () => window.clearTimeout(t)
+  }, [active, paused, reduce])
+
+  // warm the cache so the crossfade never shows an empty frame
+  useEffect(() => {
+    HERO_PRODUCTS.forEach((p) => {
+      const img = new Image()
+      img.src = p.photo
+    })
+  }, [])
+
+  const pick = (i: number) => {
+    holdUntil.current = Date.now() + 8000 // a tapped product stays a bit longer
+    setActive(i)
+  }
 
   // cursor glow: follows the pointer (mouse or finger) across the hero
   const gx = useMotionValue(-600)
   const gy = useMotionValue(-600)
   const sx = useSpring(gx, { stiffness: 120, damping: 20, mass: 0.6 })
   const sy = useSpring(gy, { stiffness: 120, damping: 20, mass: 0.6 })
-  const glow = useMotionTemplate`radial-gradient(520px circle at ${sx}px ${sy}px, rgba(0,122,82,0.16), transparent 65%)`
+  const glow = useMotionTemplate`radial-gradient(520px circle at ${sx}px ${sy}px, color-mix(in srgb, var(--gc-green) 16%, transparent), transparent 65%)`
 
   // start the glow behind the photo, so touch screens see it before anyone taps
   useEffect(() => {
@@ -74,11 +100,7 @@ export function Hero() {
 
           <BlurFade delay={0.15}>
             <h1 className="mt-6 font-serif text-[44px] leading-[1.02] text-gc-ink sm:text-[60px] lg:text-[62px] xl:text-[74px]">
-              <WordRotate
-                words={ROTATING_WORDS}
-                duration={2200}
-                className="text-gc-green italic"
-              />
+              <WordRotate words={WORDS} index={active} className="text-gc-green italic" />
               for the phone you{" "}
               <strong className="font-mono font-bold tracking-tight text-gc-ink">ALREADY</strong> own.
             </h1>
@@ -86,19 +108,23 @@ export function Hero() {
 
           <BlurFade delay={0.25}>
             <p className="mt-6 max-w-xl font-mono text-[14px] leading-7 text-gc-muted sm:text-[15px]">
-              Earbuds, chargers, power banks and covers, picked for your exact phone model.
+              Earbuds, chargers, power banks, covers, watches and speakers, picked for your exact phone model.
               Delivered across Chattogram, and you pay the rider when it arrives.
             </p>
           </BlurFade>
 
           <BlurFade delay={0.35}>
             <div className="pointer-events-auto mt-8 flex flex-wrap items-center gap-3">
-              <a href={whatsappLink("Hi Gadget Cyclone! My phone is: ")} target="_blank" rel="noreferrer">
+              <a
+                href={whatsappLink(`Hi Gadget Cyclone! I'm looking for ${WORDS[active].toLowerCase()}. My phone is: `)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <ShimmerButton
-                  background="#007a52"
+                  background="var(--gc-green)"
                   shimmerColor="#ffffff"
                   borderRadius="0px"
-                  className="h-12 px-6 font-mono text-[13px] font-bold tracking-wider text-gc-paper uppercase"
+                  className="h-12 px-6 font-mono text-[13px] font-bold tracking-wider text-gc-ongreen uppercase"
                 >
                   ■ Order on WhatsApp
                 </ShimmerButton>
@@ -124,19 +150,61 @@ export function Hero() {
         </div>
 
         <BlurFade delay={0.3} className="pointer-events-auto">
-          <TiltPhoto reduce={!!reduce} />
+          <div onPointerEnter={(e) => e.pointerType === "mouse" && setPaused(true)} onPointerLeave={() => setPaused(false)}>
+            <TiltPhoto reduce={!!reduce} active={active} />
+
+            {/* product strip: tap to jump, the active one shows time left */}
+            <div className="mt-3 grid grid-cols-6 gap-2" role="tablist" aria-label="Products">
+              {HERO_PRODUCTS.map((p, i) => {
+                const on = i === active
+                return (
+                  <button
+                    key={p.word}
+                    type="button"
+                    role="tab"
+                    aria-selected={on}
+                    aria-label={p.word}
+                    onClick={() => pick(i)}
+                    className={`group relative aspect-square overflow-hidden border-2 transition-colors ${
+                      on ? "border-gc-green" : "border-transparent hover:border-gc-line"
+                    }`}
+                  >
+                    <img
+                      src={p.photo.replace("w=1400", "w=200")}
+                      alt=""
+                      className={`size-full object-cover transition duration-300 ${on ? "" : "opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0"}`}
+                    />
+                    {on && !paused && !reduce && (
+                      <motion.span
+                        key={`bar-${active}`}
+                        className="absolute bottom-0 left-0 h-1 bg-gc-green"
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: Math.max(STEP_MS, holdUntil.current - Date.now()) / 1000, ease: "linear" }}
+                      />
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+            <div className="mt-2 flex justify-between font-mono text-[10px] text-gc-muted">
+              <span className="hidden sm:inline">{paused ? "paused" : "tap a product"}</span>
+              <span>photo: {HERO_PRODUCTS[active].credit} / Unsplash</span>
+            </div>
+          </div>
         </BlurFade>
       </div>
     </section>
   )
 }
 
-function TiltPhoto({ reduce }: { reduce: boolean }) {
+function TiltPhoto({ reduce, active }: { reduce: boolean; active: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const px = useMotionValue(0.5)
   const py = useMotionValue(0.5)
   const rx = useSpring(useTransform(py, [0, 1], [7, -7]), { stiffness: 150, damping: 18 })
   const ry = useSpring(useTransform(px, [0, 1], [-9, 9]), { stiffness: 150, damping: 18 })
+  const p = HERO_PRODUCTS[active]
 
   const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (reduce) return
@@ -157,29 +225,43 @@ function TiltPhoto({ reduce }: { reduce: boolean }) {
         onPointerMove={onMove}
         onPointerLeave={onLeave}
         style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
-        className="relative aspect-[4/3] w-full border border-gc-line bg-gc-card"
+        className="relative aspect-[4/3] w-full overflow-hidden border border-gc-line bg-gc-card"
       >
-        <img
-          src={HERO_PHOTO}
-          alt="A hand holding white wireless earbuds in their case"
-          className="absolute inset-0 size-full object-cover"
-          loading="eager"
-        />
+        <AnimatePresence initial={false}>
+          <motion.img
+            key={p.photo}
+            src={p.photo}
+            alt={p.alt}
+            initial={{ opacity: 0, scale: 1.08 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduce ? 0 : 0.7, ease: "easeOut" }}
+            className="absolute inset-0 size-full object-cover"
+          />
+        </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
 
         <FloatChip className="top-5 left-5" delay={0}>
           <span className="text-gc-green">■</span> COD · Chattogram
         </FloatChip>
-        <FloatChip className="top-1/2 right-4" delay={0.8}>
+        <FloatChip className="top-1/2 right-4 hidden sm:block" delay={0.8}>
           Tk 0 advance
         </FloatChip>
-        <FloatChip className="bottom-5 left-5" delay={1.6}>
-          Fit-checked for <span className="text-gc-ink">your model</span>
+        <FloatChip className="bottom-5 left-5 max-w-[calc(100%-2.5rem)]" delay={1.6}>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={p.word}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.25 }}
+              className="block"
+            >
+              {p.word}: <span className="text-gc-green">{p.note}</span>
+            </motion.span>
+          </AnimatePresence>
         </FloatChip>
       </motion.div>
-      <p className="mt-2 text-right font-mono text-[10px] text-gc-muted/80">
-        photo: Klim Musalimov / Unsplash
-      </p>
     </div>
   )
 }

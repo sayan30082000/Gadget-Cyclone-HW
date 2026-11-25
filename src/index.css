@@ -15,14 +15,16 @@
     --font-serif: "Newsreader", Georgia, serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
     --font-sans: "Inter", system-ui, sans-serif;
-    /* Mint Market palette: 7 colors (picked by Sayan, round 2) */
-    --color-gc-paper: #f7f7f2;
-    --color-gc-card: #ffffff;
-    --color-gc-line: #e2e2da;
-    --color-gc-muted: #5f6158;
-    --color-gc-ink: #111111;
-    --color-gc-green: #007a52;
-    --color-gc-amber: #ffb800;
+    /* Mint Market palette (Sayan, round 2): 7 colors + 2 "text on" helpers, light/dark values below */
+    --color-gc-paper: var(--gc-paper);
+    --color-gc-card: var(--gc-card);
+    --color-gc-line: var(--gc-line);
+    --color-gc-muted: var(--gc-muted);
+    --color-gc-ink: var(--gc-ink);
+    --color-gc-green: var(--gc-green);
+    --color-gc-amber: var(--gc-amber);
+    --color-gc-ongreen: var(--gc-ongreen);
+    --color-gc-onamber: var(--gc-onamber);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -115,24 +117,34 @@
 }
 
 :root {
-    --background: #ffffff;
-    --foreground: #111111;
+    --gc-paper: #f7f7f2;
+    --gc-card: #ffffff;
+    --gc-line: #e2e2da;
+    --gc-muted: #5f6158;
+    --gc-ink: #111111;
+    --gc-green: #007a52;
+    --gc-amber: #ffb800;
+    --gc-ongreen: #ffffff;
+    --gc-onamber: #111111;
+    --gc-spot: #e3f1ea;
+    --background: var(--gc-card);
+    --foreground: var(--gc-ink);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: #007a52;
-    --primary-foreground: #ffffff;
+    --primary: var(--gc-green);
+    --primary-foreground: var(--gc-ongreen);
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
     --muted: oklch(0.97 0 0);
-    --muted-foreground: #5f6158;
+    --muted-foreground: var(--gc-muted);
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: #e2e2da;
-    --input: #e2e2da;
-    --ring: #007a52;
+    --border: var(--gc-line);
+    --input: var(--gc-line);
+    --ring: var(--gc-green);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
@@ -150,24 +162,34 @@
 }
 
 .dark {
-    --background: #050505;
-    --foreground: #e4e4e4;
+    --gc-paper: #0c110f;
+    --gc-card: #141b18;
+    --gc-line: #27322d;
+    --gc-muted: #9aa59f;
+    --gc-ink: #edf2ee;
+    --gc-green: #34c38f;
+    --gc-amber: #ffb800;
+    --gc-ongreen: #0c110f;
+    --gc-onamber: #111111;
+    --gc-spot: #123a2b;
+    --background: var(--gc-card);
+    --foreground: var(--gc-ink);
     --card: #121212;
     --card-foreground: #e4e4e4;
     --popover: #121212;
     --popover-foreground: #e4e4e4;
-    --primary: #ea4a1a;
-    --primary-foreground: #050505;
+    --primary: var(--gc-green);
+    --primary-foreground: var(--gc-ongreen);
     --secondary: #1a1a1a;
     --secondary-foreground: #e4e4e4;
     --muted: #1a1a1a;
-    --muted-foreground: #8c8c8c;
+    --muted-foreground: var(--gc-muted);
     --accent: #1a1a1a;
     --accent-foreground: #e4e4e4;
     --destructive: oklch(0.704 0.191 22.216);
-    --border: #2b2b2b;
-    --input: #2b2b2b;
-    --ring: #ea4a1a;
+    --border: var(--gc-line);
+    --input: var(--gc-line);
+    --ring: var(--gc-green);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
@@ -196,11 +218,15 @@
 }
 @layer base {
   html { scroll-behavior: smooth; }
-  body { background: #f7f7f2; -webkit-font-smoothing: antialiased; }
-  ::selection { background: #007a52; color: #ffffff; }
+  body { background: var(--gc-paper); color: var(--gc-ink); -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--gc-green); color: var(--gc-ongreen); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+  ::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }

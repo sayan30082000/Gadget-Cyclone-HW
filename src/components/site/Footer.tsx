@@ -14,7 +14,7 @@ export function Footer() {
           </span>
         </ScrollVelocityRow>
         <ScrollVelocityRow baseVelocity={3} direction={-1}>
-          <span className="mx-6 font-serif text-[10vw] leading-none text-transparent italic [-webkit-text-stroke:1px_#5f6158] sm:text-[7vw]">
+          <span className="mx-6 font-serif text-[10vw] leading-none text-transparent italic [-webkit-text-stroke:1px_var(--gc-muted)] sm:text-[7vw]">
             cash on delivery · Chattogram ·
           </span>
         </ScrollVelocityRow>
@@ -40,7 +40,7 @@ export function Footer() {
             Magic Card, Number Ticker, Blur Fade, Word Rotate, Scroll Velocity). Ideas from Watermelon UI,
             Animate UI and Uiverse.
           </p>
-          <p className="mt-2">Hero photo: Klim Musalimov on Unsplash. Kit prices are samples.</p>
+          <p className="mt-2">Hero photos on Unsplash by Klim Musalimov, Lasse Jensen, I&apos;M ZION, michael evins, Barnaby Woodrow and Nejc Soklič. Theme toggle: Magic UI Animated Theme Toggler. Kit prices are samples.</p>
         </div>
       </div>
       <div className="border-t border-gc-line py-4 text-center font-mono text-[11px] text-gc-muted">

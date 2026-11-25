@@ -99,9 +99,9 @@ export function Brands() {
 /* ---------- why us (bento of Magic Cards) ---------- */
 
 const cardProps = {
-  gradientFrom: "#007a52",
-  gradientTo: "#ffb800",
-  gradientColor: "#e3f1ea",
+  gradientFrom: "var(--gc-green)",
+  gradientTo: "var(--gc-amber)",
+  gradientColor: "var(--gc-spot)",
   gradientSize: 260,
 } as const
 
@@ -244,15 +244,15 @@ function SevenDays() {
   return (
     <div ref={ref} className="mt-6 grid grid-cols-7 gap-1.5">
       {Array.from({ length: 7 }).map((_, i) => (
-        <motion.div
+        <div
           key={i}
-          initial={{ backgroundColor: "#e2e2da" }}
-          animate={inView ? { backgroundColor: "#007a52" } : undefined}
-          transition={{ delay: 0.15 * i, duration: 0.3 }}
-          className="grid aspect-square place-items-center font-mono text-[10px] text-gc-paper"
+          style={{ transitionDelay: `${0.15 * i}s` }}
+          className={`grid aspect-square place-items-center font-mono text-[10px] transition-colors duration-300 ${
+            inView ? "bg-gc-green text-gc-ongreen" : "bg-gc-line text-gc-muted"
+          }`}
         >
           {i + 1}
-        </motion.div>
+        </div>
       ))}
     </div>
   )
@@ -323,9 +323,9 @@ export function AskUs() {
       <div className={`${wrap} flex justify-center pt-8 pb-16 lg:pb-24`}>
         <a href={whatsappLink("Hi! I have a question: ")} target="_blank" rel="noreferrer">
           <ShimmerButton
-            background="#007a52"
+            background="var(--gc-green)"
             borderRadius="0px"
-            className="h-12 px-6 font-mono text-[13px] font-bold tracking-wider text-gc-paper uppercase"
+            className="h-12 px-6 font-mono text-[13px] font-bold tracking-wider text-gc-ongreen uppercase"
           >
             <MessageCircle className="mr-2 size-4" /> Ask on WhatsApp
           </ShimmerButton>
@@ -390,7 +390,7 @@ export function Visit() {
                     href={c.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-6 inline-flex h-11 items-center justify-center bg-gc-green font-mono text-[12px] font-bold tracking-[0.12em] text-gc-paper uppercase transition-transform hover:-translate-y-0.5"
+                    className="mt-6 inline-flex h-11 items-center justify-center bg-gc-green font-mono text-[12px] font-bold tracking-[0.12em] text-gc-ongreen uppercase transition-transform hover:-translate-y-0.5"
                   >
                     {c.cta}
                   </a>

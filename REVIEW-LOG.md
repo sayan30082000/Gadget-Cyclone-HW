@@ -141,7 +141,44 @@ I said the kits section didn't look good. The AI drew 3 new directions in the Mi
 - No sideways scroll on the phone (375 px).
 - Desktop layout: shelf on the left, box and summary sticky on the right.
 
-## 6. Still to do (needs the shop owner)
+## 6. Round 4: show what we sell + dark mode
+I asked for two things:
+1. The hero should show the kinds of products we sell, not only one earbuds photo.
+2. A button to switch between dark and light mode.
+
+**Hero product showcase:**
+- **6 products:** earbuds, chargers, power banks, covers, watches and speakers. Each has a free Unsplash photo (Unsplash License), picked from a contact sheet. Most are in-hand or close shots, to match the first earbuds photo.
+- **One counter drives everything.** The headline word ("Chargers for the phone you ALREADY own") and the photo change together. I changed Magic UI Word Rotate so it can follow an outside index. The photo crossfades with a slight zoom.
+- **Under the photo:** a strip of 6 thumbnails. The active one has a green progress bar. Tap one to jump to it (it stays 8 s). Hover to pause.
+- **The bottom chip and credit change too.** The chip shows the product's line (for example "Chargers: 20W to 65W, matched to your phone"). The photographer credit under the photo changes with it.
+- **Order button:** the WhatsApp message now says which product you were looking at.
+
+**Dark / light mode:**
+- **Button:** Magic UI Animated Theme Toggler, in the header (desktop and phone). Clicking it reveals the new theme as a circle from the button.
+- **Same palette, dark version:**
+
+  | Color | Light | Dark |
+  |---|---|---|
+  | Paper (background) | #F7F7F2 | #0C110F |
+  | Card | #FFFFFF | #141B18 |
+  | Line | #E2E2DA | #27322D |
+  | Muted text | #5F6158 | #9AA59F |
+  | Ink (main text) | #111111 | #EDF2EE |
+  | Green | #007A52 | #34C38F |
+  | Amber | #FFB800 | #FFB800 |
+
+  Dark contrast: text 16.8, muted 7.5, green on background 8.5, dark text on green buttons 8.5.
+- **All colors are now CSS variables.** I replaced every hard-coded color in the sections. I also added two "text on" colors, one for text on green and one for text on amber, so button text stays readable in both modes.
+- **Remembered:** the choice is saved, and a tiny script in index.html applies it before the page paints, so there is no white flash. The browser bar color (theme-color) follows the theme. Light stays the default.
+
+**Fixed during the check:** on phones the "Tk 0 advance" chip crowded the product chip, so it is hidden on small screens.
+
+**Checked:**
+- Desktop light and dark.
+- Phone dark: both header buttons show, the 6 thumbnails fit, no sideways scroll at 375 px, and dark mode survives a reload.
+- Every section in dark mode: why us, shop carousels, kit box, footer.
+
+## 7. Still to do (needs the shop owner)
 - Add the real WhatsApp number and Facebook page link in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - Kit prices are samples.
 - The "Ask us" bubbles are example questions, not real reviews.

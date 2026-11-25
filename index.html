@@ -9,6 +9,14 @@
       name="description"
       content="Gadget Cyclone: phone accessories at Finlay Square, Chattogram. Earbuds, chargers, power banks and covers. Cash on delivery, no advance."
     />
+    <script>
+      // apply the saved theme before the first paint (light is the default)
+      (function () {
+        try {
+          if (localStorage.getItem("theme") === "dark") document.documentElement.classList.add("dark")
+        } catch (e) {}
+      })()
+    </script>
     <title>Gadget Cyclone · Accessories for the phone you already own</title>
   </head>
   <body>
