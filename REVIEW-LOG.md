@@ -178,7 +178,7 @@ I asked for two things:
 - Phone dark: both header buttons show, the 6 thumbnails fit, no sideways scroll at 375 px, and dark mode survives a reload.
 - Every section in dark mode: why us, shop carousels, kit box, footer.
 
-## 8. Round 5: a more unique theme button
+## 7. Round 5: a more unique theme button
 The round 4 sun/moon button looked like every other site. I asked for something unique, like switching a light on or off.
 
 **Now there is a light bulb hanging on a cord from the header:**
@@ -202,7 +202,7 @@ The round 4 sun/moon button looked like every other site. I asked for something 
 - Phone header (bulb next to the menu, no overlap, no sideways scroll).
 - Dark mode is remembered after a reload.
 
-## 9. Still to do (needs the shop owner)
+## 8. Still to do (needs the shop owner)
 - Add the real WhatsApp number and Facebook page link in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - Kit prices are samples.
 - The "Ask us" bubbles are example questions, not real reviews.
