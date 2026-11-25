@@ -62,6 +62,20 @@ The logo lives in `public/`:
 
 Kit prices are examples until the shop adds real ones.
 
+## Add a product
+Add one line to the right category in `CATEGORIES` (`src/data/site.ts`). It then shows up in **both** places by itself:
+- **the shop row** for that category
+- **the kit box shelf**, under the same section
+
+```ts
+{ name: "Solar power banks", note: "charges in the sun", price: 2000,
+  photo: u("photo-…"), alt: "A solar power bank on a backpack", credit: "Photographer name" },
+```
+
+- `price` (example price in Tk) is required, because the box adds it up.
+- `id` and `unit` are optional. `unit` is the name inside the box, for example "Solar power bank".
+- A new category in `CATEGORIES` becomes a new shop row and a new kit section too.
+
 ## Credits
 - **Components:** [Magic UI](https://magicui.design) (MIT), added with the shadcn CLI:
   - Interactive Grid

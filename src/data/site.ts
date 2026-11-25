@@ -111,9 +111,22 @@ export type Category = {
   extras?: ShopItem[]
 }
 
-/** photo: real product photo from Unsplash (free Unsplash License), alt: what the photo shows */
-// id: used by the kit box, unit: the name inside the box, price: example price in Tk (confirmed on WhatsApp)
-export type ShopItem = { id: string; unit: string; price: number; name: string; note: string; photo: string; alt: string; credit: string }
+/**
+ * One product. Add it to a category below and it shows up in BOTH places by itself:
+ * the shop row (Shop section) and the kit shelf ("Pack your box").
+ * - name, note: what the shop card shows
+ * - photo, alt, credit: real product photo (Unsplash, free license), what it shows, who took it
+ * - price: example price in Tk (we confirm today's price on WhatsApp). Required: the box adds it up.
+ * - id (optional): made from the category + name if left out
+ * - unit (optional): the name inside the box, e.g. "Clear case" for the shop's "Clear cases"
+ */
+export type ShopItem = { id?: string; unit?: string; price: number; name: string; note: string; photo: string; alt: string; credit: string }
+
+const slug = (s: string) =>
+  s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
 
 /** product card photo, cropped to 4:3 by Unsplash */
 export const cardPhoto = (photo: string, w: number) => `${photo}&w=${w}&h=${Math.round(w * 0.75)}`
@@ -198,9 +211,16 @@ export type KitItem = { id: string; name: string; price: number; group: string; 
 /** square crop of a product photo, used on the kit shelf and inside the box */
 export const squarePhoto = (photo: string, size: number) => `${photo}&w=${size}&h=${size}`
 
-// every shop product (plus the extras) can go in the box, grouped like the shop
+// every shop product (plus the extras) goes on the kit shelf automatically, grouped like the shop.
+// A new product or a whole new category in CATEGORIES appears in the box with no other change.
 export const KIT_ITEMS: KitItem[] = CATEGORIES.flatMap((c) =>
-  [...c.items, ...(c.extras ?? [])].map((i) => ({ id: i.id, name: i.unit, price: i.price, group: c.id, photo: i.photo }))
+  [...c.items, ...(c.extras ?? [])].map((i) => ({
+    id: i.id ?? `${c.id}-${slug(i.name)}`,
+    name: i.unit ?? i.name,
+    price: i.price,
+    group: c.id,
+    photo: i.photo,
+  }))
 )
 
 /** the kit shelf, one block per shop section */
