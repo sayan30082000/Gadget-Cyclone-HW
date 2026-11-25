@@ -16,7 +16,7 @@ A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4
 - **Marquees:** top ticker, brands, phone models and "ask us" chat bubbles.
 - **Magic Cards** with a light that follows the cursor.
 - **Swipe carousels** per shop category (drag, swipe or arrows). Each of the 30 product cards has a real photo of that product.
-- **"Pack your box" kit section** (every item has a real product photo):
+- **"Pack your box" kit section:** all 32 products on the shelf, grouped by the same 5 sections as the shop (a swipe row per section on phones), each with a real photo and an example price:
   - tap items on a shelf and they fly into a box
   - a live price sticker, with 15% off for 3+ items
   - a ready-made WhatsApp order message

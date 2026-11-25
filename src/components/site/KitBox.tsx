@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { AnimatePresence, LayoutGroup, motion, useAnimate, useReducedMotion } from "motion/react"
 import { NumberTicker } from "@/components/ui/number-ticker"
 import { SectionHead, wrap } from "@/components/site/Sections"
-import { KIT_DEAL, KIT_ITEMS, KIT_PRESETS, squarePhoto, whatsappLink } from "@/data/site"
+import { KIT_DEAL, KIT_ITEMS, KIT_PRESETS, KIT_SHELF, squarePhoto, whatsappLink } from "@/data/site"
 
 /*
  * Kits: "bundle box". Tap an item on the shelf and its photo flies into the box
@@ -109,7 +109,7 @@ export function KitBuilder() {
           label="Kits"
           title="Pack your"
           bold="BOX"
-          sub="Tap things on the shelf and they jump into your box. Tap them in the box to take them out. 3 or more items: 15% off."
+          sub="Every product is on the shelf, by section. Tap one and it jumps into your box, tap it in the box to take it out. 3 or more items: 15% off."
         />
 
         <LayoutGroup>
@@ -202,11 +202,26 @@ export function KitBuilder() {
               <div className="mt-4 hidden lg:block">{summary}</div>
             </div>
 
-            {/* the shelf */}
+            {/* the shelf: every product, one block per shop section */}
             <div className="order-3 lg:col-start-1 lg:row-start-2">
-              <p className="font-mono text-[12px] tracking-[0.14em] text-gc-muted uppercase">The shelf</p>
-              <div className="mt-3 grid grid-cols-3 gap-2 sm:grid-cols-4">
-                {KIT_ITEMS.map((i) => {
+              <p className="font-mono text-[12px] tracking-[0.14em] text-gc-muted uppercase">The shelf · {KIT_ITEMS.length} products</p>
+              <div className="mt-4 space-y-8">
+                {KIT_SHELF.map((g, gi) => {
+                  const inBox = g.items.filter((i) => sel.includes(i.id)).length
+                  return (
+                    <div key={g.id}>
+                      <div className="flex items-baseline justify-between gap-3 border-b border-gc-line pb-2">
+                        <h3 className="font-serif text-[22px] leading-tight text-gc-ink">
+                          <span className="mr-2 font-mono text-[12px] text-gc-green">0{gi + 1}</span>
+                          {g.label}
+                        </h3>
+                        <span className={`shrink-0 font-mono text-[12px] ${inBox ? "text-gc-green" : "text-gc-muted"}`}>
+                          {inBox ? `${inBox} in box` : `${g.items.length} items`}
+                        </span>
+                      </div>
+                      {/* phones: swipe the row; tablets and up: a grid */}
+                      <div className="-mx-5 mt-3 flex snap-x snap-mandatory gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-4 sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
+                {g.items.map((i) => {
                   const on = sel.includes(i.id)
                   return (
                     <button
@@ -214,7 +229,7 @@ export function KitBuilder() {
                       type="button"
                       aria-pressed={on}
                       onClick={() => toggle(i.id)}
-                      className={`group relative flex flex-col items-center border p-2 text-center transition-colors sm:p-2.5 ${
+                      className={`group relative flex w-[30%] shrink-0 snap-start flex-col items-center border p-2 text-center transition-colors sm:w-auto sm:p-2.5 ${
                         on ? "border-gc-green bg-gc-green/[0.05]" : "border-gc-line bg-gc-card hover:border-gc-ink"
                       }`}
                     >
@@ -249,6 +264,10 @@ export function KitBuilder() {
                         )}
                       </AnimatePresence>
                     </button>
+                  )
+                })}
+                      </div>
+                    </div>
                   )
                 })}
               </div>

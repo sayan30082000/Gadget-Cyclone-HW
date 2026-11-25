@@ -311,10 +311,26 @@ I asked the AI to act as a web developer and tell me what would make the site lo
   - no sideways scroll
   - adding and removing an item still flies between the shelf and the box, and the price updates
 
-## 12. Still to do (needs the shop owner)
+## 12. Round 10: every product in the kit box, by section
+- **Whole range:** the kit shelf now has every product from the shop (30), plus 2 small add-ons (earbud case cover, spare ear tips). That makes 32, grouped under the same 5 sections as the shop:
+  - Earbuds & audio
+  - Chargers & cables
+  - Power banks
+  - Covers & protection
+  - Watches & speakers
+- **Section headings:** each section has a numbered heading and a counter that shows how many of its items are in the box.
+- **Layout:** each section is a swipe row on phones, so the page doesn't get too long, and a 4-column grid on tablets and desktop. The box stays pinned on the right on desktop.
+- **One list for both:** the shop cards and the kit shelf come from the same product list in `src/data/site.ts` (id, box name, example price), so they always match.
+- **Example prices:** every product has one. They are examples, and the site already says we confirm today's price on WhatsApp. "Second cable" was removed; the Power kit now has a car charger instead.
+- **Checked:**
+  - phone and desktop
+  - adding and removing a new product (party speaker)
+  - the WhatsApp message lists it with its price
+
+## 13. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
-- **Prices:** kit prices are samples.
+- **Prices:** all product prices are samples. Put the real ones in `src/data/site.ts` (the `price` of each product).
 - **Promises:** confirm the "7-day replacement" promise and the cash-on-delivery area before the site goes live.
 - **"Ask us" bubbles** are example questions, not real reviews.
 - **Later:**
