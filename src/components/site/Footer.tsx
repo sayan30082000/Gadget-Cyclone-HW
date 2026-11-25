@@ -40,7 +40,7 @@ export function Footer() {
             Magic Card, Number Ticker, Blur Fade, Word Rotate, Scroll Velocity). Ideas from Watermelon UI,
             Animate UI and Uiverse.
           </p>
-          <p className="mt-2">Hero photos on Unsplash by Klim Musalimov, Lasse Jensen, I&apos;M ZION, michael evins, Barnaby Woodrow and Nejc Soklič. Theme toggle: Magic UI Animated Theme Toggler. Kit prices are samples.</p>
+          <p className="mt-2">Hero photos on Unsplash by Klim Musalimov, Lasse Jensen, I&apos;M ZION, michael evins, Barnaby Woodrow and Nejc Soklič. Theme switch: our pull-cord light bulb (circle reveal idea from Magic UI Animated Theme Toggler). Kit prices are samples.</p>
         </div>
       </div>
       <div className="border-t border-gc-line py-4 text-center font-mono text-[11px] text-gc-muted">

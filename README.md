@@ -7,7 +7,7 @@ Live: _(link added after the first Netlify deploy)_
 ## What's interactive
 - **Hero background:** Magic UI Interactive Grid. Squares light up green under the mouse, a tap, or a finger drag, and a few glow on their own.
 - **Hero product showcase:** 6 products we sell (earbuds, chargers, power banks, covers, watches, speakers). The headline word and the photo change together. Tap a thumbnail to jump; hover to pause.
-- **Dark / light mode** button (Magic UI Animated Theme Toggler, circle reveal). The choice is remembered.
+- **Dark / light mode as a light bulb on a pull cord** in the header: light on = light mode, pull (drag the cord, click or Enter) = lights off. The bulb swings, and the new theme spreads from it in a circle (idea from Magic UI Animated Theme Toggler). The choice is remembered.
 - **Cursor glow** over the hero, and a **3D tilt** on the hero photo.
 - **Shimmer** order buttons and **number-ticker** totals in the kit box.
 - **Marquees:** top ticker, brands, phone models and "ask us" chat bubbles.

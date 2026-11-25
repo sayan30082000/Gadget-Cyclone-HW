@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react"
 import { Menu, X } from "lucide-react"
 
-import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import { Marquee } from "@/components/ui/marquee"
+import { ThemeLamp } from "@/components/site/ThemeLamp"
 import { TICKER, whatsappLink } from "@/data/site"
 
 const NAV = [
@@ -76,19 +76,11 @@ export function Header() {
             >
               ■ Order now
             </a>
-            <AnimatedThemeToggler
-              duration={500}
-              title="Dark / light mode"
-              className="grid size-10 place-items-center border border-gc-line text-gc-ink transition-colors hover:border-gc-green hover:text-gc-green [&_svg]:size-[18px]"
-            />
+            <ThemeLamp />
           </nav>
 
           <div className="flex items-center gap-2 md:hidden">
-            <AnimatedThemeToggler
-              duration={500}
-              title="Dark / light mode"
-              className="grid size-10 place-items-center border border-gc-line text-gc-ink [&_svg]:size-[18px]"
-            />
+            <ThemeLamp />
             <button
               type="button"
               aria-label={open ? "Close menu" : "Open menu"}

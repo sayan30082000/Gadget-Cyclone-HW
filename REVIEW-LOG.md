@@ -178,7 +178,31 @@ I asked for two things:
 - Phone dark: both header buttons show, the 6 thumbnails fit, no sideways scroll at 375 px, and dark mode survives a reload.
 - Every section in dark mode: why us, shop carousels, kit box, footer.
 
-## 7. Still to do (needs the shop owner)
+## 8. Round 5: a more unique theme button
+The round 4 sun/moon button looked like every other site. I asked for something unique, like switching a light on or off.
+
+**Now there is a light bulb hanging on a cord from the header:**
+- **Light on = light mode:** the bulb glows amber, with small rays.
+- **Light off = dark mode:** grey glass, no glow.
+- **Three ways to switch it:**
+  - drag the cord down; the cord stretches as you pull, and past 16 px it counts as a pull
+  - click the bulb, which still does a small tug
+  - press Enter or Space with the keyboard
+- **After a pull** the bulb swings on its cord and settles. The new theme spreads out from the bulb in a circle.
+- **Accessible:** it is a real `switch` for screen readers ("Light is on (light mode). Pull to switch it off").
+- **Phones:** it hangs next to the menu button.
+- **Cleanup:** I removed the old sun/moon component. The circle reveal idea came from Magic UI's Animated Theme Toggler, and that is credited.
+
+**Fixed while testing:**
+- **A fast second pull was ignored** while the first circle animation was still running. Now it ends the running animation and switches straight away.
+- **Test:** 3 quick clicks end in the opposite theme, and 2 quick clicks end where they started.
+
+**Checked:**
+- Click, a real drag of the cord, the Enter key, and fast repeated pulls.
+- Phone header (bulb next to the menu, no overlap, no sideways scroll).
+- Dark mode is remembered after a reload.
+
+## 9. Still to do (needs the shop owner)
 - Add the real WhatsApp number and Facebook page link in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - Kit prices are samples.
 - The "Ask us" bubbles are example questions, not real reviews.
