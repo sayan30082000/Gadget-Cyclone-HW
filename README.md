@@ -2,7 +2,9 @@
 
 A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4th floor, 2 No. Gate), Chattogram. Cash on delivery, no advance. Built by Sayan Das.
 
-**Live site: https://gagdet-cyclone.netlify.app**
+**Live site: https://gadgetcyclone.netlify.app**
+
+**Moodboard (Figma): https://www.figma.com/design/2rI3oSh0jURncZABTfSMMz/Gadget-Cyclone-moodboard---Sayan**
 
 ## What's interactive
 - **Hero background:** Magic UI Interactive Grid. Squares light up green under the mouse, a tap, or a finger drag, and a few glow on their own.

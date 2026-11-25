@@ -276,7 +276,7 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 - The "Call us" card and hours: tested with a placeholder number, then emptied again.
 
 ## 9. Round 7: real product photos, live link
-**Live:** https://gagdet-cyclone.netlify.app (Netlify, built from the GitHub repo).
+**Live:** https://gadgetcyclone.netlify.app (Netlify, built from the GitHub repo). Moodboard: https://www.figma.com/design/2rI3oSh0jURncZABTfSMMz/Gadget-Cyclone-moodboard---Sayan (its Week 3 band shows screenshots of the live site).
 
 **Shop photos:**
 - All 30 shop cards now show a real photo of that product instead of an icon. Examples: a neckband for "Neckbands", a 67W charger for "33-65W chargers", a magnetic battery pack on the back of a phone for "Magnetic packs".
