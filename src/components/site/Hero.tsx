@@ -226,16 +226,26 @@ function TiltPhoto({ reduce, active }: { reduce: boolean; active: number }) {
         // see-through stage: the hero grid shows behind, the cut-out product floats in a soft spotlight
         className="relative aspect-[4/3] w-full overflow-hidden border border-gc-line bg-gc-card/45"
       >
+        {/* backdrop that stays still: a shaded green disc with two rings, so the floating product's
+            movement (and the 3D tilt) reads clearly against it */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 grid place-items-center">
+          <div className="relative aspect-square h-[84%] -translate-y-[3%]">
+            {/* light mode needs a deeper shade than dark mode to show up */}
+            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_40%,color-mix(in_srgb,var(--gc-green)_52%,var(--gc-card))_0%,color-mix(in_srgb,var(--gc-green)_30%,var(--gc-card))_44%,transparent_71%)] dark:bg-[radial-gradient(circle_at_50%_40%,color-mix(in_srgb,var(--gc-green)_36%,var(--gc-card))_0%,color-mix(in_srgb,var(--gc-green)_18%,var(--gc-card))_46%,transparent_71%)]" />
+            <div className="absolute inset-[10%] rounded-full border border-gc-green/35 dark:border-gc-green/25" />
+            <div className="absolute inset-[2%] rounded-full border border-dashed border-gc-green/45 motion-safe:animate-[spin_60s_linear_infinite] dark:border-gc-green/35" />
+          </div>
+        </div>
         <div
           aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(closest-side_at_50%_48%,color-mix(in_srgb,var(--gc-green)_24%,transparent),transparent),radial-gradient(closest-side_at_62%_30%,color-mix(in_srgb,var(--gc-amber)_12%,transparent),transparent)]"
+          className="absolute inset-0 bg-[radial-gradient(closest-side_at_68%_26%,color-mix(in_srgb,var(--gc-amber)_14%,transparent),transparent)]"
         />
-        {/* floor shadow: shrinks a little while the product floats up */}
+        {/* floor shadow: shrinks and fades while the product floats up, grows back when it comes down */}
         <motion.div
           aria-hidden
-          animate={reduce ? undefined : { scaleX: [1, 0.86, 1], opacity: [0.9, 0.6, 0.9] }}
+          animate={reduce ? undefined : { scaleX: [1, 0.78, 1], opacity: [1, 0.55, 1] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[12%] left-[27%] h-[7%] w-[46%] rounded-[50%] bg-black/25 blur-xl dark:bg-black/70"
+          className="absolute bottom-[11%] left-[28%] h-[7%] w-[44%] rounded-[50%] bg-black/35 blur-lg dark:bg-black/80"
         />
         <motion.div
           className="absolute inset-0"

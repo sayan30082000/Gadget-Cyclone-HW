@@ -376,7 +376,15 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 - **Clean edges:** a white backdrop piece behind the earbuds was removed, and a grey edge left over from it was cleaned off. The logo and the shine on the earbuds stayed.
 - **Checked:** desktop light and dark, all 6 products.
 
-## 17. Still to do (needs the shop owner)
+## 17. Round 15: a shade behind the moving product
+- **My feedback:** the products float and move, but the movement was hard to see without something behind them.
+- **Shade:** a still, shaded green disc now sits behind each product, with a thin ring and a slowly turning dashed ring.
+  - The product floats and tilts in front of it, so the movement reads clearly.
+  - The disc is a deeper mint in light mode and deep green in dark mode.
+- **Floor shadow:** darker, and it shrinks and fades as the product rises, then grows back as it comes down.
+- **Checked:** desktop light and dark, phone, no sideways scroll.
+
+## 18. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
 - **Prices:** all product prices are samples. Put the real ones in `src/data/site.ts` (the `price` of each product).
