@@ -341,7 +341,8 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 - **Later fix:** on 1024 px laptops the "15% off" badge covered the headline. The headline and timer are now a bit smaller between 1024 and 1280 px.
 
 ## 14. Round 12: back to top
-- **Back-to-top button:** shows once the hero has scrolled away and brings you back up to the hero.
+- **Back-to-top button:** brings you back up to the hero from any section.
+  - It first showed only once the hero had scrolled away, so it was missing in the hero. Now it shows everywhere after the first 200 px of scrolling, and hides only at the very top.
   - On phones it is a square arrow button just above the floating WhatsApp button.
   - On tablet and desktop it says "↑ Top" in the bottom-right corner.
   - Same look as the other buttons: hard green shadow, ink border. It works in light and dark mode.

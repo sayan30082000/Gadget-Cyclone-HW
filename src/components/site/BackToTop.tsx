@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react"
-import { AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react"
 import { ArrowUp } from "lucide-react"
 
+/** how far down (px) before the button shows: hidden only at the very top of the page */
+const SHOW_AFTER = 200
+
 /*
- * Back to the hero. Shows once the hero has scrolled out of view.
+ * Back to the hero, from every section (the hero included, once you have scrolled a little).
  * Phones: an arrow above the floating WhatsApp button. Tablet and up: "↑ Top" in the bottom-right corner.
  */
 export function BackToTop() {
   const [show, setShow] = useState(false)
+  const { scrollY } = useScroll()
 
-  useEffect(() => {
-    const hero = document.getElementById("top")
-    if (!hero) return
-    const io = new IntersectionObserver(([e]) => setShow(!e.isIntersecting), { threshold: 0.1 })
-    io.observe(hero)
-    return () => io.disconnect()
-  }, [])
+  // a page reload can open halfway down: check once on load, then on every scroll
+  useEffect(() => setShow(window.scrollY > SHOW_AFTER), [])
+  useMotionValueEvent(scrollY, "change", (y) => setShow(y > SHOW_AFTER))
 
   const goTop = (e: React.MouseEvent) => {
     e.preventDefault()
