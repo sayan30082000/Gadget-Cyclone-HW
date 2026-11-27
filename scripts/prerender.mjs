@@ -11,7 +11,9 @@ const dist = path.resolve("dist")
 const ssrDir = path.resolve("dist-ssr")
 const { render, SITE, HERO_PRODUCTS, heroSrcSet } = await import(pathToFileURL(path.join(ssrDir, "entry-server.js")).href)
 
-const url = SITE.url.replace(/\/$/, "")
+// SITE_URL and BASE_PATH are set by the GitHub Pages build; Netlify uses SITE.url and "/"
+const url = (process.env.SITE_URL || SITE.url).replace(/\/$/, "")
+const base = process.env.BASE_PATH || "/"
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;")
 
 const indexPath = path.join(dist, "index.html")
@@ -57,7 +59,7 @@ const head = [
   `<meta property="og:image" content="${url}/og-image.png" />`,
   `<meta name="twitter:image" content="${url}/og-image.png" />`,
   `<link rel="preload" as="image" imagesrcset="${esc(heroSrcSet(first.photo))}" imagesizes="(min-width: 1024px) 45vw, 100vw" fetchpriority="high" />`,
-  ...fonts.map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin />`),
+  ...fonts.map((f) => `<link rel="preload" href="${base}assets/${f}" as="font" type="font/woff2" crossorigin />`),
   `<script type="application/ld+json">${JSON.stringify(business)}</script>`,
 ].join("\n    ")
 html = html.replace("</head>", `    ${head}\n  </head>`)
@@ -69,6 +71,12 @@ fs.writeFileSync(
   path.join(dist, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${url}/</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod></url>\n</urlset>\n`
 )
+
+// the not-found page links to the logo and the home page; point them at the right folder
+if (base !== "/") {
+  const notFound = path.join(dist, "404.html")
+  fs.writeFileSync(notFound, fs.readFileSync(notFound, "utf8").replace(/(href|src|srcset)="\//g, `$1="${base}`))
+}
 
 fs.rmSync(ssrDir, { recursive: true, force: true })
 console.log(`prerendered ${Math.round(app.length / 1024)} KB of HTML, ${fonts.length} font preloads, SEO tags for ${url}`)

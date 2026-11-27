@@ -1,0 +1,37 @@
+# Builds the site on every push to main and publishes it on GitHub Pages:
+# https://sayan30082000.github.io/Gadget-Cyclone-HW/
+# The gh-pages branch holds the built files. Netlify still builds from main on its own.
+name: GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          BASE_PATH: /Gadget-Cyclone-HW/
+          SITE_URL: https://sayan30082000.github.io/Gadget-Cyclone-HW
+      - run: touch dist/.nojekyll
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages

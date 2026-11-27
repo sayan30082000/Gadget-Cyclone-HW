@@ -2,7 +2,9 @@
 
 A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4th floor, 2 No. Gate), Chattogram. Cash on delivery, no advance. Built by Sayan Das.
 
-**Live site: https://gadget-cyclone-h.netlify.app**
+**Live site (GitHub Pages): https://sayan30082000.github.io/Gadget-Cyclone-HW/**
+
+**Live site (Netlify): https://gadget-cyclone-h.netlify.app**
 
 **Moodboard (Figma): https://www.figma.com/design/2rI3oSh0jURncZABTfSMMz/Gadget-Cyclone-moodboard---Sayan**
 
@@ -41,6 +43,7 @@ Lighthouse (phone test, production build): Performance 85-87, Accessibility 100,
   - `robots.txt` and `sitemap.xml`
   - icons and a web manifest
 - **Netlify:** `netlify.toml` sets caching and security headers. `public/404.html` is the not-found page.
+- **GitHub Pages:** every push to `main` also builds the site and publishes it to the `gh-pages` branch (`.github/workflows/github-pages.yml`). That build is served from the `/Gadget-Cyclone-HW/` folder (`BASE_PATH`), and its share tags use the GitHub address (`SITE_URL`).
 
 ## Run it
 ```
