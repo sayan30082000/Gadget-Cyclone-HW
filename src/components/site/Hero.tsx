@@ -13,7 +13,7 @@ import { ArrowDown, Check, MapPin } from "lucide-react"
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern"
 import { ShimmerButton } from "@/components/ui/shimmer-button"
 import { WordRotate } from "@/components/ui/word-rotate"
-import { HERO_PRODUCTS, heroSrcSet, sized, whatsappLink } from "@/data/site"
+import { HERO_PRODUCTS, heroImg, heroSrcSet, whatsappLink } from "@/data/site"
 
 const STEP_MS = 2800
 const WORDS = HERO_PRODUCTS.map((p) => p.word)
@@ -41,7 +41,7 @@ export function Hero() {
     const next = HERO_PRODUCTS[(active + 1) % HERO_PRODUCTS.length]
     const img = new Image()
     img.sizes = "(min-width: 1024px) 45vw, 100vw"
-    img.srcset = heroSrcSet(next.photo)
+    img.srcset = heroSrcSet(next.cutout)
   }, [active])
 
   const pick = (i: number) => {
@@ -155,17 +155,22 @@ export function Hero() {
                     aria-selected={on}
                     aria-label={p.word}
                     onClick={() => pick(i)}
-                    className={`group relative aspect-square overflow-hidden border-2 transition-colors ${
-                      on ? "border-gc-green" : "border-transparent hover:border-gc-line"
+                    className={`group relative aspect-square overflow-hidden border-2 bg-gc-card/70 transition-colors ${
+                      on ? "border-gc-green" : "border-gc-line/60 hover:border-gc-line"
                     }`}
                   >
+                    {/* small spotlight behind the cut-out */}
+                    <span
+                      aria-hidden
+                      className={`absolute inset-0 bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--gc-green)_22%,transparent),transparent)] transition-opacity duration-300 ${on ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+                    />
                     <img
-                      src={sized(p.photo, 160)}
+                      src={heroImg(p.cutout, 160)}
                       loading="lazy"
                       width={80}
                       height={80}
                       alt=""
-                      className={`size-full object-cover transition duration-300 ${on ? "" : "opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0"}`}
+                      className={`relative size-full object-contain p-1.5 transition duration-300 ${on ? "scale-105" : "opacity-75 group-hover:scale-105 group-hover:opacity-100"}`}
                     />
                     {mounted && on && !paused && !reduce && (
                       <motion.span
@@ -218,24 +223,45 @@ function TiltPhoto({ reduce, active }: { reduce: boolean; active: number }) {
         onPointerMove={onMove}
         onPointerLeave={onLeave}
         style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
-        className="relative aspect-[4/3] w-full overflow-hidden border border-gc-line bg-gc-card"
+        // see-through stage: the hero grid shows behind, the cut-out product floats in a soft spotlight
+        className="relative aspect-[4/3] w-full overflow-hidden border border-gc-line bg-gc-card/45"
       >
-        <AnimatePresence initial={false}>
-          <motion.img
-            key={p.photo}
-            src={sized(p.photo, 960)}
-            srcSet={heroSrcSet(p.photo)}
-            sizes="(min-width: 1024px) 45vw, 100vw"
-            fetchPriority={active === 0 ? "high" : "auto"}
-            alt={p.alt}
-            initial={{ opacity: 0, scale: 1.08 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.7, ease: "easeOut" }}
-            className="absolute inset-0 size-full object-cover"
-          />
-        </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-[radial-gradient(closest-side_at_50%_48%,color-mix(in_srgb,var(--gc-green)_24%,transparent),transparent),radial-gradient(closest-side_at_62%_30%,color-mix(in_srgb,var(--gc-amber)_12%,transparent),transparent)]"
+        />
+        {/* floor shadow: shrinks a little while the product floats up */}
+        <motion.div
+          aria-hidden
+          animate={reduce ? undefined : { scaleX: [1, 0.86, 1], opacity: [0.9, 0.6, 0.9] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[12%] left-[27%] h-[7%] w-[46%] rounded-[50%] bg-black/25 blur-xl dark:bg-black/70"
+        />
+        <motion.div
+          className="absolute inset-0"
+          animate={reduce ? undefined : { y: [0, -12, 0] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+          // in front of the stage, behind the chips (40)
+          style={{ translateZ: 28 }}
+        >
+          {/* wait: the old product leaves before the new one rises in (cut-outs must not overlap) */}
+          <AnimatePresence initial={false} mode="wait">
+            <motion.img
+              key={p.cutout}
+              src={heroImg(p.cutout, 960)}
+              srcSet={heroSrcSet(p.cutout)}
+              sizes="(min-width: 1024px) 36vw, 80vw"
+              fetchPriority={active === 0 ? "high" : "auto"}
+              alt={p.alt}
+              initial={{ opacity: 0, y: 46, scale: 0.86, rotate: -7 }}
+              animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, y: -34, scale: 0.94, rotate: 5, transition: { duration: reduce ? 0 : 0.22, ease: "easeIn" } }}
+              transition={{ duration: reduce ? 0 : 0.65, ease: [0.2, 0.8, 0.2, 1] }}
+              // phones: a bit smaller and lower, so the top and bottom chips don't cover the product
+              className="absolute inset-x-[12%] top-[17%] h-[58%] w-[76%] object-contain drop-shadow-[0_22px_28px_rgba(0,0,0,0.28)] sm:top-[10%] sm:h-[70%]"
+            />
+          </AnimatePresence>
+        </motion.div>
 
         <FloatChip className="top-5 left-5" delay={0}>
           <span className="text-gc-green">■</span> COD · Chattogram

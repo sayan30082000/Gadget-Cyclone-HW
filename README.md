@@ -10,7 +10,8 @@ A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4
 
 ## What's interactive
 - **Hero background:** Magic UI Interactive Grid. Squares light up green under the mouse, a tap, or a finger drag, and a few glow on their own.
-- **Hero product showcase:** 6 products we sell (earbuds, chargers, power banks, covers, watches, speakers). The headline word and the photo change together. Tap a thumbnail to jump; hover to pause.
+- **Hero product showcase:** 6 products we sell (earbuds, chargers, power banks, covers, watches, speakers). The headline word and the product change together. Tap a thumbnail to jump; hover to pause.
+  - Each product is a cut-out with a transparent background (`public/hero/`), so it floats in a soft green spotlight over the hero grid and stands out. Thumbnails are cut-outs too.
 - **Dark / light mode as a light bulb on a pull cord** in the header: light on = light mode, pull (drag the cord, click or Enter) = lights off. The bulb swings, and the new theme spreads from it in a circle (idea from Magic UI Animated Theme Toggler). The choice is remembered.
 - **Cursor glow** over the hero, and a **3D tilt** on the hero photo.
 - A **shimmer** order button in the hero and a **number-ticker** total on the kit box sticker.
@@ -105,7 +106,7 @@ Add one line to the right category in `CATEGORIES` (`src/data/site.ts`). It then
 
   | Where | Photographers |
   |---|---|
-  | Hero | Klim Musalimov, Lasse Jensen, I'M ZION, michael evins, Barnaby Woodrow, Nejc Soklič |
+  | Hero (cut-outs) | Yasin Hasan, Arturo Añez, gomi, Jascent Leung, pratik prasad, Omar Flores |
   | Earbuds & audio | TheRegisti, Miguel Angel Avila, Habib Dadkhah, C D-X, Rebekah Yip, Arturo Añez |
   | Chargers & cables | Homemade Media, Andrey Matveev, Lucian Alexe, James Lewis, Abhishek Tirkey, Matteo Grobberio |
   | Power banks | gomi, I'M ZION, Kamil Switalski, Konstantinos Papadopoulos, Andrey Matveev |

@@ -351,7 +351,17 @@ I asked the AI to act as a web developer and tell me what would make the site lo
   - It keeps the site's hard green shadow, and it is dark in light mode, light in dark mode.
 - **Motion and keyboard:** it scrolls smoothly, but jumps straight up for people who turn off animations. Keyboard focus moves to the logo, so Tab continues from the top.
 
-## 15. Still to do (needs the shop owner)
+## 15. Round 13: products stand out in the hero
+- **Transparent products:** the 6 hero products are now cut-outs with no background, instead of full photos with hands, desks and plants.
+  - Each one floats over the hero grid in a soft green spotlight, with a shadow on the floor, a slow up-and-down float and the 3D tilt.
+  - When the product changes, the old one leaves first and the new one rises in, so two cut-outs never overlap.
+  - The thumbnails are cut-outs too, in full colour (no more grey).
+  - On phones the product sits a little lower, so the chips don't cover it.
+- **How:** new isolated product photos from Unsplash (earbuds case, wall charger, power bank, phone case, smart watch, clip speaker). The backgrounds were removed on my computer and saved as small transparent WebP files in `public/hero/` (160, 480 and 960 px).
+  - The first product weighs about 60 KB, lighter than the old photos.
+- **Checked:** phone and desktop, light and dark mode, no sideways scroll.
+
+## 16. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
 - **Prices:** all product prices are samples. Put the real ones in `src/data/site.ts` (the `price` of each product).

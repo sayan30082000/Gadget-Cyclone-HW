@@ -32,58 +32,63 @@ export const TICKER = [
   "7-day replacement",
 ]
 
-// Hero showcase: the headline word and the photo change together.
-// Photos: Unsplash (free Unsplash License), credited on the page.
+// Unsplash photos (free Unsplash License), resized on the fly. Used by the shop, kit box and offer.
 const u = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&q=70`
 
 /** same photo at a given width (Unsplash resizes on the fly) */
 export const sized = (photo: string, w: number) => `${photo}&w=${w}`
-export const heroSrcSet = (photo: string) => [480, 720, 960, 1400].map((w) => `${sized(photo, w)} ${w}w`).join(", ")
 
-export type HeroProduct = { word: string; photo: string; alt: string; note: string; credit: string }
+// Hero showcase: the headline word and the product change together.
+// Each product is a cut-out with a transparent background (public/hero/<cutout>-160|480|960.webp),
+// so it floats on the page and stands out. Made from Unsplash photos, credited on the page.
+export type HeroProduct = { word: string; cutout: string; alt: string; note: string; credit: string }
+
+/** a hero cut-out at its 160, 480 or 960 px size (BASE_URL: "/" on Netlify, "/Gadget-Cyclone-HW/" on GitHub Pages) */
+export const heroImg = (cutout: string, size: 160 | 480 | 960) => `${import.meta.env.BASE_URL}hero/${cutout}-${size}.webp`
+export const heroSrcSet = (cutout: string) => `${heroImg(cutout, 480)} 480w, ${heroImg(cutout, 960)} 960w`
 
 export const HERO_PRODUCTS: HeroProduct[] = [
   {
     word: "Earbuds",
-    photo: u("photo-1657532350710-d0becd0c680d"),
-    alt: "A hand holding white wireless earbuds in their case",
+    cutout: "earbuds",
+    alt: "Black wireless earbuds in their open charging case",
     note: "TWS, ANC and neckbands",
-    credit: "Klim Musalimov",
+    credit: "Yasin Hasan",
   },
   {
     word: "Chargers",
-    photo: u("photo-1631037561126-0782ab7e666e"),
-    alt: "A phone charging on a wireless charger with a green charging ring",
+    cutout: "charger",
+    alt: "A white wall charger with metal prongs",
     note: "20W to 65W, matched to your phone",
-    credit: "Lasse Jensen",
+    credit: "Arturo Añez",
   },
   {
     word: "Power banks",
-    photo: u("photo-1566554738544-d962991c3fee"),
-    alt: "Hands holding a teal power bank next to a phone",
+    cutout: "bank",
+    alt: "A silver 10,000 mAh power bank with USB ports",
     note: "10,000 to 20,000 mAh",
-    credit: "I'M ZION",
+    credit: "gomi",
   },
   {
     word: "Covers",
-    photo: u("photo-1592320402243-605cc3e935f7"),
-    alt: "A hand holding a phone in a dark green case",
+    cutout: "cover",
+    alt: "A phone in a black and grey patterned case on a stand",
     note: "cut for your exact model",
-    credit: "michael evins",
+    credit: "Jascent Leung",
   },
   {
     word: "Watches",
-    photo: u("photo-1764169604706-d19a7cfdf823"),
-    alt: "A smartwatch on a wrist",
+    cutout: "watch",
+    alt: "A smart watch with a white band showing the time 07:20",
     note: "notifications + fitness",
-    credit: "Barnaby Woodrow",
+    credit: "pratik prasad",
   },
   {
     word: "Speakers",
-    photo: u("photo-1608043152269-423dbba4e7e1"),
-    alt: "A black portable Bluetooth speaker on a wooden table",
+    cutout: "speaker",
+    alt: "A round black portable speaker with an orange clip",
     note: "pocket to party size",
-    credit: "Nejc Soklič",
+    credit: "Omar Flores",
   },
 ]
 

@@ -58,7 +58,7 @@ const head = [
   `<meta property="og:url" content="${url}/" />`,
   `<meta property="og:image" content="${url}/og-image.png" />`,
   `<meta name="twitter:image" content="${url}/og-image.png" />`,
-  `<link rel="preload" as="image" imagesrcset="${esc(heroSrcSet(first.photo))}" imagesizes="(min-width: 1024px) 45vw, 100vw" fetchpriority="high" />`,
+  `<link rel="preload" as="image" imagesrcset="${esc(heroSrcSet(first.cutout))}" imagesizes="(min-width: 1024px) 36vw, 80vw" fetchpriority="high" />`,
   ...fonts.map((f) => `<link rel="preload" href="${base}assets/${f}" as="font" type="font/woff2" crossorigin />`),
   `<script type="application/ld+json">${JSON.stringify(business)}</script>`,
 ].join("\n    ")
