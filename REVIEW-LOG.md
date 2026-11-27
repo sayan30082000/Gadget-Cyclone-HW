@@ -361,7 +361,22 @@ I asked the AI to act as a web developer and tell me what would make the site lo
   - The first product weighs about 60 KB, lighter than the old photos.
 - **Checked:** phone and desktop, light and dark mode, no sideways scroll.
 
-## 16. Still to do (needs the shop owner)
+## 16. Round 14: sharper products, better angles
+- **My feedback:** the cut-outs were nice, but some were soft (charger, watch band) or shot from an odd angle. I wanted sharp, studio-style shots from a clean angle.
+- **New photos:** all 6 hero products are new, studio-style Unsplash shots:
+  - earbuds: a round case from the front
+  - charger: a Baseus 70W GaN charger
+  - power banks: two Anker banks
+  - covers: two phones in blue cases
+  - watch: a smart watch from the front
+  - speaker: a red cylinder speaker
+- **Sharper files:**
+  - The originals were downloaded at 3000 px, so every cut-out is 1500-2900 px before it is scaled down. Nothing is blown up any more (the old 960 px files were partly enlarged).
+  - Light sharpening, higher WebP quality.
+- **Clean edges:** a white backdrop piece behind the earbuds was removed, and a grey edge left over from it was cleaned off. The logo and the shine on the earbuds stayed.
+- **Checked:** desktop light and dark, all 6 products.
+
+## 17. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
 - **Prices:** all product prices are samples. Put the real ones in `src/data/site.ts` (the `price` of each product).

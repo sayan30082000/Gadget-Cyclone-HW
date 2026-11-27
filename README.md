@@ -106,7 +106,7 @@ Add one line to the right category in `CATEGORIES` (`src/data/site.ts`). It then
 
   | Where | Photographers |
   |---|---|
-  | Hero (cut-outs) | Yasin Hasan, Arturo Añez, gomi, Jascent Leung, pratik prasad, Omar Flores |
+  | Hero (cut-outs) | Sayan Majhi, Gavin Phillips, I'M ZION, Jascent Leung, Daniel Korpai, Ian Talmacs |
   | Earbuds & audio | TheRegisti, Miguel Angel Avila, Habib Dadkhah, C D-X, Rebekah Yip, Arturo Añez |
   | Chargers & cables | Homemade Media, Andrey Matveev, Lucian Alexe, James Lewis, Abhishek Tirkey, Matteo Grobberio |
   | Power banks | gomi, I'M ZION, Kamil Switalski, Konstantinos Papadopoulos, Andrey Matveev |
