@@ -228,6 +228,24 @@ export const KIT_SHELF = CATEGORIES.map((c) => ({ id: c.id, label: c.label, item
 
 export const KIT_DEAL = { minItems: 3, off: 0.15 }
 
+// Offer countdown, shown just above the kit box. It promotes the kit deal above (KIT_DEAL),
+// counts down to `endsAt` and hides itself once that moment has passed.
+// For a new offer change the date; set endsAt to "" to switch the section off.
+export const OFFER = {
+  endsAt: "2026-12-31T23:59:00+06:00", // Bangladesh time (UTC+6)
+  endsLabel: "31 December, 11:59 PM",
+  photo: u("photo-1650379058468-3c2d5d78f5b6"),
+  alt: "A woman listening to music with red over-ear headphones, on a black background",
+  credit: "Johanneke Kroesbergen-Kamps",
+}
+
+// Customer reviews. Only real reviews go here, copied from Facebook, WhatsApp or the shop
+// with the customer's OK. The section stays hidden on the site while this list is empty.
+// product: the id of what they bought (see CATEGORIES), its photo is shown on the card.
+export type Review = { name: string; area: string; stars: 1 | 2 | 3 | 4 | 5; text: string; product: string }
+
+export const REVIEWS: Review[] = []
+
 export type KitPreset = { id: string; name: string; line: string; items: string[] }
 
 export const KIT_PRESETS: KitPreset[] = [

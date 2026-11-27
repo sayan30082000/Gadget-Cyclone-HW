@@ -327,12 +327,25 @@ I asked the AI to act as a web developer and tell me what would make the site lo
   - adding and removing a new product (party speaker)
   - the WhatsApp message lists it with its price
 
-## 13. Still to do (needs the shop owner)
+## 13. Round 11: offer countdown and reviews
+- **Offer countdown** (new section between the shop and the kit box): a black card with a photo that fades into the dark, a spinning amber "15% off" badge and a live timer (days, hours, minutes, seconds). Each number slides into place.
+  - It promotes the real kit deal: 3 or more items in the box = 15% off. The timer runs to **31 December 2026, 11:59 PM, Bangladesh time**.
+  - After that moment the section hides itself. For a new offer, change `OFFER.endsAt` in `src/data/site.ts`.
+  - "Pack your box" jumps to the kit box. The timer is only drawn in the browser, so the pre-rendered page never shows a wrong time.
+- **Reviews section** ("what our customers SAY"): an average star rating and the review count, plus a sliding row of cards. Each card has the quote, the stars, a photo of the product the customer bought, their name and area.
+  - The rating and the count are worked out from the reviews themselves, never typed in.
+  - **Not on the live site yet:** there are no real reviews. It shows up by itself once real ones are added to `REVIEWS` in `src/data/site.ts`.
+  - The local preview (`npm run dev`) fills it with design samples marked "Sample reviews, preview only" (`src/data/sample-reviews.ts`). The live build leaves the samples out.
+- **Checked:** phone, tablet and desktop; light and dark mode; no sideways scroll; no console errors; and the samples are missing from the production build.
+
+## 14. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
 - **Phone number and opening hours** are optional. Once filled in, they show on the page and go into the Google data automatically.
 - **Prices:** all product prices are samples. Put the real ones in `src/data/site.ts` (the `price` of each product).
 - **Promises:** confirm the "7-day replacement" promise and the cash-on-delivery area before the site goes live.
 - **"Ask us" bubbles** are example questions, not real reviews.
+- **Real reviews:** copy them from Facebook or WhatsApp (with the customer's OK) into `REVIEWS` in `src/data/site.ts` to turn on the reviews section.
+- **Offer date:** the kit deal countdown ends on 31 December 2026. Set a new `OFFER.endsAt` for the next offer.
 - **Later:**
   - a Bangla version (the wording needs checking by the owner)
   - a custom domain

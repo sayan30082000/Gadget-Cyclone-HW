@@ -20,6 +20,8 @@ A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4
   - tap items on a shelf and they fly into a box
   - a live price sticker, with 15% off for 3+ items
   - a ready-made WhatsApp order message
+- **Offer countdown:** a live timer for the kit deal (3+ items, 15% off) until 31 December. It hides itself when the offer ends.
+- **Reviews:** star rating and sliding review cards, each with a photo of what the customer bought. They appear once real reviews are added; the local preview shows marked samples.
 - **Scroll effects:** a progress line in "Order in 3 steps" and huge footer text that speeds up with scroll.
 
 Review notes and fixes (mobile, tablet, desktop): [REVIEW-LOG.md](REVIEW-LOG.md).
@@ -54,6 +56,8 @@ Build: `npm run build` (output in `dist/`). Check the build locally with `npm ru
 - the phone number and opening hours, which are optional and only shown when filled in
 - the live site address, used for share previews and the sitemap
 - the ticker lines, categories, kits, steps and FAQ
+- `OFFER`: the countdown end date (set `endsAt` to "" to switch it off)
+- `REVIEWS`: real customer reviews (the section stays hidden while it is empty)
 
 The logo lives in `public/`:
 - `logo.webp` for the light theme, `logo-dark.webp` for dark mode
@@ -100,6 +104,7 @@ Add one line to the right category in `CATEGORIES` (`src/data/site.ts`). It then
   | Covers & protection | Sophia Stark, Abhishek Yadav, Grysell Alvarez, Mason Supply, Alexandru Ant, Anuj Mhatre |
   | Watches & speakers | Simon Daoudi, Nikita Kostrykin, Daniel Korpai, Nicolas J Leclercq, Habib Dadkhah, Viktor Khilchuk |
   | Kit box | the shop photos above, plus Michael Marais (earbud case cover) |
+| Offer | Johanneke Kroesbergen-Kamps |
 
 
 - **Fonts:** Newsreader, JetBrains Mono and Inter (self-hosted with Fontsource).

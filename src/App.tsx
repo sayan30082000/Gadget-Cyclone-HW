@@ -5,6 +5,8 @@ import { Shop } from "@/components/site/Shop"
 import { KitBuilder } from "@/components/site/KitBox"
 import { Footer } from "@/components/site/Footer"
 import { FloatingOrder } from "@/components/site/FloatingOrder"
+import { Offer } from "@/components/site/Offer"
+import { Reviews } from "@/components/site/Reviews"
 
 export default function App() {
   return (
@@ -15,8 +17,10 @@ export default function App() {
         <Brands />
         <WhyUs />
         <Shop />
+        <Offer />
         <KitBuilder />
         <HowToOrder />
+        <Reviews />
         <AskUs />
         <Visit />
       </main>
