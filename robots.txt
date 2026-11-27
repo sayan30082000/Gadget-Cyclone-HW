@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sayan30082000.github.io/Gadget-Cyclone-HW/sitemap.xml
