@@ -1,6 +1,6 @@
-// DESIGN SAMPLES, used only by the local preview (`npm run dev`) while REVIEWS in site.ts is empty.
-// These are not real customers. They are never part of the live site: the production build leaves
-// this file out. Replace them by putting real reviews into REVIEWS.
+// DESIGN SAMPLES, shown while REVIEWS in site.ts is empty. These are not real customers, and the
+// page says so ("Sample reviews, not real customers yet", "Sample name" on every card).
+// The first real review in REVIEWS replaces all of them.
 import type { Review } from "./site"
 
 export const SAMPLE_REVIEWS: Review[] = [

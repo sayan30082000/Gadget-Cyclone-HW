@@ -334,9 +334,11 @@ I asked the AI to act as a web developer and tell me what would make the site lo
   - "Pack your box" jumps to the kit box. The timer is only drawn in the browser, so the pre-rendered page never shows a wrong time.
 - **Reviews section** ("what our customers SAY"): an average star rating and the review count, plus a sliding row of cards. Each card has the quote, the stars, a photo of the product the customer bought, their name and area.
   - The rating and the count are worked out from the reviews themselves, never typed in.
-  - **Not on the live site yet:** there are no real reviews. It shows up by itself once real ones are added to `REVIEWS` in `src/data/site.ts`.
-  - The local preview (`npm run dev`) fills it with design samples marked "Sample reviews, preview only" (`src/data/sample-reviews.ts`). The live build leaves the samples out.
-- **Checked:** phone, tablet and desktop; light and dark mode; no sideways scroll; no console errors; and the samples are missing from the production build.
+  - **Samples until real reviews come in:** the section shows 6 design samples, marked "Sample reviews, not real customers yet", with "Sample name" on every card and "from 6 sample reviews" under the stars. The first real review in `REVIEWS` (`src/data/site.ts`) replaces all of them.
+  - At first the samples only showed in the local preview. I asked to see the section on the live site, so it now shows there too, still marked as samples.
+  - A "Bought from us? Send us your review on WhatsApp" link under the cards, to collect real ones.
+- **Checked:** phone, tablet and desktop; light and dark mode; no sideways scroll; no console errors.
+- **Later fix:** on 1024 px laptops the "15% off" badge covered the headline. The headline and timer are now a bit smaller between 1024 and 1280 px.
 
 ## 14. Still to do (needs the shop owner)
 - **WhatsApp number and Facebook page link** go in `src/data/site.ts`. Until then, the WhatsApp buttons open WhatsApp with the message typed, and you pick the chat.
@@ -344,7 +346,7 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 - **Prices:** all product prices are samples. Put the real ones in `src/data/site.ts` (the `price` of each product).
 - **Promises:** confirm the "7-day replacement" promise and the cash-on-delivery area before the site goes live.
 - **"Ask us" bubbles** are example questions, not real reviews.
-- **Real reviews:** copy them from Facebook or WhatsApp (with the customer's OK) into `REVIEWS` in `src/data/site.ts` to turn on the reviews section.
+- **Real reviews:** copy them from Facebook or WhatsApp (with the customer's OK) into `REVIEWS` in `src/data/site.ts` to replace the sample reviews.
 - **Offer date:** the kit deal countdown ends on 31 December 2026. Set a new `OFFER.endsAt` for the next offer.
 - **Later:**
   - a Bangla version (the wording needs checking by the owner)

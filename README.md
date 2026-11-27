@@ -23,7 +23,7 @@ A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4
   - a live price sticker, with 15% off for 3+ items
   - a ready-made WhatsApp order message
 - **Offer countdown:** a live timer for the kit deal (3+ items, 15% off) until 31 December. It hides itself when the offer ends.
-- **Reviews:** star rating and sliding review cards, each with a photo of what the customer bought. They appear once real reviews are added; the local preview shows marked samples.
+- **Reviews:** star rating and sliding review cards, each with a photo of what the customer bought, plus a "send us your review on WhatsApp" link. Until real reviews are added it shows samples, clearly marked "Sample reviews, not real customers yet".
 - **Scroll effects:** a progress line in "Order in 3 steps" and huge footer text that speeds up with scroll.
 
 Review notes and fixes (mobile, tablet, desktop): [REVIEW-LOG.md](REVIEW-LOG.md).
@@ -60,7 +60,7 @@ Build: `npm run build` (output in `dist/`). Check the build locally with `npm ru
 - the live site address, used for share previews and the sitemap
 - the ticker lines, categories, kits, steps and FAQ
 - `OFFER`: the countdown end date (set `endsAt` to "" to switch it off)
-- `REVIEWS`: real customer reviews (the section stays hidden while it is empty)
+- `REVIEWS`: real customer reviews (while it is empty, the section shows marked samples)
 
 The logo lives in `public/`:
 - `logo.webp` for the light theme, `logo-dark.webp` for dark mode

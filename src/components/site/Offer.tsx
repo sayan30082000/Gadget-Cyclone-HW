@@ -50,7 +50,7 @@ export function Offer() {
               <span className="inline-block bg-gc-amber px-2.5 py-1.5 font-mono text-[12px] font-bold tracking-[0.14em] text-gc-onamber uppercase">
                 ■ Kit deal
               </span>
-              <h2 id="offer-title" className="mt-5 font-serif text-[42px] leading-[1.02] sm:text-[56px] lg:text-[64px]">
+              <h2 id="offer-title" className="mt-5 font-serif text-[42px] leading-[1.02] sm:text-[56px] lg:text-[52px] xl:text-[64px]">
                 Pack {KIT_DEAL.minItems}, save <strong className="font-mono font-bold tracking-tight">{off}%</strong>
               </h2>
               <p className="mt-3 font-serif text-[20px] text-white/60 italic sm:text-[22px]">The deal ends in</p>
@@ -100,14 +100,14 @@ function Countdown({ end, onEnd }: { end: number; onEnd: () => void }) {
   return (
     <div className="mt-5">
       <p className="sr-only">The deal ends {OFFER.endsLabel}, Bangladesh time.</p>
-      <div aria-hidden className="flex items-start gap-1.5 sm:gap-4">
+      <div aria-hidden className="flex items-start gap-1.5 sm:gap-4 lg:gap-2.5 xl:gap-4">
         {UNITS.map((unit, i) => (
           <Fragment key={unit}>
             {i > 0 && (
-              <span className="font-mono text-[36px] leading-none font-bold text-white/35 sm:text-[58px] lg:text-[66px]">:</span>
+              <span className="font-mono text-[36px] leading-none font-bold text-white/35 sm:text-[58px] lg:text-[50px] xl:text-[66px]">:</span>
             )}
             <div className="flex flex-col items-center">
-              <span className="relative inline-block h-[1.02em] min-w-[2ch] overflow-hidden text-center font-mono text-[36px] leading-none font-bold tabular-nums sm:text-[58px] lg:text-[66px]">
+              <span className="relative inline-block h-[1.02em] min-w-[2ch] overflow-hidden text-center font-mono text-[36px] leading-none font-bold tabular-nums sm:text-[58px] lg:text-[50px] xl:text-[66px]">
                 {parts ? <Digits value={pad(parts[i])} reduce={reduce} /> : "--"}
               </span>
               <span className="mt-2 font-serif text-[14px] text-white/60 italic sm:text-[17px]">{unit}</span>

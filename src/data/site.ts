@@ -240,7 +240,8 @@ export const OFFER = {
 }
 
 // Customer reviews. Only real reviews go here, copied from Facebook, WhatsApp or the shop
-// with the customer's OK. The section stays hidden on the site while this list is empty.
+// with the customer's OK. While this list is empty the section shows marked samples instead
+// (src/data/sample-reviews.ts); the first real review replaces them.
 // product: the id of what they bought (see CATEGORIES), its photo is shown on the card.
 export type Review = { name: string; area: string; stars: 1 | 2 | 3 | 4 | 5; text: string; product: string }
 

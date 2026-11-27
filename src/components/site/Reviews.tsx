@@ -3,13 +3,13 @@ import { Quote, Star } from "lucide-react"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { Marquee } from "@/components/ui/marquee"
 import { Label, wrap } from "@/components/site/Sections"
-import { KIT_ITEMS, REVIEWS, cardPhoto, type Review } from "@/data/site"
+import { KIT_ITEMS, REVIEWS, cardPhoto, whatsappLink, type Review } from "@/data/site"
 import { SAMPLE_REVIEWS } from "@/data/sample-reviews"
 
-// Real reviews from site.ts. While there are none, the local preview (npm run dev) shows
-// clearly marked design samples, and the live site shows no reviews section at all.
-const SAMPLE = import.meta.env.DEV && REVIEWS.length === 0
-const LIST: Review[] = REVIEWS.length ? REVIEWS : import.meta.env.DEV ? SAMPLE_REVIEWS : []
+// Real reviews from site.ts. While there are none, the section shows design samples that are
+// clearly marked as samples (label, names, rating line). The first real review replaces them all.
+const SAMPLE = REVIEWS.length === 0
+const LIST: Review[] = SAMPLE ? SAMPLE_REVIEWS : REVIEWS
 
 const FIVE = [0, 1, 2, 3, 4]
 
@@ -30,7 +30,7 @@ export function Reviews() {
                 <Label>Reviews</Label>
                 {SAMPLE && (
                   <span className="inline-block bg-gc-amber px-2.5 py-1.5 font-mono text-[12px] font-bold tracking-[0.14em] text-gc-onamber uppercase">
-                    Sample reviews, preview only
+                    Sample reviews, not real customers yet
                   </span>
                 )}
               </div>
@@ -43,7 +43,8 @@ export function Reviews() {
             <div className="md:pb-3 md:text-right">
               <Stars value={avg} />
               <p className="mt-3 font-mono text-[13px] tracking-wider text-gc-muted">
-                {avg.toFixed(1)} out of 5 <span className="px-1.5 text-gc-line">|</span> from {LIST.length} reviews
+                {avg.toFixed(1)} out of 5 <span className="px-1.5 text-gc-line">|</span> from {LIST.length}
+                {SAMPLE ? " sample reviews" : " reviews"}
               </p>
             </div>
           </div>
@@ -51,11 +52,22 @@ export function Reviews() {
       </div>
 
       <div className="mt-10 pb-16 [mask-image:linear-gradient(90deg,transparent,white_5%,white_95%,transparent)] lg:mt-14 lg:pb-24">
-        <Marquee pauseOnHover repeat={3} className="[--duration:70s] [--gap:1.25rem]">
+        <Marquee pauseOnHover repeat={2} className="[--duration:46s] [--gap:1.25rem]">
           {LIST.map((r) => (
             <ReviewCard key={`${r.name}-${r.product}`} r={r} />
           ))}
         </Marquee>
+        <p className={`${wrap} mt-8 text-center font-sans text-[15px] text-gc-muted`}>
+          Bought from us?{" "}
+          <a
+            href={whatsappLink("Hi! Here is my review of Gadget Cyclone: ")}
+            target="_blank"
+            rel="noreferrer"
+            className="font-medium text-gc-green underline underline-offset-4 hover:no-underline"
+          >
+            Send us your review on WhatsApp
+          </a>
+        </p>
       </div>
     </section>
   )
