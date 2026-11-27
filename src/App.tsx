@@ -5,6 +5,7 @@ import { Shop } from "@/components/site/Shop"
 import { KitBuilder } from "@/components/site/KitBox"
 import { Footer } from "@/components/site/Footer"
 import { FloatingOrder } from "@/components/site/FloatingOrder"
+import { BackToTop } from "@/components/site/BackToTop"
 import { Offer } from "@/components/site/Offer"
 import { Reviews } from "@/components/site/Reviews"
 
@@ -26,6 +27,7 @@ export default function App() {
       </main>
       <Footer />
       <FloatingOrder />
+      <BackToTop />
     </div>
   )
 }
