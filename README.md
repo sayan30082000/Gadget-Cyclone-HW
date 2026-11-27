@@ -14,7 +14,11 @@ A one-page site for Gadget Cyclone, a phone-accessories shop at Finlay Square (4
 - **Dark / light mode as a light bulb on a pull cord** in the header: light on = light mode, pull (drag the cord, click or Enter) = lights off. The bulb swings, and the new theme spreads from it in a circle (idea from Magic UI Animated Theme Toggler). The choice is remembered.
 - **Cursor glow** over the hero, and a **3D tilt** on the hero photo.
 - A **shimmer** order button in the hero and a **number-ticker** total on the kit box sticker.
-- A **back-to-top button** appears in every section as soon as you scroll down a little, and takes you back to the hero (an arrow above the WhatsApp button on phones, "Top" in the corner on bigger screens).
+- A **"cyclone" back-to-top button** in every section once you scroll down a little:
+  - a round button with just an arrow
+  - a green ring that fills as you go down the page
+  - an amber swirl that spins with the scroll and unwinds on the way back up
+  - on click the arrow shoots up and the page glides back to the hero
 - On phones, a **floating WhatsApp button** appears after the hero and hides where the page already has order buttons.
 - **Marquees:** top ticker, brands, phone models and "ask us" chat bubbles.
 - **Magic Cards** with a light that follows the cursor.

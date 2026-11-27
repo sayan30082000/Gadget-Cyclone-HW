@@ -343,9 +343,12 @@ I asked the AI to act as a web developer and tell me what would make the site lo
 ## 14. Round 12: back to top
 - **Back-to-top button:** brings you back up to the hero from any section.
   - It first showed only once the hero had scrolled away, so it was missing in the hero. Now it shows everywhere after the first 200 px of scrolling, and hides only at the very top.
-  - On phones it is a square arrow button just above the floating WhatsApp button.
-  - On tablet and desktop it says "↑ Top" in the bottom-right corner.
-  - Same look as the other buttons: hard green shadow, ink border. It works in light and dark mode.
+  - **Redesigned (unique, icon only, no "Top" text):** a round "cyclone" button.
+    - A green ring around it fills up as you go down the page, so it also shows how far you are.
+    - Three amber arcs inside spin as you scroll, like a small cyclone, and unwind on the way back up.
+    - On click the arrow shoots up out of the button and a new one rises back in, while the page glides to the hero.
+  - Where it sits: just above the WhatsApp button on phones, bottom-right corner from tablet up.
+  - It keeps the site's hard green shadow, and it is dark in light mode, light in dark mode.
 - **Motion and keyboard:** it scrolls smoothly, but jumps straight up for people who turn off animations. Keyboard focus moves to the logo, so Tab continues from the top.
 
 ## 15. Still to do (needs the shop owner)
